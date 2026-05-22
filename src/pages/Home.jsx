@@ -59,14 +59,14 @@ function Home() {
           <p className="concept-text">
             初めてのお客様にも安心していただけるよう、お問い合わせから施工後のアフターフォローまで丁寧に進めてまいります。
           </p>
-          <ol className="flow-steps">
+          <ol className="flow-diagram">
             {FLOW_STEPS.map((step, index) => (
-              <li key={step.title} className="flow-step">
-                <span className="flow-no">
-                  STEP {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
+              <li key={step.title} className="flow-node">
+                <span className="flow-num">{index + 1}</span>
+                <div className="flow-body">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
               </li>
             ))}
           </ol>
