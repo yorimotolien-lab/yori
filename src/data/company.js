@@ -5,7 +5,7 @@ export const company = {
   address: '千葉県市川市塩焼3-20-6',
   capital: '1,000万円',
   ceo: '秋本 駿',
-  tel: '080-5414-1522',
+  tel: '047-307-9287',
   // お問い合わせの送信先（複数宛先はカンマ区切り）
   email: 'asongfor1522@gmail.com,yorimoto.lien@gmail.com',
 }
