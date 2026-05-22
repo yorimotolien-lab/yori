@@ -57,7 +57,7 @@ function Home() {
           <ul className="hero-trust">
             <li>創業 2020年</li>
             <li>有資格者 在籍</li>
-            <li>市川市 拠点</li>
+            <li>1都3県 対応</li>
             <li>見積り 無料</li>
           </ul>
         </div>

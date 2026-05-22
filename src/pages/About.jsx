@@ -16,6 +16,7 @@ function About() {
     ['会社名', COMPANY.name],
     ['創業', COMPANY.founded],
     ['所在地', COMPANY.address],
+    ['対応エリア', COMPANY.serviceArea],
     ['資本金', COMPANY.capital],
     ['代表者', COMPANY.representative],
     ['事業内容', COMPANY.business],
