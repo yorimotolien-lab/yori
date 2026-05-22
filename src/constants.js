@@ -8,8 +8,7 @@ export const COMPANY = {
   business: 'シーリング工事 / 塗装工事 / 防水工事 / 足場工事 / 大規模修繕工事 / 内装工事',
   tel: '047-307-9287',
   telHref: 'tel:04733079287',
-  // ※実際のお問い合わせ先メールアドレスに差し替えてください
-  email: 'info@lien-construction.example',
+  email: 'asongfor1522@gmail.com,yorimoto.lien@gmail.com',
   concept:
     '「LIEN」はフランス語で「絆」を意味します。お客様との信頼関係を大切に、確かな技術と誠実な対応で建物の資産価値を守り続けます。',
 }
