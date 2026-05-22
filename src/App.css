@@ -169,13 +169,30 @@
 
 /* ===== Hero ===== */
 .hero {
+  position: relative;
+  overflow: hidden;
   background:
-    linear-gradient(rgba(19, 31, 56, 0.82), rgba(19, 31, 56, 0.82)),
-    url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=60')
-      center / cover no-repeat;
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(58, 92, 150, 0.55),
+      transparent 60%
+    ),
+    linear-gradient(135deg, #14223d 0%, #1d3052 55%, #25406c 100%);
   color: #fff;
 }
+.hero-watermark {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: right -60px center;
+  background-size: auto 130%;
+  opacity: 0.12;
+  filter: grayscale(1) brightness(2.2);
+  pointer-events: none;
+}
 .hero-inner {
+  position: relative;
+  z-index: 1;
   max-width: 1080px;
   margin: 0 auto;
   padding: 120px 24px;

@@ -4,12 +4,12 @@
   --navy-light: #2c4068;
   --accent: #ee7203;
   --accent-dark: #c25a00;
-  --text: #2b2f38;
-  --text-muted: #5d6470;
+  --text: #232a36;
+  --text-muted: #586072;
   --bg: #ffffff;
-  --bg-alt: #f5f6f8;
-  --border: #e2e4e8;
-  --shadow: rgba(26, 42, 74, 0.08) 0 8px 24px;
+  --bg-alt: #eef2f9;
+  --border: #dde3ee;
+  --shadow: rgba(26, 42, 74, 0.1) 0 8px 24px;
 
   --sans:
     'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, system-ui,

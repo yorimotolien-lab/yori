@@ -26,6 +26,11 @@ function Home() {
   return (
     <>
       <section className="hero">
+        <div
+          className="hero-watermark"
+          aria-hidden="true"
+          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}logo.png)` }}
+        />
         <div className="hero-inner">
           <p className="hero-lead">千葉県市川市の建設・修繕パートナー</p>
           <h1 className="hero-title">
