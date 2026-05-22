@@ -4,6 +4,8 @@ import { COMPANY, NAV_ITEMS } from '../constants.js'
 
 function Header() {
   const [open, setOpen] = useState(false)
+  const [logoOk, setLogoOk] = useState(true)
+  const logoSrc = `${import.meta.env.BASE_URL}logo.png`
 
   return (
     <header className="site-header">
@@ -14,8 +16,19 @@ function Header() {
           aria-label={`${COMPANY.name} ${COMPANY.nameEn}`}
           onClick={() => setOpen(false)}
         >
-          <span className="logo-main">LIEN</span>
-          <span className="logo-sub">CONSTRUCTION</span>
+          {logoOk ? (
+            <img
+              src={logoSrc}
+              alt={`${COMPANY.name} ${COMPANY.nameEn}`}
+              className="logo-img"
+              onError={() => setLogoOk(false)}
+            />
+          ) : (
+            <>
+              <span className="logo-main">LIEN</span>
+              <span className="logo-sub">CONSTRUCTION</span>
+            </>
+          )}
         </Link>
 
         <button
