@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { COMPANY, SERVICES } from '../constants.js'
+import { COMPANY, SERVICES, FLOW_STEPS } from '../constants.js'
 
 function Home() {
   return (
@@ -49,6 +49,27 @@ function Home() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="section flow">
+        <div className="section-inner">
+          <p className="section-eyebrow">FLOW</p>
+          <h2 className="section-title">ご依頼〜お引き渡しの流れ</h2>
+          <p className="concept-text">
+            初めてのお客様にも安心していただけるよう、お問い合わせから施工後のアフターフォローまで丁寧に進めてまいります。
+          </p>
+          <ol className="flow-steps">
+            {FLOW_STEPS.map((step, index) => (
+              <li key={step.title} className="flow-step">
+                <span className="flow-no">
+                  STEP {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

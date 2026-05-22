@@ -1,4 +1,9 @@
-import { COMPANY } from '../constants.js'
+import {
+  COMPANY,
+  QUALIFICATION_DETAILS,
+  QUALIFICATION_MERITS,
+  AUDIENCES,
+} from '../constants.js'
 
 function About() {
   const rows = [
@@ -56,6 +61,53 @@ function About() {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-inner">
+          <p className="section-eyebrow">QUALIFICATIONS</p>
+          <h2 className="section-title">有資格者の在籍</h2>
+          <p className="concept-text">
+            {COMPANY.name}
+            には、各分野の専門資格を持つ技術者が在籍しています。資格に裏付けられた確かな知識と技術で、一つひとつの工事に責任をもって取り組みます。
+          </p>
+          <ul className="qual-detail-grid">
+            {QUALIFICATION_DETAILS.map((q) => (
+              <li key={q.name} className="qual-detail-card">
+                <h3>{q.name}</h3>
+                <p>{q.description}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="merit-box">
+            <h3 className="merit-title">有資格者が在籍するメリット</h3>
+            <p className="merit-lead">
+              専門資格を持つ技術者が在籍しているからこそ、{COMPANY.name}
+              は安心してお任せいただけます。
+            </p>
+            <ul className="merit-list">
+              {QUALIFICATION_MERITS.map((merit) => (
+                <li key={merit}>{merit}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-inner">
+          <p className="section-eyebrow">FOR OUR CLIENTS</p>
+          <h2 className="section-title">お客様別の安心ポイント</h2>
+          <ul className="audience-grid">
+            {AUDIENCES.map((a) => (
+              <li key={a.target} className="audience-card">
+                <h3>{a.target}へ</h3>
+                <p>{a.description}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>

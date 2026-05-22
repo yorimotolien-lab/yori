@@ -497,10 +497,145 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* ===== Qualifications detail ===== */
+.qual-detail-grid {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.qual-detail-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.qual-detail-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.qual-detail-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.merit-box {
+  margin-top: 36px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 10px;
+  padding: 36px;
+}
+.merit-title {
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.merit-lead {
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 20px;
+}
+.merit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+}
+.merit-list li {
+  position: relative;
+  padding-left: 28px;
+  color: #fff;
+}
+.merit-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ===== Audience ===== */
+.audience-grid {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.audience-card {
+  background: var(--bg-alt);
+  border-radius: 8px;
+  padding: 28px 24px;
+  border-top: 4px solid var(--accent);
+}
+.audience-card h3 {
+  font-family: var(--serif);
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+.audience-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+/* ===== Flow ===== */
+.flow-steps {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  counter-reset: flow;
+}
+.flow-step {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.flow-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: var(--accent);
+}
+.flow-no {
+  display: inline-block;
+  color: var(--accent-dark);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.flow-step h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.flow-step p {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 860px) {
   .service-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .audience-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -549,6 +684,13 @@
 @media (max-width: 560px) {
   .service-grid {
     grid-template-columns: 1fr;
+  }
+  .qual-detail-grid,
+  .merit-list {
+    grid-template-columns: 1fr;
+  }
+  .merit-box {
+    padding: 28px 22px;
   }
   .info-table th,
   .info-table td {
