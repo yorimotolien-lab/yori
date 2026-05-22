@@ -1,125 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import logo from './assets/logo.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const services = [
+  {
+    id: 'reform',
+    title: 'リフォーム・改修工事',
+    lead: '住まいや店舗を、暮らしや事業に合わせて最適にアップデートします。',
+    items: [
+      '内装リフォーム（クロス・床・建具）',
+      '水まわりリフォーム（キッチン・浴室・トイレ・洗面）',
+      '外装リフォーム（外壁・屋根）',
+      '増改築・間取り変更',
+      'バリアフリー改修',
+      '店舗・オフィス改装',
+    ],
+  },
+  {
+    id: 'demo',
+    title: '解体・塗装・防水工事',
+    lead: '建物の寿命を延ばし、安全に次の工程へつなぐメンテナンス工事。',
+    items: [
+      '家屋・建物解体',
+      '内装解体（スケルトン）',
+      '外壁・屋根塗装',
+      '屋上・ベランダ防水',
+      'シーリング・コーキング',
+      '足場設置',
+    ],
+  },
+]
 
+function App() {
   return (
     <>
       <header className="site-header">
         <img src={logo} className="site-logo" alt="LIEN CONSTRUCTION" />
       </header>
 
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+      <section className="hero">
+        <h1>確かな施工で、暮らしと建物を支える</h1>
+        <p className="hero-lead">
+          LIEN CONSTRUCTION は、リフォーム・改修から解体・塗装・防水まで、
+          ひとつひとつの現場に責任を持って取り組みます。
+        </p>
+        <a className="cta" href="#contact">
+          無料で相談する
+        </a>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+      <section className="services" aria-label="工事内容">
+        {services.map((service) => (
+          <article key={service.id} className="service-card">
+            <h2>{service.title}</h2>
+            <p className="service-lead">{service.lead}</p>
+            <ul className="service-items">
+              {service.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <section id="contact" className="contact">
+        <h2>お問い合わせ</h2>
+        <p>
+          お見積り・ご相談は無料です。工事の内容や規模に合わせて丁寧にご提案します。
+        </p>
+        <a className="cta" href="mailto:info@lien-construction.example">
+          メールで問い合わせる
+        </a>
+      </section>
+
+      <footer className="site-footer">
+        <span>LIEN CONSTRUCTION</span>
+      </footer>
     </>
   )
 }
