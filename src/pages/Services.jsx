@@ -1,7 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SERVICES } from '../constants.js'
 
 function Services() {
+  const [openIndex, setOpenIndex] = useState(null)
+
+  const toggle = (index) =>
+    setOpenIndex((current) => (current === index ? null : index))
+
   return (
     <>
       <section className="page-head">
@@ -14,22 +20,47 @@ function Services() {
       <section className="section">
         <div className="section-inner">
           <ul className="service-grid">
-            {SERVICES.map((service, index) => (
-              <li key={service.title} className="service-card">
-                <span className="service-no">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h2>{service.title}</h2>
-                <p>{service.description}</p>
-                {service.details && (
-                  <ul className="service-details">
-                    {service.details.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+            {SERVICES.map((service, index) => {
+              const isOpen = openIndex === index
+              const panelId = `service-detail-${index}`
+              return (
+                <li key={service.title} className="service-card">
+                  <span className="service-no">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h2>{service.title}</h2>
+                  <p>{service.description}</p>
+                  {service.details && (
+                    <ul className="service-details">
+                      {service.details.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {service.detail && (
+                    <>
+                      <button
+                        type="button"
+                        className="disclosure-toggle"
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                        onClick={() => toggle(index)}
+                      >
+                        {isOpen ? '閉じる' : 'もっと詳しく'}
+                        <span className="disclosure-icon" aria-hidden="true">
+                          {isOpen ? '−' : '＋'}
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div id={panelId} className="disclosure-panel">
+                          <p>{service.detail}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </section>

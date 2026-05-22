@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   COMPANY,
   QUALIFICATION_DETAILS,
@@ -6,6 +7,11 @@ import {
 } from '../constants.js'
 
 function About() {
+  const [openAudience, setOpenAudience] = useState(null)
+
+  const toggleAudience = (index) =>
+    setOpenAudience((current) => (current === index ? null : index))
+
   const rows = [
     ['会社名', COMPANY.name],
     ['創業', COMPANY.founded],
@@ -101,12 +107,37 @@ function About() {
           <p className="section-eyebrow">FOR OUR CLIENTS</p>
           <h2 className="section-title">お客様別の安心ポイント</h2>
           <ul className="audience-grid">
-            {AUDIENCES.map((a) => (
-              <li key={a.target} className="audience-card">
-                <h3>{a.target}へ</h3>
-                <p>{a.description}</p>
-              </li>
-            ))}
+            {AUDIENCES.map((a, index) => {
+              const isOpen = openAudience === index
+              const panelId = `audience-detail-${index}`
+              return (
+                <li key={a.target} className="audience-card">
+                  <h3>{a.target}へ</h3>
+                  <p>{a.description}</p>
+                  {a.detail && (
+                    <>
+                      <button
+                        type="button"
+                        className="disclosure-toggle"
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                        onClick={() => toggleAudience(index)}
+                      >
+                        {isOpen ? '閉じる' : 'もっと詳しく'}
+                        <span className="disclosure-icon" aria-hidden="true">
+                          {isOpen ? '−' : '＋'}
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div id={panelId} className="disclosure-panel">
+                          <p>{a.detail}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </section>
