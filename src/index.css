@@ -1,23 +1,21 @@
 :root {
-  --navy: #0f2747;
-  --navy-light: #1c3d63;
-  --accent: #2f80ed;
-  --accent-dark: #1f63c4;
-
+  --navy: #1a2a4a;
+  --navy-dark: #131f38;
+  --navy-light: #2c4068;
+  --accent: #b8893f;
+  --accent-dark: #9a7032;
+  --text: #2b2f38;
+  --text-muted: #5d6470;
   --bg: #ffffff;
-  --bg-soft: #f5f7fa;
-  --text: #1a2436;
-  --muted: #5b6677;
-  --border: #e2e8f0;
-  --white: #ffffff;
-
-  --maxw: 1080px;
-  --radius: 12px;
-  --shadow: 0 8px 24px rgba(15, 39, 71, 0.08);
+  --bg-alt: #f5f6f8;
+  --border: #e2e4e8;
+  --shadow: rgba(26, 42, 74, 0.08) 0 8px 24px;
 
   --sans:
-    'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
-    Meiryo, system-ui, sans-serif;
+    'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, system-ui,
+    sans-serif;
+  --serif:
+    'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Noto Serif JP', serif;
 
   font: 16px/1.8 var(--sans);
   color: var(--text);
@@ -35,14 +33,23 @@ body {
   margin: 0;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 h1,
 h2,
 h3 {
   margin: 0;
-  font-weight: 700;
   color: var(--navy);
   line-height: 1.4;
-  letter-spacing: 0.02em;
+  font-weight: 600;
 }
 
 p {
@@ -50,12 +57,7 @@ p {
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+  color: inherit;
 }
 
 img {

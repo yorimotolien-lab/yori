@@ -1,34 +1,29 @@
 import { Link } from 'react-router-dom'
-import { company } from '../data/company.js'
+import { COMPANY, NAV_ITEMS } from '../constants.js'
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <span className="brand-mark">LIEN</span>
-          <div>
-            <p className="footer-name">{company.name}</p>
-            <p className="footer-tagline">「絆」を、確かな技術で。</p>
-          </div>
-        </div>
-
-        <div className="footer-info">
-          <p>{company.address}</p>
-          <p>
-            TEL:{' '}
-            <a href={`tel:${company.tel.replace(/-/g, '')}`}>{company.tel}</a>
+          <span className="logo-main">LIEN</span>
+          <span className="logo-sub">CONSTRUCTION</span>
+          <p className="footer-company">{COMPANY.name}</p>
+          <p className="footer-address">{COMPANY.address}</p>
+          <p className="footer-tel">
+            TEL <a href={COMPANY.telHref}>{COMPANY.tel}</a>
           </p>
         </div>
-
         <nav className="footer-nav">
-          <Link to="/about">会社概要</Link>
-          <Link to="/services">事業内容</Link>
-          <Link to="/contact">お問い合わせ</Link>
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.to} to={item.to}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </div>
       <p className="copyright">
-        © {new Date().getFullYear()} {company.name} All Rights Reserved.
+        © {new Date().getFullYear()} {COMPANY.name}
       </p>
     </footer>
   )

@@ -1,51 +1,52 @@
 import { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-
-const navItems = [
-  { to: '/', label: 'ホーム' },
-  { to: '/about', label: '会社概要' },
-  { to: '/services', label: '事業内容' },
-  { to: '/contact', label: 'お問い合わせ' },
-]
+import { Link, NavLink } from 'react-router-dom'
+import { COMPANY, NAV_ITEMS } from '../constants.js'
 
 function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="header">
+    <header className="site-header">
       <div className="header-inner">
-        <Link to="/" className="brand" onClick={() => setOpen(false)}>
-          <span className="brand-mark">LIEN</span>
-          <span className="brand-text">
-            <span className="brand-jp">株式会社LIEN</span>
-            <span className="brand-en">CONSTRUCTION</span>
-          </span>
+        <Link
+          to="/"
+          className="logo"
+          aria-label={`${COMPANY.name} ${COMPANY.nameEn}`}
+          onClick={() => setOpen(false)}
+        >
+          <span className="logo-main">LIEN</span>
+          <span className="logo-sub">CONSTRUCTION</span>
         </Link>
 
         <button
           type="button"
           className="nav-toggle"
-          aria-label="メニューを開閉"
+          aria-label="メニューを開く"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className={`nav-toggle-bar ${open ? 'is-open' : ''}`}></span>
+          <span className="nav-toggle-bar" />
+          <span className="nav-toggle-bar" />
+          <span className="nav-toggle-bar" />
         </button>
 
-        <nav className={`nav ${open ? 'is-open' : ''}`}>
-          {navItems.map((item) => (
+        <nav className={`site-nav${open ? ' is-open' : ''}`}>
+          {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                `nav-link ${isActive ? 'is-active' : ''}`
+                isActive ? 'nav-link is-active' : 'nav-link'
               }
               onClick={() => setOpen(false)}
             >
               {item.label}
             </NavLink>
           ))}
+          <a className="nav-tel" href={COMPANY.telHref}>
+            {COMPANY.tel}
+          </a>
         </nav>
       </div>
     </header>

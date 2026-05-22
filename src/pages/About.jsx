@@ -1,23 +1,14 @@
-import { company } from '../data/company.js'
+import { COMPANY } from '../constants.js'
 
 function About() {
   const rows = [
-    { label: '会社名', value: company.name },
-    { label: '創業', value: company.founded },
-    { label: '所在地', value: company.address },
-    { label: '資本金', value: company.capital },
-    { label: '代表者', value: company.ceo },
-    {
-      label: '事業内容',
-      value:
-        'シーリング工事 / 塗装工事 / 防水工事 / 足場工事 / 大規模修繕工事 / 内装工事',
-    },
-    {
-      label: '電話番号',
-      value: (
-        <a href={`tel:${company.tel.replace(/-/g, '')}`}>{company.tel}</a>
-      ),
-    },
+    ['会社名', COMPANY.name],
+    ['創業', COMPANY.founded],
+    ['所在地', COMPANY.address],
+    ['資本金', COMPANY.capital],
+    ['代表者', COMPANY.representative],
+    ['事業内容', COMPANY.business],
+    ['電話番号', COMPANY.tel],
   ]
 
   return (
@@ -31,19 +22,29 @@ function About() {
 
       <section className="section">
         <div className="section-inner narrow">
+          <p className="concept-text">{COMPANY.concept}</p>
           <p className="concept-text">
-            株式会社LIENは、千葉県市川市を拠点に、シーリング工事・塗装工事・防水工事・足場工事・大規模修繕工事・内装工事を手がける建設会社です。
+            私たち{COMPANY.name}
+            は、確かな技術と誠実な対応を信条とし、一つひとつの工事に真摯に向き合ってまいります。
           </p>
-          <p className="concept-text">
-            「LIEN」はフランス語で「絆」を意味します。お客様との信頼関係を大切に、確かな技術と誠実な対応で建物の資産価値を守り続けます。
-          </p>
+        </div>
+      </section>
 
+      <section className="section">
+        <div className="section-inner narrow">
+          <h2 className="section-title">会社情報</h2>
           <table className="info-table">
             <tbody>
-              {rows.map((row) => (
-                <tr key={row.label}>
-                  <th scope="row">{row.label}</th>
-                  <td>{row.value}</td>
+              {rows.map(([label, value]) => (
+                <tr key={label}>
+                  <th scope="row">{label}</th>
+                  <td>
+                    {label === '電話番号' ? (
+                      <a href={COMPANY.telHref}>{value}</a>
+                    ) : (
+                      value
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
