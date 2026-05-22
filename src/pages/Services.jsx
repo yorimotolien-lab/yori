@@ -21,6 +21,13 @@ function Services() {
                 </span>
                 <h2>{service.title}</h2>
                 <p>{service.description}</p>
+                {service.details && (
+                  <ul className="service-details">
+                    {service.details.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

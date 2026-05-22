@@ -8,6 +8,7 @@ function About() {
     ['資本金', COMPANY.capital],
     ['代表者', COMPANY.representative],
     ['事業内容', COMPANY.business],
+    ['有資格者', COMPANY.qualifications],
     ['電話番号', COMPANY.tel],
   ]
 
@@ -41,6 +42,12 @@ function About() {
                   <td>
                     {label === '電話番号' ? (
                       <a href={COMPANY.telHref}>{value}</a>
+                    ) : label === '有資格者' ? (
+                      <ul className="qual-list">
+                        {value.map((q) => (
+                          <li key={q}>{q}</li>
+                        ))}
+                      </ul>
                     ) : (
                       value
                     )}

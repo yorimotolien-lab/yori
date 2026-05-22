@@ -248,6 +248,33 @@
   color: var(--text-muted);
   font-size: 15px;
 }
+.service-details {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px dashed var(--border);
+}
+.service-details li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.service-details li:last-child {
+  margin-bottom: 0;
+}
+.service-details li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
 .service-no {
   display: block;
   font-family: var(--serif);
@@ -294,6 +321,22 @@
 }
 .info-table td {
   color: var(--text);
+}
+.qual-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.qual-list li {
+  font-size: 14px;
+  color: var(--navy);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 12px;
 }
 
 /* ===== CTA ===== */
@@ -380,7 +423,7 @@
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(184, 137, 63, 0.15);
+  box-shadow: 0 0 0 3px rgba(238, 114, 3, 0.2);
 }
 .field-error {
   color: #c0392b;
