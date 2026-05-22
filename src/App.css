@@ -184,10 +184,10 @@
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-position: right -60px center;
-  background-size: auto 130%;
-  opacity: 0.12;
-  filter: grayscale(1) brightness(2.2);
+  background-position: right -30px center;
+  background-size: auto 150%;
+  opacity: 0.32;
+  filter: grayscale(1) brightness(2.4) contrast(1.1);
   pointer-events: none;
 }
 .hero-inner {
@@ -1003,6 +1003,11 @@
   }
   .logo-img {
     height: 40px;
+  }
+  .hero-watermark {
+    background-position: center;
+    background-size: auto 90%;
+    opacity: 0.16;
   }
   .hero-title {
     font-size: 30px;
