@@ -1,3 +1,19 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.site-logo {
+  height: 64px;
+  width: auto;
+  display: block;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
