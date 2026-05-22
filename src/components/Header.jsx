@@ -8,9 +8,14 @@ function Header() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link to="/" className="logo" onClick={() => setOpen(false)}>
-          <span className="logo-main">{COMPANY.name}</span>
-          <span className="logo-sub">{COMPANY.nameEn}</span>
+        <Link
+          to="/"
+          className="logo"
+          aria-label={`${COMPANY.name} ${COMPANY.nameEn}`}
+          onClick={() => setOpen(false)}
+        >
+          <span className="logo-main">LIEN</span>
+          <span className="logo-sub">CONSTRUCTION</span>
         </Link>
 
         <button

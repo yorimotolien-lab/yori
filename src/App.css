@@ -91,19 +91,33 @@
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  align-items: flex-start;
+  line-height: 1;
 }
 .logo-main {
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--navy);
-  letter-spacing: 0.04em;
+  font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  background: linear-gradient(
+    180deg,
+    #6f7479 0%,
+    #2b2f33 38%,
+    #0a0b0c 52%,
+    #4a4e52 70%,
+    #d6d9dc 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .logo-sub {
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  color: var(--navy);
+  margin-top: 3px;
+  padding-left: 0.21em;
 }
 .site-nav {
   display: flex;
@@ -395,6 +409,20 @@
   gap: 32px;
 }
 .footer-brand .logo-main {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #c7cacd 45%,
+    #8a8e92 60%,
+    #e6e8ea 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.footer-company {
+  font-size: 14px;
+  margin-top: 10px;
   color: #fff;
 }
 .footer-address,

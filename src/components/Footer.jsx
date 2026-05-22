@@ -6,8 +6,9 @@ function Footer() {
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <span className="logo-main">{COMPANY.name}</span>
-          <span className="logo-sub">{COMPANY.nameEn}</span>
+          <span className="logo-main">LIEN</span>
+          <span className="logo-sub">CONSTRUCTION</span>
+          <p className="footer-company">{COMPANY.name}</p>
           <p className="footer-address">{COMPANY.address}</p>
           <p className="footer-tel">
             TEL <a href={COMPANY.telHref}>{COMPANY.tel}</a>
