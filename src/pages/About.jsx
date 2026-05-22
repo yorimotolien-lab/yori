@@ -95,7 +95,10 @@ function About() {
             </p>
             <ul className="merit-list">
               {QUALIFICATION_MERITS.map((merit) => (
-                <li key={merit}>{merit}</li>
+                <li key={merit.title}>
+                  <h4>{merit.title}</h4>
+                  <p>{merit.description}</p>
+                </li>
               ))}
             </ul>
           </div>
