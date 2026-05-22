@@ -6,8 +6,8 @@ export const company = {
   capital: '1,000万円',
   ceo: '秋本 駿',
   tel: '080-5414-1522',
-  // 担当メールアドレスが未指定のため、お問い合わせ送信先のプレースホルダ
-  email: 'info@lien-construction.co.jp',
+  // お問い合わせの送信先（複数宛先はカンマ区切り）
+  email: 'asongfor1522@gmail.com,yorimoto.lien@gmail.com',
 }
 
 export const services = [
