@@ -26,6 +26,19 @@
   font-size: 30px;
   margin-bottom: 28px;
 }
+.section-title::after {
+  content: '';
+  display: block;
+  width: 52px;
+  height: 4px;
+  margin-top: 16px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--navy), var(--accent));
+}
+.cta-inner .section-title::after {
+  margin-inline: auto;
+  background: linear-gradient(90deg, #ffffff, var(--accent));
+}
 .text-link {
   display: inline-block;
   margin-top: 20px;
@@ -78,6 +91,12 @@
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(6px);
+}
+.site-header::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--navy), var(--navy-light), var(--accent));
 }
 .header-inner {
   max-width: 1080px;
@@ -259,6 +278,7 @@
   padding: 28px 20px;
   background: var(--bg);
   border: 1px solid var(--border);
+  border-top: 4px solid var(--navy);
   border-radius: 10px;
   box-shadow: var(--shadow);
 }
