@@ -19,6 +19,7 @@ function About() {
     ['対応エリア', COMPANY.serviceArea],
     ['資本金', COMPANY.capital],
     ['代表者', COMPANY.representative],
+    ['建設業許可', COMPANY.constructionLicense],
     ['事業内容', COMPANY.business],
     ['有資格者', COMPANY.qualifications],
     ['電話番号', COMPANY.tel],
