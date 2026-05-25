@@ -10,7 +10,7 @@ export const COMPANY = {
     'シーリング工事 / 塗装工事 / 防水工事 / 足場工事 / 大規模修繕工事 / 内装工事 / 雨漏り診断',
   tel: '047-307-9287',
   telHref: 'tel:04733079287',
-  email: 'asongfor1522@gmail.com,yorimoto.lien@gmail.com',
+  email: 's.akimoto@lien-2020.com,r.yorimoto@lien-2020.com',
   qualifications: [
     '1級シーリング技能士',
     'シーリング管理士',
