@@ -6,7 +6,7 @@ export const COMPANY = {
   serviceArea: '千葉県全域・茨城県・東京都・埼玉県',
   capital: '1,000万円',
   representative: '秋本 駿',
-  constructionLicense: '千葉県知事許可（般-6）第57419号',
+  constructionLicense: '千葉県知事許可（般）第57419号',
   business:
     'シーリング工事 / 塗装工事 / 防水工事 / 足場工事 / 大規模修繕工事 / 内装工事 / 雨漏り診断',
   tel: '047-307-9287',
