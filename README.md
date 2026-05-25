@@ -23,4 +23,4 @@ npm run lint     # ESLint
 `main` ブランチへの push をトリガーに、GitHub Actions（`.github/workflows/deploy.yml`）が
 ビルドして GitHub Pages へ公開します。
 
-- 公開URL: https://yorimotolien-lab.github.io/yori/
+- 公開URL: https://lien-2020.com/
