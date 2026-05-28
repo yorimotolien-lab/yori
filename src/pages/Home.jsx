@@ -142,6 +142,21 @@ function Home() {
         </div>
       </section>
 
+      <section className="section partners-band">
+        <div className="section-inner partners-band-inner">
+          <div>
+            <p className="section-eyebrow">PARTNERS</p>
+            <h2 className="section-title">協力会社募集</h2>
+            <p>
+              ともに成長できる協力会社さまを募集しています。各分野の専門業者さまからのご連絡をお待ちしています。
+            </p>
+          </div>
+          <Link to="/partners" className="btn btn-primary">
+            協力会社募集の詳細
+          </Link>
+        </div>
+      </section>
+
       <section className="section cta">
         <div className="section-inner cta-inner">
           <p className="section-eyebrow">CONTACT</p>
