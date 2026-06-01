@@ -27,6 +27,11 @@ function About() {
 
   return (
     <>
+      <title>会社概要 | 株式会社LIEN</title>
+      <meta
+        name="description"
+        content="株式会社LIEN（リアン）の会社概要・代表者・有資格者・建設業許可・対応エリア。千葉県市川市の建設会社で、1都3県で施工対応します。"
+      />
       <section className="page-head">
         <div className="section-inner">
           <p className="section-eyebrow">ABOUT US</p>

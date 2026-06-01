@@ -47,6 +47,11 @@ function Contact() {
 
   return (
     <>
+      <title>お問い合わせ | 株式会社LIEN</title>
+      <meta
+        name="description"
+        content="株式会社LIENへのご相談・お見積りは無料です。お電話または問い合わせフォームよりお気軽にどうぞ。千葉県全域・茨城県・東京都・埼玉県対応。"
+      />
       <section className="page-head">
         <div className="section-inner">
           <p className="section-eyebrow">CONTACT</p>

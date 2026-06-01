@@ -10,6 +10,11 @@ function Services() {
 
   return (
     <>
+      <title>事業内容 | 塗装・防水・シーリング・大規模修繕 | 株式会社LIEN</title>
+      <meta
+        name="description"
+        content="シーリング工事・塗装工事・防水工事・足場工事・大規模修繕工事・内装工事・雨漏り診断の詳細。1級シーリング技能士・1級建築施工管理技士・雨漏り診断士が在籍。"
+      />
       <section className="page-head">
         <div className="section-inner">
           <p className="section-eyebrow">SERVICES</p>
