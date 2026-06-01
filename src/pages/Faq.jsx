@@ -10,6 +10,11 @@ function Faq() {
 
   return (
     <>
+      <title>よくあるご質問 | 株式会社LIEN</title>
+      <meta
+        name="description"
+        content="対応エリア・無料見積もり・工期・アフターフォローなど、株式会社LIENへ寄せられるよくあるご質問にお答えします。"
+      />
       <section className="page-head">
         <div className="section-inner">
           <p className="section-eyebrow">FAQ</p>

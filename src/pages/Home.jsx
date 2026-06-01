@@ -25,6 +25,13 @@ const REASON_ICONS = {
 function Home() {
   return (
     <>
+      <title>
+        株式会社LIEN | 千葉・茨城・東京・埼玉の塗装・防水・大規模修繕・雨漏り診断
+      </title>
+      <meta
+        name="description"
+        content="千葉県市川市拠点の建設会社・株式会社LIEN。シーリング・塗装・防水・足場・大規模修繕・内装・雨漏り診断まで一貫対応。1都3県対応・現地調査と見積り無料。"
+      />
       <section className="hero">
         <div
           className="hero-watermark"

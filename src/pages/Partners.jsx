@@ -4,6 +4,11 @@ import { COMPANY, SERVICES, PARTNER } from '../constants.js'
 function Partners() {
   return (
     <>
+      <title>協力会社募集 | 株式会社LIEN</title>
+      <meta
+        name="description"
+        content="株式会社LIENでは、ともに成長できる協力会社さまを募集しています。シーリング・塗装・防水・足場・大規模修繕・内装・雨漏り補修の専門業者さま、お気軽にご連絡ください。"
+      />
       <section className="page-head">
         <div className="section-inner">
           <p className="section-eyebrow">PARTNERS</p>
