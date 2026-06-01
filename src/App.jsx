@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import * as XLSX from 'xlsx'
+import Login from './Login.jsx'
 import './App.css'
 
 const CATEGORIES = [
@@ -94,11 +95,21 @@ ${CATEGORY_HINTS}
 }
 
 function App() {
+  const [authed, setAuthed] = useState(() => sessionStorage.getItem('authed') === '1')
   const [apiKey, setApiKey] = useState(() => localStorage.getItem('anthropic_api_key') || '')
   const [rows, setRows] = useState([])
   const [busy, setBusy] = useState(false)
   const [progress, setProgress] = useState({ done: 0, total: 0 })
   const [error, setError] = useState('')
+
+  if (!authed) {
+    return <Login onAuthed={() => setAuthed(true)} />
+  }
+
+  const logout = () => {
+    sessionStorage.removeItem('authed')
+    setAuthed(false)
+  }
 
   const saveKey = (k) => {
     setApiKey(k)
@@ -216,6 +227,9 @@ function App() {
   return (
     <div className="app">
       <header className="hdr">
+        <button className="logout-btn" onClick={logout} title="ログアウト">
+          ログアウト
+        </button>
         <h1>📷 レシートAI仕訳</h1>
         <p className="sub">スマホで撮影 → AIが勘定科目に分類 → Excel出力</p>
       </header>
