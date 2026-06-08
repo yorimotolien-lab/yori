@@ -4,8 +4,17 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+// 新しい質問を追加するには、この配列に { question, answer } を追加してください。
+const faqs = [
+  {
+    question: '見積もりは無料ですか？',
+    answer: 'はい、無料です。お気軽にご相談ください',
+  },
+]
+
 function App() {
   const [count, setCount] = useState(0)
+  const [openFaq, setOpenFaq] = useState(null)
 
   return (
     <>
@@ -111,6 +120,36 @@ function App() {
             </li>
           </ul>
         </div>
+      </section>
+
+      <div className="ticks"></div>
+
+      <section id="faq">
+        <svg className="icon" role="presentation" aria-hidden="true">
+          <use href="/icons.svg#documentation-icon"></use>
+        </svg>
+        <h2>よくある質問</h2>
+        <p>FAQ</p>
+        <ul className="faq-list">
+          {faqs.map((faq, index) => (
+            <li key={index} className="faq-item">
+              <button
+                type="button"
+                className="faq-question"
+                aria-expanded={openFaq === index}
+                onClick={() =>
+                  setOpenFaq((current) => (current === index ? null : index))
+                }
+              >
+                <span>{faq.question}</span>
+                <span className="faq-toggle" aria-hidden="true">
+                  {openFaq === index ? '−' : '+'}
+                </span>
+              </button>
+              {openFaq === index && <p className="faq-answer">{faq.answer}</p>}
+            </li>
+          ))}
+        </ul>
       </section>
 
       <div className="ticks"></div>
