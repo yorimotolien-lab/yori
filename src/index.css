@@ -4,15 +4,19 @@
   --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  --accent: #1f5fbf;
+  --accent-bg: rgba(31, 95, 191, 0.1);
+  --accent-border: rgba(31, 95, 191, 0.45);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.08) 0 10px 25px -8px, rgba(0, 0, 0, 0.04) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans:
+    system-ui, 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    Meiryo, Roboto, sans-serif;
+  --heading:
+    system-ui, 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    Meiryo, Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -37,9 +41,9 @@
     --bg: #16171d;
     --border: #2e303a;
     --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
+    --accent: #5b9bf0;
+    --accent-bg: rgba(91, 155, 240, 0.16);
+    --accent-border: rgba(91, 155, 240, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
