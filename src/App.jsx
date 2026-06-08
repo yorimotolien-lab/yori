@@ -6,6 +6,7 @@ import ScrollToTop from './components/ScrollToTop.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Services from './pages/Services.jsx'
+import Maintenance from './pages/Maintenance.jsx'
 import Faq from './pages/Faq.jsx'
 import Partners from './pages/Partners.jsx'
 import Contact from './pages/Contact.jsx'
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/maintenance" element={<Maintenance />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/contact" element={<Contact />} />
