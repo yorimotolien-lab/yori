@@ -16,6 +16,8 @@ const SENDER = {
   addr: '千葉県市川市塩焼3-20-6',
   tel: 'TEL 047-307-9287',
   fax: 'FAX 047-307-9288',
+  web: 'Webサイト：https://lien-2020.com/',
+  webShort: 'Web  lien-2020.com',
 };
 
 // embedded real logo (transparent, trimmed)
@@ -52,28 +54,29 @@ function stampBox(W, H) {
   return `<rect x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" rx="${f(W * 0.006)}" fill="none" stroke="#DCD8CE" stroke-width="${f(W * 0.0025)}"/>`;
 }
 
-// two-column sender block: name + address (left), TEL / FAX (right)
+// two-row sender block: name | TEL·FAX  /  address | website
 function senderBand(xL, xR, yc, color, W) {
-  const nameF = W * 0.040, bodyF = W * 0.027, lineGap = W * 0.046;
-  const y1 = yc - lineGap * 0.18, y2 = yc + lineGap * 0.74;
+  const nameF = W * 0.035, bodyF = W * 0.023, lineGap = W * 0.048;
+  const y1 = yc - lineGap * 0.5 + bodyF * 0.32, y2 = yc + lineGap * 0.5 + bodyF * 0.32;
   let s = '';
   s += `<text x="${f(xL)}" y="${f(y1)}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`;
+  s += `<text x="${f(xR)}" y="${f(y1)}" text-anchor="end" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
   s += `<text x="${f(xL)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`;
-  s += `<text x="${f(xR)}" y="${f(y1)}" text-anchor="end" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}</text>`;
-  s += `<text x="${f(xR)}" y="${f(y2)}" text-anchor="end" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.fax}</text>`;
+  s += `<text x="${f(xR)}" y="${f(y2)}" text-anchor="end" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.web}</text>`;
   return s;
 }
 
 const logoW = (W) => W * 0.235;
 
-// left-aligned 3-line sender block (name / address / tel・fax), centred on yc
+// left-aligned sender block (name / address / tel・fax / web), centred on yc
 function senderLeft(x, yc, color, W) {
-  const nameF = W * 0.038, bodyF = W * 0.026, lh = W * 0.046;
-  const y1 = yc - lh * 0.92, y2 = yc + lh * 0.12, y3 = yc + lh * 1.06;
+  const nameF = W * 0.036, bodyF = W * 0.025, lh = W * 0.042;
+  const yy = [yc - lh * 1.5, yc - lh * 0.5, yc + lh * 0.5, yc + lh * 1.5];
   let s = '';
-  s += `<text x="${f(x)}" y="${f(y1)}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`;
-  s += `<text x="${f(x)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`;
-  s += `<text x="${f(x)}" y="${f(y3)}" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
+  s += `<text x="${f(x)}" y="${f(yy[0])}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`;
+  s += `<text x="${f(x)}" y="${f(yy[1])}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`;
+  s += `<text x="${f(x)}" y="${f(yy[2])}" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
+  s += `<text x="${f(x)}" y="${f(yy[3])}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.web}</text>`;
   return s;
 }
 
@@ -117,7 +120,7 @@ function conceptC(W, H, { bleed = 0, mockup = false } = {}) {
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   if (mockup) { b += recipient(W, H); b += stampBox(W, H); }
   b += logoImg(spineW + W * 0.05, M * 0.95, logoW(W));
-  b += senderBand(spineW + W * 0.05, W - M, by + bandH * 0.52, '#FFFFFF', W);
+  b += senderLeft(spineW + W * 0.05, by + bandH * 0.52, '#FFFFFF', W);
   return frame(W, H, b, bleed);
 }
 
@@ -127,7 +130,8 @@ function senderCentered(cx, yTop, color, W) {
   let s = '', y = yTop;
   s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.08)}" font-weight="700" fill="${color}">${SENDER.name}</text>`; y += lh * 1.05;
   s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`; y += lh * 0.82;
-  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
+  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`; y += lh * 0.82;
+  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.web}</text>`;
   return s;
 }
 // stacked sender block (for a narrow side panel), bottom-aligned, auto-fit
@@ -135,14 +139,15 @@ function senderStack(x, yBottom, color, W, panelW) {
   const usable = Math.max(panelW - x - W * 0.015, W * 0.1);
   const bodyF = Math.min(W * 0.025, usable / 12.5); // address ~12.5 em advance
   const nameF = bodyF * 1.4, lh = bodyF * 1.55, nameGap = nameF * 1.35;
-  const total = nameGap + 4 * lh;
+  const total = nameGap + 5 * lh;
   let y = yBottom - total, s = '';
   const put = (t, fz, wt, ff) => `<text x="${f(x)}" y="${f(y)}" font-family="${ff}" font-size="${f(fz)}" font-weight="${wt}" fill="${color}">${t}</text>`;
   s += put(SENDER.name, nameF, 700, MIX); y += nameGap;
   s += put(SENDER.zip, bodyF, 400, MIX); y += lh;
   s += put(SENDER.addr, bodyF, 400, MIX); y += lh;
   s += put(SENDER.tel, bodyF, 400, SANS); y += lh;
-  s += put(SENDER.fax, bodyF, 400, SANS);
+  s += put(SENDER.fax, bodyF, 400, SANS); y += lh;
+  s += put(SENDER.webShort, bodyF * 0.96, 400, MIX);
   return s;
 }
 
