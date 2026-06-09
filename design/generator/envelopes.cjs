@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const B = require('./brand.cjs');
-const { f, PALETTE: P, MIX, SANS } = B;
+const { f, PALETTE: P, MIX, SANS, JP } = B;
 
 const SENDER = {
   name: '株式会社LIEN',
@@ -31,6 +31,38 @@ function logoImg(x, y, w) {
   return `<image x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" xlink:href="${LOGO_URI}"/>`;
 }
 
+// embedded QR code (white background, square)
+const QR_PATH = path.join(__dirname, '..', 'logo', 'lien-qr.png');
+const QR_URI = 'data:image/png;base64,' + fs.readFileSync(QR_PATH).toString('base64');
+function qrImg(x, y, s) {
+  return `<image x="${f(x)}" y="${f(y)}" width="${f(s)}" height="${f(s)}" xlink:href="${QR_URI}"/>`;
+}
+
+// 在中 checkboxes placed above the navy band (wraps to fit the width)
+function checkboxes(W, bandTopY, color) {
+  const items = ['御見積書在中', '御請求書在中', '領収書在中', '御契約書在中', '注文書在中', '注文請書在中', 'その他（　　　　）'];
+  const M = W * 0.058, fz = W * 0.0185, box = fz * 0.95, gap = W * 0.016, usable = W - M * 2;
+  const itemW = (t) => box + fz * 0.45 + t.length * fz * 1.02;
+  const rows = [[]]; let cur = 0;
+  for (const t of items) {
+    const w = itemW(t);
+    if (cur + w > usable && rows[rows.length - 1].length) { rows.push([]); cur = 0; }
+    rows[rows.length - 1].push([t, w]); cur += w + gap;
+  }
+  const lineH = fz * 2.0;
+  let y = bandTopY - W * 0.022 - (rows.length - 1) * lineH, s = '';
+  for (const row of rows) {
+    let x = M;
+    for (const [t, w] of row) {
+      s += `<rect x="${f(x)}" y="${f(y - box)}" width="${f(box)}" height="${f(box)}" rx="${f(box * 0.12)}" fill="none" stroke="${color}" stroke-width="${f(W * 0.0016)}"/>`;
+      s += `<text x="${f(x + box + fz * 0.45)}" y="${f(y)}" font-family="${MIX}" font-size="${f(fz)}" fill="${color}">${t}</text>`;
+      x += w + gap;
+    }
+    y += lineH;
+  }
+  return s;
+}
+
 function frame(W, H, body, bleed = 0, paper = P.PAPER) {
   const vw = W + bleed * 2, vh = H + bleed * 2;
   const bg = (paper && paper !== 'none')
@@ -39,27 +71,14 @@ function frame(W, H, body, bleed = 0, paper = P.PAPER) {
     + bg + body + `</svg>`;
 }
 
-// light placeholder: postal code at the top, recipient name/address centred
-function recipient(W, H) {
-  const x = W * 0.165;
-  const c = '#CBC7BE', lh = W * 0.054, fz = W * 0.030, big = W * 0.040;
-  let s = `<g fill="${c}" font-family="${MIX}" font-weight="400">`;
-  // 郵便番号 — top
-  s += `<text x="${f(x)}" y="${f(H * 0.12)}" font-size="${f(fz)}" letter-spacing="0.3">〒123-4567</text>`;
-  // 宛名 — centre
-  let y = H * 0.42;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">東京都千代田区丸の内1-2-3</text>`; y += lh;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">〇〇ビル 4階</text>`; y += lh * 1.5;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">株式会社 〇〇〇〇〇〇　〇〇部</text>`; y += lh * 1.45;
-  s += `<text x="${f(x + W * 0.04)}" y="${f(y)}" font-size="${f(big)}" letter-spacing="${f(big * 0.12)}">氏名　氏名　様</text>`;
-  return s + `</g>`;
-}
+// recipient is handled by an address label, so no printed guide is needed
+function recipient() { return ''; }
 function stampBox(W, H) {
   const w = W * 0.105, h = w * 1.32, x = W - W * 0.058 - w, y = H * 0.055;
   return `<rect x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" rx="${f(W * 0.006)}" fill="none" stroke="#DCD8CE" stroke-width="${f(W * 0.0025)}"/>`;
 }
 
-// three-row sender block: name | TEL·FAX / address | website / licence
+// three-row sender block: name | TEL·FAX / address / licence
 function senderBand(xL, xR, yc, color, W) {
   const nameF = W * 0.034, bodyF = W * 0.022, smallF = W * 0.020, lg = W * 0.042;
   const o = bodyF * 0.32, y1 = yc - lg + o, y2 = yc + o, y3 = yc + lg + o;
@@ -67,21 +86,22 @@ function senderBand(xL, xR, yc, color, W) {
   s += `<text x="${f(xL)}" y="${f(y1)}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`;
   s += `<text x="${f(xR)}" y="${f(y1)}" text-anchor="end" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
   s += `<text x="${f(xL)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`;
-  s += `<text x="${f(xR)}" y="${f(y2)}" text-anchor="end" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.web}</text>`;
   s += `<text x="${f(xL)}" y="${f(y3)}" font-family="${MIX}" font-size="${f(smallF)}" fill="${color}">${SENDER.license}</text>`;
   return s;
 }
 
 const logoW = (W) => W * 0.235;
 
-// left-aligned sender block (name / address / tel・fax / web / licence), on yc
-function senderLeft(x, yc, color, W) {
-  const nameF = W * 0.035, bodyF = W * 0.024, smallF = W * 0.0215, lh = W * 0.039;
+// left-aligned sender block (name / address / tel・fax / licence), on yc.
+// maxW (optional) auto-fits the font so the longest line stays within it.
+function senderLeft(x, yc, color, W, maxW) {
+  let bodyF = W * 0.024;
+  if (maxW) bodyF = Math.max(W * 0.013, Math.min(bodyF, maxW / 19));
+  const nameF = bodyF * 1.42, smallF = bodyF * 0.9, lh = bodyF * 1.68;
   const lines = [
     [SENDER.name, nameF, 700, MIX],
     [`${SENDER.zip}　${SENDER.addr}`, bodyF, 400, MIX],
     [`${SENDER.tel}　${SENDER.fax}`, bodyF, 400, SANS],
-    [SENDER.web, bodyF, 400, MIX],
     [SENDER.license, smallF, 400, MIX],
   ];
   let y = yc - lh * (lines.length - 1) / 2, s = '';
@@ -103,24 +123,32 @@ function conceptA(W, H, { bleed = 0, mockup = false } = {}) {
   return frame(W, H, b, bleed);
 }
 
-// ---- Concept B : navy footer band, logo on a white plate (selected) --------
+// ---- Concept B : navy L-frame, logo (left) + sender + QR (right) [selected] -
 function conceptB(W, H, { bleed = 0, mockup = false, paper = P.PAPER } = {}) {
   const M = W * 0.058; let b = '';
-  if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
-  const bandH = H * 0.170, by = H - bandH;
-  // thin navy vertical line up the left edge -> forms an L with the band
-  const lineW = W * 0.017;
+  if (mockup) b += stampBox(W, H);          // 宛名 is applied by label — no guide
+  const bandH = H * 0.205, by = H - bandH;   // larger band
+  const lineW = W * 0.028;                    // wider navy vertical line
+  // navy L-frame (vertical line + band), full bleed to the edges
   b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(lineW + bleed)}" height="${f(by + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
-  // white plate behind the logo, inside the navy band
-  const innerM = bandH * 0.13, plateH = bandH - innerM * 2, pad = plateH * 0.12;
-  const logoH = plateH - pad * 2, lw = logoH * LOGO_AR, plateW = lw + pad * 2;
-  const plateX = M, plateY = by + innerM, rx = plateH * 0.06;
-  b += `<rect x="${f(plateX)}" y="${f(plateY)}" width="${f(plateW)}" height="${f(plateH)}" rx="${f(rx)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
-  b += logoImg(plateX + pad, plateY + pad, lw);
-  // sender details fill the rest of the band (single column, left-aligned)
-  b += senderLeft(plateX + plateW + W * 0.05, by + bandH * 0.52, '#FFFFFF', W);
+  // 在中 checkboxes above the band
+  b += checkboxes(W, by, P.NAVY);
+  const innerM = bandH * 0.12, plateH = bandH - innerM * 2, rx = plateH * 0.06, plateY = by + innerM;
+  // logo plate (left)
+  const lpad = plateH * 0.11, logoH = plateH - lpad * 2, lw = logoH * LOGO_AR, logoPlateW = lw + lpad * 2;
+  const logoPlateX = Math.max(M, lineW + W * 0.022);
+  b += `<rect x="${f(logoPlateX)}" y="${f(plateY)}" width="${f(logoPlateW)}" height="${f(plateH)}" rx="${f(rx)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += logoImg(logoPlateX + lpad, plateY + lpad, lw);
+  // QR plate (right, opposite the logo)
+  const qrPlateS = Math.min(plateH, W * 0.195), qrPad = qrPlateS * 0.1, qrS = qrPlateS - qrPad * 2;
+  const qrPlateX = W - M - qrPlateS, qrPlateY = by + (bandH - qrPlateS) / 2;
+  b += `<rect x="${f(qrPlateX)}" y="${f(qrPlateY)}" width="${f(qrPlateS)}" height="${f(qrPlateS)}" rx="${f(qrPlateS * 0.06)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += qrImg(qrPlateX + qrPad, qrPlateY + qrPad, qrS);
+  // sender details between the two plates
+  const sxL = logoPlateX + logoPlateW + W * 0.03, sxR = qrPlateX - W * 0.03;
+  b += senderLeft(sxL, by + bandH * 0.5, '#FFFFFF', W, sxR - sxL);
   return frame(W, H, b, bleed, paper);
 }
 
@@ -146,7 +174,6 @@ function senderCentered(cx, yTop, color, W) {
   s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.08)}" font-weight="700" fill="${color}">${SENDER.name}</text>`; y += lh * 1.05;
   s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`; y += lh * 0.82;
   s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`; y += lh * 0.82;
-  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.web}</text>`; y += lh * 0.78;
   s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(bodyF * 0.92)}" fill="${color}">${SENDER.license}</text>`;
   return s;
 }
@@ -155,7 +182,7 @@ function senderStack(x, yBottom, color, W, panelW) {
   const usable = Math.max(panelW - x - W * 0.015, W * 0.1);
   const bodyF = Math.min(W * 0.024, usable / 14.5); // licence ~14.5 em advance
   const nameF = bodyF * 1.4, lh = bodyF * 1.55, nameGap = nameF * 1.35;
-  const total = nameGap + 6 * lh;
+  const total = nameGap + 5 * lh;
   let y = yBottom - total, s = '';
   const put = (t, fz, wt, ff) => `<text x="${f(x)}" y="${f(y)}" font-family="${ff}" font-size="${f(fz)}" font-weight="${wt}" fill="${color}">${t}</text>`;
   s += put(SENDER.name, nameF, 700, MIX); y += nameGap;
@@ -163,7 +190,6 @@ function senderStack(x, yBottom, color, W, panelW) {
   s += put(SENDER.addr, bodyF, 400, MIX); y += lh;
   s += put(SENDER.tel, bodyF, 400, SANS); y += lh;
   s += put(SENDER.fax, bodyF, 400, SANS); y += lh;
-  s += put(SENDER.webShort, bodyF * 0.96, 400, MIX); y += lh;
   s += put(SENDER.licenseShort, bodyF * 0.92, 400, MIX);
   return s;
 }

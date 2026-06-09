@@ -64,7 +64,7 @@ if (Resvg) {
     const n3 = readB64(path.join(ENV, 'chokei3-B-band-mockup.png'));
     let s = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${Wt}" height="${Ht}"><rect width="100%" height="100%" fill="#ECECEA"/>`;
     s += `<text x="${padX}" y="70" font-family="sans-serif" font-size="40" font-weight="700" fill="#223A5C">Concept B — フッターバンド ／ Navy</text>`;
-    s += `<text x="${padX}" y="104" font-family="sans-serif" font-size="24" fill="#666">株式会社LIEN 封筒デザイン（差出人情報は下部・宛名グレーは配置ガイド）</text>`;
+    s += `<text x="${padX}" y="104" font-family="sans-serif" font-size="24" fill="#666">株式会社LIEN 封筒デザイン（宛名は宛名ラベルで貼付・在中チェック＋QR付き）</text>`;
     s += tile(k2, padX, padTop, k2w, Hpx, '#fff', '角2号 240×332mm');
     s += tile(n3, padX + k2w + gap, padTop, n3w, Hpx, '#fff', '長形3号 120×235mm');
     s += `</svg>`;
