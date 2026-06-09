@@ -66,6 +66,17 @@ function senderBand(xL, xR, yc, color, W) {
 
 const logoW = (W) => W * 0.235;
 
+// left-aligned 3-line sender block (name / address / tel・fax), centred on yc
+function senderLeft(x, yc, color, W) {
+  const nameF = W * 0.038, bodyF = W * 0.026, lh = W * 0.046;
+  const y1 = yc - lh * 0.92, y2 = yc + lh * 0.12, y3 = yc + lh * 1.06;
+  let s = '';
+  s += `<text x="${f(x)}" y="${f(y1)}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`;
+  s += `<text x="${f(x)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`;
+  s += `<text x="${f(x)}" y="${f(y3)}" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
+  return s;
+}
+
 // ---- Concept A : minimal hairline footer -----------------------------------
 function conceptA(W, H, { bleed = 0, mockup = false } = {}) {
   const M = W * 0.058; let b = '';
@@ -77,15 +88,21 @@ function conceptA(W, H, { bleed = 0, mockup = false } = {}) {
   return frame(W, H, b, bleed);
 }
 
-// ---- Concept B : navy footer band (selected) -------------------------------
+// ---- Concept B : navy footer band, logo on a white plate (selected) --------
 function conceptB(W, H, { bleed = 0, mockup = false, paper = P.PAPER } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
-  b += logoImg(M, M * 0.95, logoW(W));
-  const bandH = H * 0.150, by = H - bandH;
+  const bandH = H * 0.170, by = H - bandH;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
-  b += senderBand(M, W - M, by + bandH * 0.52, '#FFFFFF', W);
+  // white plate behind the logo, inside the navy band
+  const innerM = bandH * 0.13, plateH = bandH - innerM * 2, pad = plateH * 0.12;
+  const logoH = plateH - pad * 2, lw = logoH * LOGO_AR, plateW = lw + pad * 2;
+  const plateX = M, plateY = by + innerM, rx = plateH * 0.06;
+  b += `<rect x="${f(plateX)}" y="${f(plateY)}" width="${f(plateW)}" height="${f(plateH)}" rx="${f(rx)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += logoImg(plateX + pad, plateY + pad, lw);
+  // sender details fill the rest of the band (single column, left-aligned)
+  b += senderLeft(plateX + plateW + W * 0.05, by + bandH * 0.52, '#FFFFFF', W);
   return frame(W, H, b, bleed, paper);
 }
 
