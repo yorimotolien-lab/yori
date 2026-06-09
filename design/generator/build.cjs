@@ -71,18 +71,43 @@ if (Resvg) {
     png(s, path.join(PREV, 'conceptB-final.png'), Wt);
   }
 
-  // envelope concept sheets, one per size
+  // per-size concept sheet — all concepts in a 3-column grid
+  const allKeys = Object.keys(CONCEPTS);
   for (const [sk, S] of Object.entries(SIZES)) {
-    const ppm = 6, iw = Math.round(S.W * ppm), ih = Math.round(S.H * ppm), gap2 = 40;
-    let s = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${3 * iw + 4 * gap2}" height="${ih + 2 * gap2 + 70}"><rect width="100%" height="100%" fill="#e9e9e9"/>`;
-    s += `<text x="${gap2}" y="${gap2 - 12}" font-family="sans-serif" font-size="28" fill="#444">${S.label}</text>`;
-    ['A', 'B', 'C'].forEach((ck, i) => {
-      const x = gap2 + i * (iw + gap2);
+    const ppm = 5, iw = Math.round(S.W * ppm), ih = Math.round(S.H * ppm), gap2 = 36, cols = 3;
+    const rows = Math.ceil(allKeys.length / cols);
+    const top = 60, rowH = ih + 46 + gap2;
+    let s = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${cols * iw + (cols + 1) * gap2}" height="${top + rows * rowH}"><rect width="100%" height="100%" fill="#e9e9e9"/>`;
+    s += `<text x="${gap2}" y="${top - 22}" font-family="sans-serif" font-size="28" fill="#444">${S.label}</text>`;
+    allKeys.forEach((ck, i) => {
+      const x = gap2 + (i % cols) * (iw + gap2), y = top + Math.floor(i / cols) * rowH;
       const b64 = readB64(path.join(ENV, `${sk}-${ck}-${CONCEPTS[ck].name}-mockup.png`));
-      s += tile(b64, x, gap2, iw, ih, '#ffffff', `Concept ${ck} — ${CONCEPTS[ck].name}`);
+      s += tile(b64, x, y, iw, ih, '#ffffff', `Concept ${ck} — ${CONCEPTS[ck].name}`);
     });
     s += `</svg>`;
-    png(s, path.join(PREV, `${sk}-concepts.png`), 3 * iw + 4 * gap2);
+    png(s, path.join(PREV, `${sk}-concepts.png`), cols * iw + (cols + 1) * gap2);
+  }
+
+  // "other designs" sheet — D/E/F across both sizes
+  {
+    const newKeys = ['D', 'E', 'F'];
+    const hpx = 1000, gap3 = 40, top = 130;
+    const k2w = Math.round(hpx * 240 / 332), n3w = Math.round(hpx * 120 / 235);
+    const colW = Math.max(k2w, n3w);
+    const Wt = gap3 + newKeys.length * (colW + gap3);
+    const Ht = top + 2 * (hpx + 46 + gap3);
+    let s = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${Wt}" height="${Ht}"><rect width="100%" height="100%" fill="#ECECEA"/>`;
+    s += `<text x="${gap3}" y="64" font-family="sans-serif" font-size="40" font-weight="700" fill="#223A5C">その他のデザイン案 ／ Other directions</text>`;
+    s += `<text x="${gap3}" y="98" font-family="sans-serif" font-size="22" fill="#666">D: センタード　E: フレーム　F: サイドバー（いずれもネイビー・実ロゴ）</text>`;
+    newKeys.forEach((ck, i) => {
+      const cx = gap3 + i * (colW + gap3);
+      const k2 = readB64(path.join(ENV, `kaku2-${ck}-${CONCEPTS[ck].name}-mockup.png`));
+      const n3 = readB64(path.join(ENV, `chokei3-${ck}-${CONCEPTS[ck].name}-mockup.png`));
+      s += tile(k2, cx + (colW - k2w) / 2, top, k2w, hpx, '#fff', `Concept ${ck} — ${CONCEPTS[ck].name} ／ 角2号`);
+      s += tile(n3, cx + (colW - n3w) / 2, top + hpx + 46 + gap3, n3w, hpx, '#fff', `Concept ${ck} ／ 長形3号`);
+    });
+    s += `</svg>`;
+    png(s, path.join(PREV, 'other-concepts.png'), Wt);
   }
   console.log('preview sheets written');
 }

@@ -29,9 +29,10 @@ function logoImg(x, y, w) {
 
 function frame(W, H, body, bleed = 0, paper = P.PAPER) {
   const vw = W + bleed * 2, vh = H + bleed * 2;
+  const bg = (paper && paper !== 'none')
+    ? `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(vw)}" height="${f(vh)}" fill="${paper}"/>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${f(vw)}mm" height="${f(vh)}mm" viewBox="${f(-bleed)} ${f(-bleed)} ${f(vw)} ${f(vh)}">`
-    + `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(vw)}" height="${f(vh)}" fill="${paper}"/>`
-    + body + `</svg>`;
+    + bg + body + `</svg>`;
 }
 
 // light placeholder showing where the recipient address / stamp will go
@@ -77,7 +78,7 @@ function conceptA(W, H, { bleed = 0, mockup = false } = {}) {
 }
 
 // ---- Concept B : navy footer band (selected) -------------------------------
-function conceptB(W, H, { bleed = 0, mockup = false } = {}) {
+function conceptB(W, H, { bleed = 0, mockup = false, paper = P.PAPER } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
   b += logoImg(M, M * 0.95, logoW(W));
@@ -85,7 +86,7 @@ function conceptB(W, H, { bleed = 0, mockup = false } = {}) {
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   b += senderBand(M, W - M, by + bandH * 0.52, '#FFFFFF', W);
-  return frame(W, H, b, bleed);
+  return frame(W, H, b, bleed, paper);
 }
 
 // ---- Concept C : architectural L-spine -------------------------------------
@@ -103,7 +104,73 @@ function conceptC(W, H, { bleed = 0, mockup = false } = {}) {
   return frame(W, H, b, bleed);
 }
 
-const CONCEPTS = { A: { name: 'line', fn: conceptA }, B: { name: 'band', fn: conceptB }, C: { name: 'spine', fn: conceptC } };
+// centred 3-line sender block
+function senderCentered(cx, yTop, color, W) {
+  const nameF = W * 0.040, bodyF = W * 0.027, lh = W * 0.046;
+  let s = '', y = yTop;
+  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.08)}" font-weight="700" fill="${color}">${SENDER.name}</text>`; y += lh * 1.05;
+  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`; y += lh * 0.82;
+  s += `<text x="${f(cx)}" y="${f(y)}" text-anchor="middle" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
+  return s;
+}
+// stacked sender block (for a narrow side panel), bottom-aligned, auto-fit
+function senderStack(x, yBottom, color, W, panelW) {
+  const usable = Math.max(panelW - x - W * 0.015, W * 0.1);
+  const bodyF = Math.min(W * 0.025, usable / 12.5); // address ~12.5 em advance
+  const nameF = bodyF * 1.4, lh = bodyF * 1.55, nameGap = nameF * 1.35;
+  const total = nameGap + 4 * lh;
+  let y = yBottom - total, s = '';
+  const put = (t, fz, wt, ff) => `<text x="${f(x)}" y="${f(y)}" font-family="${ff}" font-size="${f(fz)}" font-weight="${wt}" fill="${color}">${t}</text>`;
+  s += put(SENDER.name, nameF, 700, MIX); y += nameGap;
+  s += put(SENDER.zip, bodyF, 400, MIX); y += lh;
+  s += put(SENDER.addr, bodyF, 400, MIX); y += lh;
+  s += put(SENDER.tel, bodyF, 400, SANS); y += lh;
+  s += put(SENDER.fax, bodyF, 400, SANS);
+  return s;
+}
+
+// ---- Concept D : centred / classic -----------------------------------------
+function conceptD(W, H, { bleed = 0, mockup = false } = {}) {
+  const M = W * 0.058; let b = '';
+  const lw = logoW(W) * 0.94;
+  b += logoImg((W - lw) / 2, M * 1.0, lw);
+  if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
+  const footY = H - M - H * 0.075, ruleW = W * 0.26;
+  b += `<line x1="${f((W - ruleW) / 2)}" y1="${f(footY)}" x2="${f((W + ruleW) / 2)}" y2="${f(footY)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.003)}"/>`;
+  b += senderCentered(W / 2, footY + H * 0.028, P.INK, W);
+  return frame(W, H, b, bleed);
+}
+
+// ---- Concept E : navy keyline frame ----------------------------------------
+function conceptE(W, H, { bleed = 0, mockup = false } = {}) {
+  const M = W * 0.058; let b = '';
+  const ins = W * 0.046, pad = W * 0.035;
+  b += `<rect x="${f(ins)}" y="${f(ins)}" width="${f(W - ins * 2)}" height="${f(H - ins * 2)}" fill="none" stroke="${P.NAVY}" stroke-width="${f(W * 0.004)}"/>`;
+  b += `<rect x="${f(ins + W * 0.012)}" y="${f(ins + W * 0.012)}" width="${f(W - (ins + W * 0.012) * 2)}" height="${f(H - (ins + W * 0.012) * 2)}" fill="none" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += logoImg(ins + pad, ins + pad, logoW(W) * 0.9);
+  if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
+  const footH = H * 0.10, ruleY = H - ins - pad - footH;
+  b += `<line x1="${f(ins + pad)}" y1="${f(ruleY)}" x2="${f(W - ins - pad)}" y2="${f(ruleY)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0022)}"/>`;
+  b += senderBand(ins + pad, W - ins - pad, ruleY + footH * 0.54, P.INK, W);
+  return frame(W, H, b, bleed);
+}
+
+// ---- Concept F : navy side panel (colour block) ----------------------------
+function conceptF(W, H, { bleed = 0, mockup = false } = {}) {
+  const M = W * 0.058; let b = '';
+  const panelW = W * 0.30;
+  b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(panelW + bleed)}" height="${f(H + bleed * 2)}" fill="${P.NAVY}"/>`;
+  b += `<rect x="${f(panelW)}" y="${f(-bleed)}" width="${f(W * 0.004)}" height="${f(H + bleed * 2)}" fill="${P.STEEL_L}"/>`;
+  b += logoImg(panelW + W * 0.05, M * 1.0, logoW(W) * 0.92);
+  if (mockup) { b += recipient(W, H); b += stampBox(W, H); }
+  b += senderStack(W * 0.045, H - M, '#FFFFFF', W, panelW);
+  return frame(W, H, b, bleed);
+}
+
+const CONCEPTS = {
+  A: { name: 'line', fn: conceptA }, B: { name: 'band', fn: conceptB }, C: { name: 'spine', fn: conceptC },
+  D: { name: 'center', fn: conceptD }, E: { name: 'frame', fn: conceptE }, F: { name: 'sidebar', fn: conceptF },
+};
 const SIZES = { kaku2: { W: 240, H: 332, label: '角2号 (240 × 332 mm)' }, chokei3: { W: 120, H: 235, label: '長形3号 (120 × 235 mm)' } };
 
 module.exports = { CONCEPTS, SIZES, SENDER };
