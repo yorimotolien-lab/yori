@@ -105,6 +105,9 @@ function conceptB(W, H, { bleed = 0, mockup = false, paper = P.PAPER } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
   const bandH = H * 0.170, by = H - bandH;
+  // thin navy vertical line up the left edge -> forms an L with the band
+  const lineW = W * 0.017;
+  b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(lineW + bleed)}" height="${f(by + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   // white plate behind the logo, inside the navy band
