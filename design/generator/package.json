@@ -1,0 +1,12 @@
+{
+  "name": "lien-brand-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates LIEN logo and envelope design assets (SVG + PNG previews).",
+  "scripts": {
+    "build": "node build.cjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
