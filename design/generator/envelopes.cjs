@@ -38,28 +38,23 @@ function qrImg(x, y, s) {
   return `<image x="${f(x)}" y="${f(y)}" width="${f(s)}" height="${f(s)}" xlink:href="${QR_URI}"/>`;
 }
 
-// 在中 checkboxes placed above the navy band (wraps to fit the width)
+// 在中 checkboxes above the navy band: six 在中 items on row 1, その他 on row 2
+// with its closing paren widened out to the 領収書在中 column.
 function checkboxes(W, bandTopY, color) {
-  const items = ['御見積書在中', '御請求書在中', '領収書在中', '御契約書在中', '注文書在中', '注文請書在中', 'その他（　　　　）'];
-  const M = W * 0.058, fz = W * 0.0185, box = fz * 0.95, gap = W * 0.016, usable = W - M * 2;
+  const six = ['御見積書在中', '御請求書在中', '領収書在中', '御契約書在中', '注文書在中', '注文請書在中'];
+  const M = W * 0.058, fz = W * 0.017, box = fz * 0.95, gap = W * 0.018;
   const itemW = (t) => box + fz * 0.45 + t.length * fz * 1.02;
-  const rows = [[]]; let cur = 0;
-  for (const t of items) {
-    const w = itemW(t);
-    if (cur + w > usable && rows[rows.length - 1].length) { rows.push([]); cur = 0; }
-    rows[rows.length - 1].push([t, w]); cur += w + gap;
-  }
-  const lineH = fz * 2.0;
-  let y = bandTopY - W * 0.022 - (rows.length - 1) * lineH, s = '';
-  for (const row of rows) {
-    let x = M;
-    for (const [t, w] of row) {
-      s += `<rect x="${f(x)}" y="${f(y - box)}" width="${f(box)}" height="${f(box)}" rx="${f(box * 0.12)}" fill="none" stroke="${color}" stroke-width="${f(W * 0.0016)}"/>`;
-      s += `<text x="${f(x + box + fz * 0.45)}" y="${f(y)}" font-family="${MIX}" font-size="${f(fz)}" fill="${color}">${t}</text>`;
-      x += w + gap;
-    }
-    y += lineH;
-  }
+  const lineH = fz * 2.05;
+  const y1 = bandTopY - W * 0.022 - lineH, y2 = bandTopY - W * 0.022;
+  const chk = (t, x, y) =>
+    `<rect x="${f(x)}" y="${f(y - box)}" width="${f(box)}" height="${f(box)}" rx="${f(box * 0.12)}" fill="none" stroke="${color}" stroke-width="${f(W * 0.0016)}"/>`
+    + (t ? `<text x="${f(x + box + fz * 0.45)}" y="${f(y)}" font-family="${MIX}" font-size="${f(fz)}" fill="${color}">${t}</text>` : '');
+  let s = '', x = M; const xs = [];
+  for (const t of six) { xs.push(x); s += chk(t, x, y1); x += itemW(t) + gap; }
+  // その他（  …  ） — closing paren aligned to the right edge of 領収書在中 (index 2)
+  const closeX = xs[2] + itemW(six[2]) - gap * 0.4;
+  s += chk('その他（', M, y2);
+  s += `<text x="${f(closeX)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(fz)}" fill="${color}">）</text>`;
   return s;
 }
 
@@ -129,10 +124,11 @@ function conceptB(W, H, { bleed = 0, mockup = false, paper = P.PAPER } = {}) {
   if (mockup) b += stampBox(W, H);          // 宛名 is applied by label — no guide
   const bandH = H * 0.205, by = H - bandH;   // larger band
   const lineW = W * 0.028;                    // wider navy vertical line
-  // navy L-frame (vertical line + band), full bleed to the edges
-  b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(lineW + bleed)}" height="${f(by + bleed)}" fill="${P.NAVY}"/>`;
+  // navy L-frame: vertical line overlaps into the band so the corner is solid
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
-  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
+  b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(lineW + bleed)}" height="${f(by + bleed + bandH * 0.5)}" fill="${P.NAVY}"/>`;
+  // steel hairline on the band top, starting from the vertical line (keeps the corner solid navy)
+  b += `<rect x="${f(lineW)}" y="${f(by)}" width="${f(W + bleed - lineW)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   // 在中 checkboxes above the band
   b += checkboxes(W, by, P.NAVY);
   const innerM = bandH * 0.12, plateH = bandH - innerM * 2, rx = plateH * 0.06, plateY = by + innerM;
