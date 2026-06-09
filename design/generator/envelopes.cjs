@@ -1,9 +1,12 @@
 // =============================================================================
 //  LIEN envelope layouts  —  角2号 (240x332) and 長形3号 (120x235), millimetres.
-//  Each concept renders either a print master (bleed, brand only) or a mockup
-//  (no bleed, with a light addressing-area guide for presentation).
+//  Uses the actual LIEN CONSTRUCTION logo (design/logo/lien-master.png),
+//  placed on the paper; the navy footer band carries the sender details.
+//  Print master = bleed + brand only; mockup = addressing-area guide.
 // =============================================================================
 
+const fs = require('fs');
+const path = require('path');
 const B = require('./brand.cjs');
 const { f, PALETTE: P, MIX, SANS } = B;
 
@@ -15,16 +18,25 @@ const SENDER = {
   fax: 'FAX 047-307-9288',
 };
 
+// embedded real logo (transparent, trimmed)
+const LOGO_PATH = path.join(__dirname, '..', 'logo', 'lien-master.png');
+const LOGO_URI = 'data:image/png;base64,' + fs.readFileSync(LOGO_PATH).toString('base64');
+const LOGO_AR = 1692 / 1934; // width / height
+function logoImg(x, y, w) {
+  const h = w / LOGO_AR;
+  return `<image x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" xlink:href="${LOGO_URI}"/>`;
+}
+
 function frame(W, H, body, bleed = 0, paper = P.PAPER) {
   const vw = W + bleed * 2, vh = H + bleed * 2;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${f(vw)}mm" height="${f(vh)}mm" viewBox="${f(-bleed)} ${f(-bleed)} ${f(vw)} ${f(vh)}">`
+  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${f(vw)}mm" height="${f(vh)}mm" viewBox="${f(-bleed)} ${f(-bleed)} ${f(vw)} ${f(vh)}">`
     + `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(vw)}" height="${f(vh)}" fill="${paper}"/>`
     + body + `</svg>`;
 }
 
 // light placeholder showing where the recipient address / stamp will go
 function recipient(W, H) {
-  const x = W * 0.165; let y = H * 0.30;
+  const x = W * 0.165; let y = H * 0.345;
   const c = '#CBC7BE', lh = W * 0.052, fz = W * 0.030, big = W * 0.040;
   let s = `<g fill="${c}" font-family="${MIX}" font-weight="400">`;
   s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">〒123-4567</text>`; y += lh;
@@ -39,37 +51,40 @@ function stampBox(W, H) {
   return `<rect x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" rx="${f(W * 0.006)}" fill="none" stroke="#DCD8CE" stroke-width="${f(W * 0.0025)}"/>`;
 }
 
-function senderLines(x, y, W, anchor, color, opts = {}) {
-  const nameF = opts.nameF || W * 0.036, bodyF = opts.bodyF || W * 0.025, lh = opts.lh || W * 0.040;
-  let s = '', yy = y;
-  s += `<text x="${f(x)}" y="${f(yy)}" text-anchor="${anchor}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`; yy += lh * 1.05;
-  s += `<text x="${f(x)}" y="${f(yy)}" text-anchor="${anchor}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`; yy += lh * 0.82;
-  s += `<text x="${f(x)}" y="${f(yy)}" text-anchor="${anchor}" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}　${SENDER.fax}</text>`;
+// two-column sender block: name + address (left), TEL / FAX (right)
+function senderBand(xL, xR, yc, color, W) {
+  const nameF = W * 0.040, bodyF = W * 0.027, lineGap = W * 0.046;
+  const y1 = yc - lineGap * 0.18, y2 = yc + lineGap * 0.74;
+  let s = '';
+  s += `<text x="${f(xL)}" y="${f(y1)}" font-family="${MIX}" font-size="${f(nameF)}" letter-spacing="${f(nameF * 0.06)}" font-weight="700" fill="${color}">${SENDER.name}</text>`;
+  s += `<text x="${f(xL)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(bodyF)}" fill="${color}">${SENDER.zip}　${SENDER.addr}</text>`;
+  s += `<text x="${f(xR)}" y="${f(y1)}" text-anchor="end" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.tel}</text>`;
+  s += `<text x="${f(xR)}" y="${f(y2)}" text-anchor="end" font-family="${SANS}" font-size="${f(bodyF)}" letter-spacing="0.3" fill="${color}">${SENDER.fax}</text>`;
   return s;
 }
+
+const logoW = (W) => W * 0.235;
 
 // ---- Concept A : minimal hairline footer -----------------------------------
 function conceptA(W, H, { bleed = 0, mockup = false } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
-  const footH = H * 0.118, ruleY = H - M - footH;
+  b += logoImg(M, M * 0.95, logoW(W));
+  const footH = H * 0.120, ruleY = H - M - footH;
   b += `<line x1="${f(M)}" y1="${f(ruleY)}" x2="${f(W - M)}" y2="${f(ruleY)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0025)}"/>`;
-  const markH = W * 0.082, logoY = ruleY + (footH - markH) / 2 + footH * 0.04;
-  b += B.logoLockup(M, logoY, markH, { variant: 'color' });
-  b += senderLines(W - M, ruleY + footH * 0.42, W, 'end', P.INK, { nameF: W * 0.036, bodyF: W * 0.025, lh: W * 0.040 });
+  b += senderBand(M, W - M, ruleY + footH * 0.52, P.INK, W);
   return frame(W, H, b, bleed);
 }
 
-// ---- Concept B : dark footer band ------------------------------------------
+// ---- Concept B : navy footer band (selected) -------------------------------
 function conceptB(W, H, { bleed = 0, mockup = false } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
+  b += logoImg(M, M * 0.95, logoW(W));
   const bandH = H * 0.150, by = H - bandH;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
-  const markH = W * 0.088, logoY = by + (bandH - markH) / 2;
-  b += B.logoLockup(M, logoY, markH, { variant: 'ko' });
-  b += senderLines(W - M, by + bandH * 0.40, W, 'end', '#FFFFFF', { nameF: W * 0.036, bodyF: W * 0.025, lh: W * 0.040 });
+  b += senderBand(M, W - M, by + bandH * 0.52, '#FFFFFF', W);
   return frame(W, H, b, bleed);
 }
 
@@ -79,15 +94,12 @@ function conceptC(W, H, { bleed = 0, mockup = false } = {}) {
   const spineW = W * 0.052, bandH = H * 0.140, by = H - bandH;
   b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(spineW + bleed)}" height="${f(by + bandH + bleed * 2)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
-  const gap = spineW + W * 0.018;
-  b += `<line x1="${f(gap)}" y1="${f(M * 0.7)}" x2="${f(gap)}" y2="${f(by - W * 0.018)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0022)}"/>`;
+  const gx = spineW + W * 0.022;
+  b += `<line x1="${f(gx)}" y1="${f(M * 0.7)}" x2="${f(gx)}" y2="${f(by - W * 0.02)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0022)}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
-  const cmH = spineW * 0.78;
-  b += B.markGroup(cmH, (spineW - cmH) / 2, M * 0.7, { ko: true });
   if (mockup) { b += recipient(W, H); b += stampBox(W, H); }
-  const markH = W * 0.086, logoY = by + (bandH - markH) / 2;
-  b += B.logoLockup(spineW + W * 0.03, logoY, markH, { variant: 'ko' });
-  b += senderLines(W - M, by + bandH * 0.40, W, 'end', '#FFFFFF', { nameF: W * 0.036, bodyF: W * 0.025, lh: W * 0.040 });
+  b += logoImg(spineW + W * 0.05, M * 0.95, logoW(W));
+  b += senderBand(spineW + W * 0.05, W - M, by + bandH * 0.52, '#FFFFFF', W);
   return frame(W, H, b, bleed);
 }
 

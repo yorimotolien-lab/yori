@@ -27,23 +27,9 @@ function png(svg, out, width, bg = '#ffffff') {
 }
 const W = (p, s) => fs.writeFileSync(p, s);
 
-// ---------------- logo files ----------------
-const logoFiles = [
-  ['lien-logo-vertical',        B.verticalLogo({ variant: 'color' }), 'color'],
-  ['lien-logo-vertical-mono',   B.verticalLogo({ variant: 'mono' }),  'mono'],
-  ['lien-logo-vertical-white',  B.verticalLogo({ variant: 'ko' }),    'ko'],
-  ['lien-logo-horizontal',      B.horizontalLogo({ variant: 'color' }), 'color'],
-  ['lien-logo-horizontal-mono', B.horizontalLogo({ variant: 'mono' }),  'mono'],
-  ['lien-logo-horizontal-white',B.horizontalLogo({ variant: 'ko' }),    'ko'],
-  ['lien-mark',                 B.markOnly({ variant: 'color' }), 'color'],
-  ['lien-mark-mono',            B.markOnly({ variant: 'mono' }),  'mono'],
-  ['lien-mark-white',           B.markOnly({ variant: 'ko' }),    'ko'],
-];
-for (const [name, svg] of logoFiles) {
-  W(path.join(LOGO, name + '.svg'), svg);
-  png(svg, path.join(LOGO, name + '.png'), 1000, 'transparent');
-}
-console.log('logo: ' + logoFiles.length + ' svg');
+// ---------------- logo ----------------
+// The brand logo is the client's actual mark: logo/lien-master.png
+// (transparent, trimmed). The envelope layouts embed it directly.
 
 // ---------------- envelope masters + mockups ----------------
 const envManifest = [];
@@ -69,21 +55,21 @@ function tile(b64, x, y, w, h, bg, label) {
 function readB64(p) { return fs.readFileSync(p).toString('base64'); }
 
 if (Resvg) {
-  // logo overview
-  const lo = [
-    ['lien-logo-vertical', '#ffffff', 'vertical'],
-    ['lien-logo-vertical-white', '#16181D', 'white'],
-    ['lien-logo-horizontal', '#ffffff', 'horizontal'],
-    ['lien-mark', '#ffffff', 'mark'],
-  ];
-  const cw = 520, gap = 28;
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${2 * cw + 3 * gap}" height="${2 * 480 + 3 * gap + 30}"><rect width="100%" height="100%" fill="#eeeeec"/>`;
-  lo.forEach(([n, bg, lb], i) => {
-    const x = gap + (i % 2) * (cw + gap), y = gap + Math.floor(i / 2) * (480 + gap + 30);
-    svg += tile(readB64(path.join(LOGO, n + '.png')), x + 40, y + 30, cw - 80, 380, bg, lb);
-  });
-  svg += `</svg>`;
-  png(svg, path.join(PREV, 'logo-overview.png'), 2 * cw + 3 * gap);
+  // selected-direction sheet: Concept B for both sizes, side by side
+  {
+    const Hpx = 1180, k2w = Math.round(Hpx * 240 / 332), n3w = Math.round(Hpx * 120 / 235);
+    const gap = 70, padX = 70, padTop = 120, padBot = 80;
+    const Wt = padX * 2 + k2w + gap + n3w, Ht = padTop + Hpx + padBot;
+    const k2 = readB64(path.join(ENV, 'kaku2-B-band-mockup.png'));
+    const n3 = readB64(path.join(ENV, 'chokei3-B-band-mockup.png'));
+    let s = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${Wt}" height="${Ht}"><rect width="100%" height="100%" fill="#ECECEA"/>`;
+    s += `<text x="${padX}" y="70" font-family="sans-serif" font-size="40" font-weight="700" fill="#223A5C">Concept B — フッターバンド ／ Navy</text>`;
+    s += `<text x="${padX}" y="104" font-family="sans-serif" font-size="24" fill="#666">株式会社LIEN 封筒デザイン（差出人情報は下部・宛名グレーは配置ガイド）</text>`;
+    s += tile(k2, padX, padTop, k2w, Hpx, '#fff', '角2号 240×332mm');
+    s += tile(n3, padX + k2w + gap, padTop, n3w, Hpx, '#fff', '長形3号 120×235mm');
+    s += `</svg>`;
+    png(s, path.join(PREV, 'conceptB-final.png'), Wt);
+  }
 
   // envelope concept sheets, one per size
   for (const [sk, S] of Object.entries(SIZES)) {
