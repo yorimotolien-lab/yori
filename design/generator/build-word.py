@@ -96,13 +96,15 @@ def run(text, sz, bold=False):
 def para(inner, after):
     return f'<w:p><w:pPr><w:spacing w:after="{after}"/></w:pPr>{inner}</w:p>'
 
-RCP = [('〒　　-　　　　', 24), ('（ご住所）', 24), ('（会社名・部署名）', 24), ('（ご担当者名）　様', 32)]
+POSTAL = ('〒　　-　　　　', 24)                       # postal code — top of page
+NAME = [('（ご住所）', 24), ('（会社名・部署名）', 24), ('（ご担当者名）　様', 32)]  # 宛名 — centre
 
-def section(img, sectpr=None):
-    out = []
-    for i, (t, sz) in enumerate(RCP):
-        inner = (img if i == 0 else '') + run(t, sz, bold=(sz >= 32))
-        out.append(para(inner, 160 if sz >= 32 else 90))
+def section(img, gap, sectpr=None):
+    # postal code at the top (carries the background image), then a large gap
+    out = [para(img + run(POSTAL[0], POSTAL[1]), gap)]
+    # recipient name/address, centred down the page
+    for t, sz in NAME:
+        out.append(para(run(t, sz, bold=(sz >= 32)), 180 if sz >= 32 else 100))
     if sectpr:
         out.append(f'<w:p><w:pPr>{sectpr}</w:pPr></w:p>')
     return ''.join(out)
@@ -114,13 +116,15 @@ def sectpr(w, h, top, right, bottom, left):
       '<w:cols w:space="720"/><w:docGrid w:type="lines" w:linePitch="360"/></w:sectPr>')
 
 # twips = mm * 1440 / 25.4 ;  EMU = mm * 36000
-KAKU2 = sectpr(13606, 18822, 6236, 1134, 3290, 2041)   # 240x332, recipient ~110/36mm
-CHOKEI3 = sectpr(6803, 13323, 4422, 567, 2381, 1020)   # 120x235, recipient ~78/18mm
+# small top margin -> postal code near the top; gap pushes 宛名 to the centre
+KAKU2 = sectpr(13606, 18822, 2268, 1134, 3290, 2041)   # 240x332, 〒~40mm top
+CHOKEI3 = sectpr(6803, 13323, 1587, 567, 2381, 1020)   # 120x235, 〒~28mm top
+GAP_KAKU2, GAP_CHOKEI3 = 5600, 4000                    # spacing after 〒 (twips)
 img1 = anchor('rId100', 8640000, 11952000, 1, 'bg-kaku2')
 img2 = anchor('rId101', 4320000, 8460000, 2, 'bg-chokei3')
 
 document = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' + DOC_ROOT + '<w:body>'
-  + section(img1, KAKU2) + section(img2) + CHOKEI3 + '</w:body></w:document>')
+  + section(img1, GAP_KAKU2, KAKU2) + section(img2, GAP_CHOKEI3) + CHOKEI3 + '</w:body></w:document>')
 
 # ---- write package ----------------------------------------------------------
 parts = {

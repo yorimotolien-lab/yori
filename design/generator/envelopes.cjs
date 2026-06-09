@@ -39,15 +39,18 @@ function frame(W, H, body, bleed = 0, paper = P.PAPER) {
     + bg + body + `</svg>`;
 }
 
-// light placeholder showing where the recipient address / stamp will go
+// light placeholder: postal code at the top, recipient name/address centred
 function recipient(W, H) {
-  const x = W * 0.165; let y = H * 0.345;
-  const c = '#CBC7BE', lh = W * 0.052, fz = W * 0.030, big = W * 0.040;
+  const x = W * 0.165;
+  const c = '#CBC7BE', lh = W * 0.054, fz = W * 0.030, big = W * 0.040;
   let s = `<g fill="${c}" font-family="${MIX}" font-weight="400">`;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">〒123-4567</text>`; y += lh;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">東京都千代田区丸の内1-2-3</text>`; y += lh * 0.92;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">〇〇ビル 4階</text>`; y += lh * 1.25;
-  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">株式会社 〇〇〇〇〇〇　〇〇部</text>`; y += lh * 1.25;
+  // 郵便番号 — top
+  s += `<text x="${f(x)}" y="${f(H * 0.12)}" font-size="${f(fz)}" letter-spacing="0.3">〒123-4567</text>`;
+  // 宛名 — centre
+  let y = H * 0.42;
+  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">東京都千代田区丸の内1-2-3</text>`; y += lh;
+  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">〇〇ビル 4階</text>`; y += lh * 1.5;
+  s += `<text x="${f(x)}" y="${f(y)}" font-size="${f(fz)}">株式会社 〇〇〇〇〇〇　〇〇部</text>`; y += lh * 1.45;
   s += `<text x="${f(x + W * 0.04)}" y="${f(y)}" font-size="${f(big)}" letter-spacing="${f(big * 0.12)}">氏名　氏名　様</text>`;
   return s + `</g>`;
 }
