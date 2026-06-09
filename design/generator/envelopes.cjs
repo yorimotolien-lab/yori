@@ -53,7 +53,7 @@ function conceptA(W, H, { bleed = 0, mockup = false } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
   const footH = H * 0.118, ruleY = H - M - footH;
-  b += `<line x1="${f(M)}" y1="${f(ruleY)}" x2="${f(W - M)}" y2="${f(ruleY)}" stroke="${P.BRASS}" stroke-width="${f(W * 0.0025)}"/>`;
+  b += `<line x1="${f(M)}" y1="${f(ruleY)}" x2="${f(W - M)}" y2="${f(ruleY)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0025)}"/>`;
   const markH = W * 0.082, logoY = ruleY + (footH - markH) / 2 + footH * 0.04;
   b += B.logoLockup(M, logoY, markH, { variant: 'color' });
   b += senderLines(W - M, ruleY + footH * 0.42, W, 'end', P.INK, { nameF: W * 0.036, bodyF: W * 0.025, lh: W * 0.040 });
@@ -65,8 +65,8 @@ function conceptB(W, H, { bleed = 0, mockup = false } = {}) {
   const M = W * 0.058; let b = '';
   if (mockup) { b += stampBox(W, H); b += recipient(W, H); }
   const bandH = H * 0.150, by = H - bandH;
-  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.INK}"/>`;
-  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.004)}" fill="${P.BRASS}"/>`;
+  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
+  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   const markH = W * 0.088, logoY = by + (bandH - markH) / 2;
   b += B.logoLockup(M, logoY, markH, { variant: 'ko' });
   b += senderLines(W - M, by + bandH * 0.40, W, 'end', '#FFFFFF', { nameF: W * 0.036, bodyF: W * 0.025, lh: W * 0.040 });
@@ -77,11 +77,11 @@ function conceptB(W, H, { bleed = 0, mockup = false } = {}) {
 function conceptC(W, H, { bleed = 0, mockup = false } = {}) {
   const M = W * 0.058; let b = '';
   const spineW = W * 0.052, bandH = H * 0.140, by = H - bandH;
-  b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(spineW + bleed)}" height="${f(by + bandH + bleed * 2)}" fill="${P.INK}"/>`;
-  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.INK}"/>`;
+  b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(spineW + bleed)}" height="${f(by + bandH + bleed * 2)}" fill="${P.NAVY}"/>`;
+  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   const gap = spineW + W * 0.018;
-  b += `<line x1="${f(gap)}" y1="${f(M * 0.7)}" x2="${f(gap)}" y2="${f(by - W * 0.018)}" stroke="${P.BRASS}" stroke-width="${f(W * 0.0022)}"/>`;
-  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.004)}" fill="${P.BRASS}"/>`;
+  b += `<line x1="${f(gap)}" y1="${f(M * 0.7)}" x2="${f(gap)}" y2="${f(by - W * 0.018)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0022)}"/>`;
+  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   const cmH = spineW * 0.78;
   b += B.markGroup(cmH, (spineW - cmH) / 2, M * 0.7, { ko: true });
   if (mockup) { b += recipient(W, H); b += stampBox(W, H); }

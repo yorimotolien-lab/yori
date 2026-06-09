@@ -10,10 +10,16 @@ const PALETTE = {
   INK: '#16181D',        // near-black, cool
   CHARCOAL: '#23272E',
   STEEL: '#5C636D',
-  FACE_TOP: '#DCDFE3',   // cube faces (light / mid / dark)
+  // navy identity — accent + cube faces (light top / mid / deep)
+  NAVY: '#223A5C',       // primary accent (footer band, rules)
+  NAVY_DEEP: '#19293F',  // cube right face
+  NAVY_MID: '#3C5275',   // cube left face
+  NAVY_TOP: '#D8DCE3',   // cube top face (cool light)
+  STEEL_L: '#C7D0DC',    // light steel — inlaid "L" + hairline on navy
+  FACE_TOP: '#DCDFE3',   // (legacy grayscale faces, kept for reference)
   FACE_LEFT: '#5C636D',
   FACE_RIGHT: '#272B32',
-  BRASS: '#B0894A',      // single refined accent
+  BRASS: '#B0894A',      // (alternative accent, unused in navy scheme)
   PAPER: '#FAF9F5',      // warm off-white stock
 };
 
@@ -70,9 +76,9 @@ function markGroup(size, x, y, { mono = false, ko = false } = {}) {
   const c = cube(size / 2, size / 2, size * 0.43);
   const sw = size * 0.022;
   let topF, leftF, rightF, stroke, ac;
-  if (ko) { topF = '#FFFFFF'; leftF = 'rgba(255,255,255,0.70)'; rightF = 'rgba(255,255,255,0.46)'; stroke = '#FFFFFF'; ac = PALETTE.BRASS; }
+  if (ko) { topF = '#FFFFFF'; leftF = 'rgba(255,255,255,0.78)'; rightF = 'rgba(255,255,255,0.58)'; stroke = '#FFFFFF'; ac = PALETTE.NAVY; }
   else if (mono) { topF = leftF = rightF = 'none'; stroke = '#000'; ac = '#000'; }
-  else { topF = PALETTE.FACE_TOP; leftF = PALETTE.FACE_LEFT; rightF = PALETTE.FACE_RIGHT; stroke = PALETTE.INK; ac = PALETTE.BRASS; }
+  else { topF = PALETTE.NAVY_TOP; leftF = PALETTE.NAVY_MID; rightF = PALETTE.NAVY_DEEP; stroke = PALETTE.INK; ac = PALETTE.STEEL_L; }
   const p = c.pts, lj = 'stroke-linejoin="round"';
   let g = `<g transform="translate(${f(x)},${f(y)})">`;
   g += `<path d="${c.top}" fill="${topF}" stroke="${stroke}" stroke-width="${f(sw)}" ${lj}/>`;
@@ -115,7 +121,7 @@ function verticalLogo({ w = 600, variant = 'color' } = {}) {
   const markY = pad, lienY = markY + markSize + w * 0.025, tagY = lienY + H + w * 0.05, totalH = tagY + tagF + pad;
   const ink = ko ? '#FFFFFF' : (mono ? '#000' : PALETTE.INK);
   let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${f(totalW)} ${f(totalH)}">`;
-  if (ko) s += `<rect width="${f(totalW)}" height="${f(totalH)}" fill="${PALETTE.INK}"/>`;
+  if (ko) s += `<rect width="${f(totalW)}" height="${f(totalH)}" fill="${PALETTE.NAVY}"/>`;
   s += markGroup(markSize, cx - markSize / 2, markY, { mono, ko });
   s += `<path d="${word('LIEN', cx - lienW / 2, 0, H, t, tracking).d}" transform="translate(0,${f(lienY)})" fill="${ink}"/>`;
   s += `<text x="${f(cx)}" y="${f(tagY + tagF * 0.82)}" font-family="${SANS}" font-size="${f(tagF)}" letter-spacing="${f(tagLS)}" text-anchor="middle" fill="${ink}" font-weight="500">CONSTRUCTION</text>`;
@@ -132,7 +138,7 @@ function horizontalLogo({ w = 900, variant = 'color' } = {}) {
   const lienY = pad + (markSize - blockH) / 2, tagY = lienY + H + H * 0.30;
   const ink = ko ? '#FFFFFF' : (mono ? '#000' : PALETTE.INK);
   let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${f(totalW)} ${f(totalH)}">`;
-  if (ko) s += `<rect width="${f(totalW)}" height="${f(totalH)}" fill="${PALETTE.INK}"/>`;
+  if (ko) s += `<rect width="${f(totalW)}" height="${f(totalH)}" fill="${PALETTE.NAVY}"/>`;
   s += markGroup(markSize, pad, pad, { mono, ko });
   s += `<path d="${word('LIEN', tx, 0, H, t, tracking).d}" transform="translate(0,${f(lienY)})" fill="${ink}"/>`;
   s += `<text x="${f(tx)}" y="${f(tagY + tagF * 0.82)}" font-family="${SANS}" font-size="${f(tagF)}" letter-spacing="${f(tagLS)}" fill="${ink}" font-weight="500">CONSTRUCTION</text>`;
@@ -141,7 +147,7 @@ function horizontalLogo({ w = 900, variant = 'color' } = {}) {
 function markOnly({ w = 400, variant = 'color' } = {}) {
   const mono = variant === 'mono', ko = variant === 'ko';
   let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${w}">`;
-  if (ko) s += `<rect width="${w}" height="${w}" fill="${PALETTE.INK}"/>`;
+  if (ko) s += `<rect width="${w}" height="${w}" fill="${PALETTE.NAVY}"/>`;
   return s + markGroup(w * 0.86, w * 0.07, w * 0.07, { mono, ko }) + `</svg>`;
 }
 
