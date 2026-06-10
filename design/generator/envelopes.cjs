@@ -130,8 +130,6 @@ function conceptB(W, H, { bleed = 0, mockup = false, paper = P.PAPER } = {}) {
   // navy L-frame: vertical line overlaps into the band so the corner is solid
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(-bleed)}" y="${f(-bleed)}" width="${f(lineW + bleed)}" height="${f(by + bleed + bandH * 0.5)}" fill="${P.NAVY}"/>`;
-  // steel hairline on the band top, starting from the vertical line (keeps the corner solid navy)
-  b += `<rect x="${f(lineW)}" y="${f(by)}" width="${f(W + bleed - lineW)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   // 在中 checkboxes above the band
   b += checkboxes(W, by, P.NAVY);
   const innerM = bandH * 0.12, plateH = bandH - innerM * 2, rx = plateH * 0.06, plateY = by + innerM;
@@ -159,7 +157,6 @@ function conceptC(W, H, { bleed = 0, mockup = false } = {}) {
   b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(bandH + bleed)}" fill="${P.NAVY}"/>`;
   const gx = spineW + W * 0.022;
   b += `<line x1="${f(gx)}" y1="${f(M * 0.7)}" x2="${f(gx)}" y2="${f(by - W * 0.02)}" stroke="${P.NAVY}" stroke-width="${f(W * 0.0022)}"/>`;
-  b += `<rect x="${f(-bleed)}" y="${f(by)}" width="${f(W + bleed * 2)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   if (mockup) { b += recipient(W, H); b += stampBox(W, H); }
   b += logoImg(spineW + W * 0.05, M * 0.95, logoW(W));
   b += senderLeft(spineW + W * 0.05, by + bandH * 0.52, '#FFFFFF', W);
@@ -241,7 +238,6 @@ function conceptG(W, H, { mockup = false, paper = P.PAPER } = {}) {
   // inset navy L (vertical line down the left + bottom band), within the margins
   b += `<rect x="${f(ix0)}" y="${f(iy0)}" width="${f(lineW)}" height="${f(iy1 - iy0)}" fill="${P.NAVY}"/>`;
   b += `<rect x="${f(ix0)}" y="${f(by)}" width="${f(ix1 - ix0)}" height="${f(bandH)}" fill="${P.NAVY}"/>`;
-  b += `<rect x="${f(ix0 + lineW)}" y="${f(by)}" width="${f(ix1 - ix0 - lineW)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
   // 在中 checkboxes above the band (right of the vertical line)
   b += checkboxes(W, by, P.NAVY, ix0 + lineW + W * 0.012, ix1 - W * 0.006);
   const innerM = bandH * 0.12, plateH = bandH - innerM * 2, plateY = by + innerM, rx = plateH * 0.06;
@@ -267,7 +263,6 @@ function conceptH(W, H, { mockup = false, paper = P.PAPER } = {}) {
   const bandH = H * 0.17, by = iy1 - bandH, rx = bandH * 0.12;
   // rounded navy footer card, inset on all sides
   b += `<rect x="${f(ix0)}" y="${f(by)}" width="${f(ix1 - ix0)}" height="${f(bandH)}" rx="${f(rx)}" fill="${P.NAVY}"/>`;
-  b += `<rect x="${f(ix0 + rx)}" y="${f(by + bandH * 0.085)}" width="${f(ix1 - ix0 - rx * 2)}" height="${f(W * 0.0032)}" fill="${P.STEEL_L}"/>`;
   // 在中 checkboxes above the card
   b += checkboxes(W, by, P.NAVY, ix0 + W * 0.006, ix1 - W * 0.006);
   const innerM = bandH * 0.14, plateH = bandH - innerM * 2, plateY = by + innerM, prx = plateH * 0.08;
