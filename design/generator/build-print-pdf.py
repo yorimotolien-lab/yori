@@ -1,25 +1,33 @@
 #!/usr/bin/env python3
-# Wrap the 300dpi bleed renders (render-print.cjs) into print-ready PDFs.
-# Page size = finished size + 3mm bleed each side.  Needs: pip install img2pdf
+# Wrap the 350dpi renders (render-print.cjs) into print-ready PDFs.
+#   フチなし製袋 : page = finished + 3mm bleed (B)
+#   フチありG/H  : page = finished size (no bleed)
+# Needs: pip install img2pdf
 # Usage:  node render-print.cjs && python3 build-print-pdf.py
-import os, img2pdf
+import os, glob, img2pdf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PRINT = os.path.join(HERE, '..', 'print')
 
+SIZES = {'kaku2': (240, 332, '角2号'), 'chokei3': (120, 235, '長形3号')}
+JOBS = [('b', 'フチなし製袋', 3), ('g', 'フチありG', 0), ('h', 'フチありH', 0)]
 
-def mk(png, out, w_mm, h_mm):
-    pw, ph = img2pdf.mm_to_pt(w_mm + 6), img2pdf.mm_to_pt(h_mm + 6)
+
+def mk(png, out, w_mm, h_mm, bleed):
+    pw, ph = img2pdf.mm_to_pt(w_mm + bleed * 2), img2pdf.mm_to_pt(h_mm + bleed * 2)
     with open(out, 'wb') as f:
         f.write(img2pdf.convert(os.path.join(PRINT, png), layout_fun=img2pdf.get_layout_fun((pw, ph))))
     print('wrote', os.path.basename(out))
 
 
-mk('_render_kaku2.png',   os.path.join(PRINT, 'LIEN封筒_角2号_入稿.pdf'),  240, 332)
-mk('_render_chokei3.png', os.path.join(PRINT, 'LIEN封筒_長形3号_入稿.pdf'), 120, 235)
+# remove previous PDFs (clean, unambiguous filenames)
+for old in glob.glob(os.path.join(PRINT, 'LIEN封筒_*.pdf')):
+    os.remove(old)
 
-# remove the intermediate renders
-for f in ('_render_kaku2.png', '_render_chokei3.png'):
-    p = os.path.join(PRINT, f)
-    if os.path.exists(p):
-        os.remove(p)
+for tag, label, bleed in JOBS:
+    for k, (w, h, jp) in SIZES.items():
+        mk(f'_{tag}_{k}.png', os.path.join(PRINT, f'LIEN封筒_{jp}_{label}.pdf'), w, h, bleed)
+
+# drop intermediate renders
+for p in glob.glob(os.path.join(PRINT, '_*.png')):
+    os.remove(p)
