@@ -39,21 +39,24 @@ function qrImg(x, y, s) {
 }
 
 // 在中 checkboxes above the navy band: six 在中 items on row 1, その他 on row 2
-// with its closing paren widened out to the 領収書在中 column.
-function checkboxes(W, bandTopY, color) {
+// with its closing paren widened out to the 領収書在中 column. The font auto-
+// fits the available width [x0,x1] (defaults to the standard margins).
+function checkboxes(W, bandTopY, color, x0, x1) {
+  if (x0 == null) x0 = W * 0.058;
+  if (x1 == null) x1 = W - W * 0.058;
   const six = ['御見積書在中', '御請求書在中', '領収書在中', '御契約書在中', '注文書在中', '注文請書在中'];
-  const M = W * 0.058, fz = W * 0.017, box = fz * 0.95, gap = W * 0.018;
+  const fz = Math.min(W * 0.018, (x1 - x0) / 49); // 6 items + gaps must fit
+  const box = fz * 0.95, gap = fz * 1.0;
   const itemW = (t) => box + fz * 0.45 + t.length * fz * 1.02;
   const lineH = fz * 2.05;
-  const y1 = bandTopY - W * 0.022 - lineH, y2 = bandTopY - W * 0.022;
+  const y1 = bandTopY - W * 0.018 - lineH, y2 = bandTopY - W * 0.018;
   const chk = (t, x, y) =>
     `<rect x="${f(x)}" y="${f(y - box)}" width="${f(box)}" height="${f(box)}" rx="${f(box * 0.12)}" fill="none" stroke="${color}" stroke-width="${f(W * 0.0016)}"/>`
     + (t ? `<text x="${f(x + box + fz * 0.45)}" y="${f(y)}" font-family="${MIX}" font-size="${f(fz)}" fill="${color}">${t}</text>` : '');
-  let s = '', x = M; const xs = [];
+  let s = '', x = x0; const xs = [];
   for (const t of six) { xs.push(x); s += chk(t, x, y1); x += itemW(t) + gap; }
-  // その他（  …  ） — closing paren aligned to the right edge of 領収書在中 (index 2)
-  const closeX = xs[2] + itemW(six[2]) - gap * 0.4;
-  s += chk('その他（', M, y2);
+  const closeX = xs[2] + itemW(six[2]) - gap * 0.4; // ） to right edge of 領収書在中
+  s += chk('その他（', x0, y2);
   s += `<text x="${f(closeX)}" y="${f(y2)}" font-family="${MIX}" font-size="${f(fz)}" fill="${color}">）</text>`;
   return s;
 }
@@ -228,9 +231,63 @@ function conceptF(W, H, { bleed = 0, mockup = false } = {}) {
   return frame(W, H, b, bleed);
 }
 
+// ---- Concept G : フチあり版（既製封筒用）— inset navy L + plates, no bleed ----
+function conceptG(W, H, { mockup = false, paper = P.PAPER } = {}) {
+  const SM = Math.max(W * 0.05, 9);            // safe printable margin (no bleed)
+  const ix0 = SM, iy0 = SM, ix1 = W - SM, iy1 = H - SM;
+  let b = '';
+  if (mockup) b += stampBox(W, H);
+  const bandH = H * 0.165, by = iy1 - bandH, lineW = W * 0.024;
+  // inset navy L (vertical line down the left + bottom band), within the margins
+  b += `<rect x="${f(ix0)}" y="${f(iy0)}" width="${f(lineW)}" height="${f(iy1 - iy0)}" fill="${P.NAVY}"/>`;
+  b += `<rect x="${f(ix0)}" y="${f(by)}" width="${f(ix1 - ix0)}" height="${f(bandH)}" fill="${P.NAVY}"/>`;
+  b += `<rect x="${f(ix0 + lineW)}" y="${f(by)}" width="${f(ix1 - ix0 - lineW)}" height="${f(W * 0.0035)}" fill="${P.STEEL_L}"/>`;
+  // 在中 checkboxes above the band (right of the vertical line)
+  b += checkboxes(W, by, P.NAVY, ix0 + lineW + W * 0.012, ix1 - W * 0.006);
+  const innerM = bandH * 0.12, plateH = bandH - innerM * 2, plateY = by + innerM, rx = plateH * 0.06;
+  const lpad = plateH * 0.11, logoH = plateH - lpad * 2, lw = logoH * LOGO_AR, logoPlateW = lw + lpad * 2;
+  const logoPlateX = ix0 + lineW + W * 0.018;
+  b += `<rect x="${f(logoPlateX)}" y="${f(plateY)}" width="${f(logoPlateW)}" height="${f(plateH)}" rx="${f(rx)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += logoImg(logoPlateX + lpad, plateY + lpad, lw);
+  const qrPlateS = Math.min(plateH, W * 0.16), qrPad = qrPlateS * 0.1, qrS = qrPlateS - qrPad * 2;
+  const qrPlateX = ix1 - W * 0.022 - qrPlateS, qrPlateY = by + (bandH - qrPlateS) / 2;
+  b += `<rect x="${f(qrPlateX)}" y="${f(qrPlateY)}" width="${f(qrPlateS)}" height="${f(qrPlateS)}" rx="${f(qrPlateS * 0.06)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += qrImg(qrPlateX + qrPad, qrPlateY + qrPad, qrS);
+  const sxL = logoPlateX + logoPlateW + W * 0.025, sxR = qrPlateX - W * 0.025;
+  b += senderLeft(sxL, by + bandH * 0.5, '#FFFFFF', W, sxR - sxL);
+  return frame(W, H, b, 0, paper);
+}
+
+// ---- Concept H : フチあり版（既製封筒用）— rounded contained footer card ----
+function conceptH(W, H, { mockup = false, paper = P.PAPER } = {}) {
+  const SM = Math.max(W * 0.05, 9);
+  const ix0 = SM, ix1 = W - SM, iy1 = H - SM;
+  let b = '';
+  if (mockup) b += stampBox(W, H);
+  const bandH = H * 0.17, by = iy1 - bandH, rx = bandH * 0.12;
+  // rounded navy footer card, inset on all sides
+  b += `<rect x="${f(ix0)}" y="${f(by)}" width="${f(ix1 - ix0)}" height="${f(bandH)}" rx="${f(rx)}" fill="${P.NAVY}"/>`;
+  b += `<rect x="${f(ix0 + rx)}" y="${f(by + bandH * 0.085)}" width="${f(ix1 - ix0 - rx * 2)}" height="${f(W * 0.0032)}" fill="${P.STEEL_L}"/>`;
+  // 在中 checkboxes above the card
+  b += checkboxes(W, by, P.NAVY, ix0 + W * 0.006, ix1 - W * 0.006);
+  const innerM = bandH * 0.14, plateH = bandH - innerM * 2, plateY = by + innerM, prx = plateH * 0.08;
+  const lpad = plateH * 0.11, logoH = plateH - lpad * 2, lw = logoH * LOGO_AR, logoPlateW = lw + lpad * 2;
+  const logoPlateX = ix0 + bandH * 0.16;
+  b += `<rect x="${f(logoPlateX)}" y="${f(plateY)}" width="${f(logoPlateW)}" height="${f(plateH)}" rx="${f(prx)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += logoImg(logoPlateX + lpad, plateY + lpad, lw);
+  const qrPlateS = Math.min(plateH, W * 0.155), qrPad = qrPlateS * 0.1, qrS = qrPlateS - qrPad * 2;
+  const qrPlateX = ix1 - bandH * 0.16 - qrPlateS, qrPlateY = by + (bandH - qrPlateS) / 2;
+  b += `<rect x="${f(qrPlateX)}" y="${f(qrPlateY)}" width="${f(qrPlateS)}" height="${f(qrPlateS)}" rx="${f(qrPlateS * 0.08)}" fill="#FFFFFF" stroke="${P.STEEL_L}" stroke-width="${f(W * 0.0014)}"/>`;
+  b += qrImg(qrPlateX + qrPad, qrPlateY + qrPad, qrS);
+  const sxL = logoPlateX + logoPlateW + W * 0.025, sxR = qrPlateX - W * 0.025;
+  b += senderLeft(sxL, by + bandH * 0.5, '#FFFFFF', W, sxR - sxL);
+  return frame(W, H, b, 0, paper);
+}
+
 const CONCEPTS = {
   A: { name: 'line', fn: conceptA }, B: { name: 'band', fn: conceptB }, C: { name: 'spine', fn: conceptC },
   D: { name: 'center', fn: conceptD }, E: { name: 'frame', fn: conceptE }, F: { name: 'sidebar', fn: conceptF },
+  G: { name: 'inset', fn: conceptG }, H: { name: 'card', fn: conceptH },
 };
 const SIZES = { kaku2: { W: 240, H: 332, label: '角2号 (240 × 332 mm)' }, chokei3: { W: 120, H: 235, label: '長形3号 (120 × 235 mm)' } };
 
