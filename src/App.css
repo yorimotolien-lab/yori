@@ -446,6 +446,21 @@
   letter-spacing: 0.1em;
   margin-bottom: 4px;
 }
+.service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--accent-bg, rgba(238, 114, 3, 0.12));
+  margin-bottom: 14px;
+}
+.service-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--accent-dark);
+}
 
 /* ===== Page head ===== */
 .page-head {
