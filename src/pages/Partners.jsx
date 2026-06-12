@@ -33,6 +33,7 @@ function Partners() {
               ),
             )}
           </ul>
+          <p className="form-note">{PARTNER.jobsNote}</p>
         </div>
       </section>
 

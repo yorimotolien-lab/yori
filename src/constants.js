@@ -428,6 +428,8 @@ export const PARTNER = {
     '各種工事（シーリング・塗装・防水・足場・修繕・内装など）の専門技術をお持ちの方',
   ],
   additionalJobs: ['下地補修工事', '洗浄工事', 'リペア'],
+  jobsNote:
+    '上記に記載のない職種も随時募集しております。お気軽にお問い合わせください。',
 }
 
 export const NAV_ITEMS = [
