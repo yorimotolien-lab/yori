@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { COMPANY } from '../constants.js'
+import { ConsultIllustration } from '../illustrations.jsx'
 
 const EMPTY = { name: '', email: '', tel: '', message: '' }
 
@@ -61,6 +62,12 @@ function Contact() {
 
       <section className="section">
         <div className="section-inner narrow">
+          <div className="contact-illu">
+            <ConsultIllustration />
+          </div>
+          <p className="contact-lead">
+            「こんなこと聞いていいのかな？」も大歓迎です。専門スタッフが親身に対応いたします。
+          </p>
           <div className="contact-tel-block">
             <p className="contact-tel-label">お電話でのお問い合わせ</p>
             <a href={COMPANY.telHref} className="contact-tel">
