@@ -6,6 +6,7 @@ import {
   REASONS,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
+import { WorksComingSoon } from '../illustrations.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -119,6 +120,7 @@ function Home() {
             {WORKS_PLACEHOLDER.map((label) => (
               <li key={label} className="works-card">
                 <div className="works-thumb">
+                  <WorksComingSoon className="works-illu" />
                   <span>準備中</span>
                 </div>
                 <p className="works-label">{label}</p>
