@@ -27,9 +27,11 @@ function Partners() {
           <p className="section-eyebrow">JOB</p>
           <h2 className="section-title">募集職種</h2>
           <ul className="qual-list">
-            {SERVICES.map((s) => (
-              <li key={s.title}>{s.title}</li>
-            ))}
+            {[...SERVICES.map((s) => s.title), ...PARTNER.additionalJobs].map(
+              (job) => (
+                <li key={job}>{job}</li>
+              ),
+            )}
           </ul>
         </div>
       </section>
