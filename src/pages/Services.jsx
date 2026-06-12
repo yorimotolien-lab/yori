@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SERVICES } from '../constants.js'
+import { ICONS } from '../icons.jsx'
 
 function Services() {
   const [openIndex, setOpenIndex] = useState(null)
@@ -30,6 +31,9 @@ function Services() {
               const panelId = `service-detail-${index}`
               return (
                 <li key={service.title} className="service-card">
+                  <span className="service-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">{ICONS[service.icon]}</svg>
+                  </span>
                   <span className="service-no">
                     {String(index + 1).padStart(2, '0')}
                   </span>

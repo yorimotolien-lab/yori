@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { MAINTENANCE } from '../constants.js'
+import { ICONS } from '../icons.jsx'
 
 function Maintenance() {
   return (
@@ -36,6 +37,9 @@ function Maintenance() {
           <ul className="service-grid">
             {MAINTENANCE.layers.map((layer, index) => (
               <li key={layer.title} className="service-card">
+                <span className="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">{ICONS[layer.icon]}</svg>
+                </span>
                 <span className="service-no">
                   {String(index + 1).padStart(2, '0')}
                 </span>
