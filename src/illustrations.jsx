@@ -29,10 +29,9 @@ export function ConsultIllustration({ className }) {
         stroke="#ef9a4f"
         strokeWidth="3"
       />
-      <path
-        d="M180 50 c-2.6-5-11-4.2-11 1.8 c0 4.2 6 7.6 11 11.6 c5-4 11-7.4 11-11.6 c0-6-8.4-6.8-11-1.8 z"
-        fill="#ef7d6a"
-      />
+      <circle cx="168" cy="59" r="3.4" fill="#93a7bd" />
+      <circle cx="180" cy="59" r="3.4" fill="#93a7bd" />
+      <circle cx="192" cy="59" r="3.4" fill="#93a7bd" />
       <path d="M80 158 q0-36 40-36 q40 0 40 36 z" fill="#3a5780" />
       <rect x="111" y="110" width="18" height="18" rx="7" fill="#f4c39a" />
       <circle cx="120" cy="96" r="23" fill="#f4c39a" />
