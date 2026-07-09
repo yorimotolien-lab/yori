@@ -1,6 +1,17 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FAQS } from '../constants.js'
+import Seo from '../components/Seo.jsx'
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+}
 
 function Faq() {
   const [openIndex, setOpenIndex] = useState(null)
@@ -10,6 +21,7 @@ function Faq() {
 
   return (
     <>
+      <Seo path="/faq" name="よくあるご質問" jsonLd={faqLd} />
       <title>よくあるご質問 | 株式会社LIEN</title>
       <meta
         name="description"

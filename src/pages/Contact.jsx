@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { COMPANY } from '../constants.js'
 import { ConsultIllustration } from '../illustrations.jsx'
+import Seo from '../components/Seo.jsx'
 
 const EMPTY = { name: '', email: '', tel: '', message: '' }
 
@@ -48,6 +49,7 @@ function Contact() {
 
   return (
     <>
+      <Seo path="/contact" name="お問い合わせ" />
       <title>お問い合わせ | 株式会社LIEN</title>
       <meta
         name="description"

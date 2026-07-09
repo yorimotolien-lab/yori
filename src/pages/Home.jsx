@@ -7,6 +7,7 @@ import {
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { WorksComingSoon } from '../illustrations.jsx'
+import Seo from '../components/Seo.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -23,9 +24,17 @@ const REASON_ICONS = {
   ),
 }
 
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: '株式会社LIEN',
+  url: 'https://lien-2020.com/',
+}
+
 function Home() {
   return (
     <>
+      <Seo path="/" jsonLd={websiteLd} />
       <title>
         株式会社LIEN | 千葉・茨城・東京・埼玉の塗装・防水・大規模修繕・雨漏り診断
       </title>

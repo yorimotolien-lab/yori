@@ -2,6 +2,17 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SERVICES } from '../constants.js'
 import { ICONS } from '../icons.jsx'
+import Seo from '../components/Seo.jsx'
+
+const servicesLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: SERVICES.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: s.title,
+  })),
+}
 
 function Services() {
   const [openIndex, setOpenIndex] = useState(null)
@@ -11,6 +22,7 @@ function Services() {
 
   return (
     <>
+      <Seo path="/services" name="事業内容" jsonLd={servicesLd} />
       <title>事業内容 | 塗装・防水・シーリング・大規模修繕 | 株式会社LIEN</title>
       <meta
         name="description"

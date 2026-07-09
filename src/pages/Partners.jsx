@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { COMPANY, SERVICES, PARTNER } from '../constants.js'
+import Seo from '../components/Seo.jsx'
 
 function Partners() {
   return (
     <>
+      <Seo path="/partners" name="協力会社募集" />
       <title>協力会社募集 | 株式会社LIEN</title>
       <meta
         name="description"
