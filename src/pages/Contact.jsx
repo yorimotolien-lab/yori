@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { COMPANY } from '../constants.js'
+import { COMPANY, WEB3FORMS_ACCESS_KEY } from '../constants.js'
 import { ConsultIllustration } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 
@@ -8,6 +8,7 @@ const EMPTY = { name: '', email: '', tel: '', message: '' }
 function Contact() {
   const [form, setForm] = useState(EMPTY)
   const [errors, setErrors] = useState({})
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -26,12 +27,8 @@ function Contact() {
     return next
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const next = validate()
-    setErrors(next)
-    if (Object.keys(next).length > 0) return
-
+  // アクセスキー未設定時のフォールバック（従来のメーラー起動）
+  const sendViaMailto = () => {
     const subject = `お問い合わせ（${form.name} 様）`
     const body = [
       `お名前: ${form.name}`,
@@ -41,10 +38,56 @@ function Contact() {
       'お問い合わせ内容:',
       form.message,
     ].join('\n')
-
     window.location.href = `mailto:${COMPANY.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // ハニーポット（ボット除け）: 隠しフィールドに入力があれば送信しない
+    if (e.target.company_website && e.target.company_website.value) return
+
+    const next = validate()
+    setErrors(next)
+    if (Object.keys(next).length > 0) return
+
+    // アクセスキー未設定ならメーラー起動にフォールバック
+    if (!WEB3FORMS_ACCESS_KEY) {
+      sendViaMailto()
+      return
+    }
+
+    setStatus('sending')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `【お問い合わせ】${form.name} 様（株式会社LIEN サイト）`,
+          from_name: '株式会社LIEN お問い合わせフォーム',
+          replyto: form.email,
+          お名前: form.name,
+          メールアドレス: form.email,
+          電話番号: form.tel || '（未入力）',
+          お問い合わせ内容: form.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setStatus('success')
+        setForm(EMPTY)
+        setErrors({})
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -70,6 +113,12 @@ function Contact() {
           <p className="contact-lead">
             「こんなこと聞いていいのかな？」も大歓迎です。専門スタッフが親身に対応いたします。
           </p>
+          <ul className="assurance">
+            <li>相談・見積もり無料</li>
+            <li>相談だけでもOK</li>
+            <li>しつこい営業なし</li>
+            <li>1営業日以内に返信</li>
+          </ul>
           <div className="contact-tel-block">
             <p className="contact-tel-label">お電話でのお問い合わせ</p>
             <a href={COMPANY.telHref} className="contact-tel">
@@ -77,69 +126,101 @@ function Contact() {
             </a>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
-            <div className="field">
-              <label htmlFor="name">
-                お名前 <span className="required">必須</span>
-              </label>
+          {status === 'success' ? (
+            <div className="form-success" role="status">
+              <p className="form-success-title">送信が完了しました。</p>
+              <p>
+                お問い合わせありがとうございます。1営業日以内に担当者よりご連絡いたします。お急ぎの場合はお電話（
+                <a href={COMPANY.telHref}>{COMPANY.tel}</a>
+                ）でもご相談いただけます。
+              </p>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
               <input
-                id="name"
-                name="name"
                 type="text"
-                value={form.name}
-                onChange={handleChange}
+                name="company_website"
+                className="hp-field"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
               />
-              {errors.name && <p className="field-error">{errors.name}</p>}
-            </div>
+              <div className="field">
+                <label htmlFor="name">
+                  お名前 <span className="required">必須</span>
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={form.name}
+                  onChange={handleChange}
+                />
+                {errors.name && <p className="field-error">{errors.name}</p>}
+              </div>
 
-            <div className="field">
-              <label htmlFor="email">
-                メールアドレス <span className="required">必須</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-              />
-              {errors.email && <p className="field-error">{errors.email}</p>}
-            </div>
+              <div className="field">
+                <label htmlFor="email">
+                  メールアドレス <span className="required">必須</span>
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                />
+                {errors.email && <p className="field-error">{errors.email}</p>}
+              </div>
 
-            <div className="field">
-              <label htmlFor="tel">電話番号</label>
-              <input
-                id="tel"
-                name="tel"
-                type="tel"
-                value={form.tel}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="field">
+                <label htmlFor="tel">電話番号</label>
+                <input
+                  id="tel"
+                  name="tel"
+                  type="tel"
+                  value={form.tel}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="field">
-              <label htmlFor="message">
-                お問い合わせ内容 <span className="required">必須</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                value={form.message}
-                onChange={handleChange}
-              />
-              {errors.message && (
-                <p className="field-error">{errors.message}</p>
+              <div className="field">
+                <label htmlFor="message">
+                  お問い合わせ内容 <span className="required">必須</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  value={form.message}
+                  onChange={handleChange}
+                />
+                {errors.message && (
+                  <p className="field-error">{errors.message}</p>
+                )}
+              </div>
+
+              {status === 'error' && (
+                <p className="form-error-banner" role="alert">
+                  送信に失敗しました。お手数ですが、お電話（{COMPANY.tel}
+                  ）または時間をおいて再度お試しください。
+                </p>
               )}
-            </div>
 
-            <button type="submit" className="btn btn-primary">
-              この内容で送信する
-            </button>
-            <p className="form-note">
-              送信ボタンを押すとメールソフトが起動します。内容をご確認のうえ送信してください。
-            </p>
-          </form>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? '送信中…' : 'この内容で送信する'}
+              </button>
+              <p className="form-note">
+                {WEB3FORMS_ACCESS_KEY
+                  ? '内容をご確認のうえ送信してください。1営業日以内にご返信します。'
+                  : '送信ボタンを押すとメールソフトが起動します。内容をご確認のうえ送信してください。'}
+              </p>
+            </form>
+          )}
         </div>
       </section>
     </>
