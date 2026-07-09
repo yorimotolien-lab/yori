@@ -23,6 +23,12 @@ export const COMPANY = {
     '「LIEN」はフランス語で「絆」を意味します。お客様との信頼関係を大切に、確かな技術と誠実な対応で建物の資産価値を守り続けます。',
 }
 
+// 問い合わせフォームの送信先（Web3Forms のアクセスキー）。
+// 公開用キーのためクライアントに露出して問題ありません。
+// https://web3forms.com/ で無料取得し、ここに貼り付けると本送信が有効になります。
+// 空の間は従来どおりメーラー起動方式にフォールバックします。
+export const WEB3FORMS_ACCESS_KEY = ''
+
 export const SERVICES = [
   {
     icon: 'caulk',
