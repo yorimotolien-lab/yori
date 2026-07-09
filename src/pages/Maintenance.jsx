@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { MAINTENANCE } from '../constants.js'
 import { ICONS } from '../icons.jsx'
+import Seo from '../components/Seo.jsx'
 
 function Maintenance() {
   return (
     <>
+      <Seo path="/maintenance" name="劣化と対策" />
       <title>外壁塗膜・防水・シーリング劣化の重要性 | 株式会社LIEN</title>
       <meta
         name="description"

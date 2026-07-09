@@ -5,6 +5,7 @@ import {
   QUALIFICATION_MERITS,
   AUDIENCES,
 } from '../constants.js'
+import Seo from '../components/Seo.jsx'
 
 function About() {
   const [openAudience, setOpenAudience] = useState(null)
@@ -27,6 +28,7 @@ function About() {
 
   return (
     <>
+      <Seo path="/about" name="会社概要" />
       <title>会社概要 | 株式会社LIEN</title>
       <meta
         name="description"
