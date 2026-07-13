@@ -66,12 +66,25 @@ function Partners() {
         </div>
       </section>
 
+      <section className="section">
+        <div className="section-inner narrow">
+          <p className="section-eyebrow">RECRUIT</p>
+          <h2 className="section-title">従業員（自社スタッフ）募集</h2>
+          <p className="concept-text">{PARTNER.staff.lead}</p>
+          <ul className="check-list">
+            {PARTNER.staff.points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="section cta">
         <div className="section-inner cta-inner">
           <p className="section-eyebrow">CONTACT</p>
           <h2 className="section-title">ご応募・お問い合わせ</h2>
           <p>
-            お電話・お問い合わせフォームより、「協力会社募集の件」とお伝えください。担当よりご連絡いたします。
+            お電話・お問い合わせフォームより、「協力会社募集の件」または「求人（従業員募集）の件」とお伝えください。担当よりご連絡いたします。
           </p>
           <div className="cta-contacts">
             <a href={COMPANY.telHref} className="cta-tel">
