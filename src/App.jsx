@@ -11,6 +11,7 @@ import Maintenance from './pages/Maintenance.jsx'
 import Faq from './pages/Faq.jsx'
 import Partners from './pages/Partners.jsx'
 import Contact from './pages/Contact.jsx'
+import Privacy from './pages/Privacy.jsx'
 import './App.css'
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
       </main>
       <Footer />
