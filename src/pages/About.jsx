@@ -29,7 +29,7 @@ function About() {
   return (
     <>
       <Seo path="/about" name="会社概要" />
-      <title>会社概要 | 株式会社LIEN</title>
+      <title>会社概要 | 市川市の建設会社 株式会社LIEN</title>
       <meta
         name="description"
         content="株式会社LIEN（リアン）の会社概要・代表者・有資格者・建設業許可・対応エリア。千葉県市川市の建設会社で、1都3県で施工対応します。"
