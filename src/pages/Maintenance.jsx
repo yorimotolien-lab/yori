@@ -7,7 +7,7 @@ function Maintenance() {
   return (
     <>
       <Seo path="/maintenance" name="劣化と対策" />
-      <title>外壁塗膜・防水・シーリング劣化の重要性 | 株式会社LIEN</title>
+      <title>外壁塗膜・防水・シーリング劣化の重要性 | 市川市の株式会社LIEN</title>
       <meta
         name="description"
         content="外壁塗膜・防水塗膜・シーリングの劣化を放置するリスクと、早めのメンテナンスの重要性を解説します。千葉県市川市の株式会社LIENが現地調査・お見積り無料で対応します。"

@@ -93,7 +93,7 @@ function Contact() {
   return (
     <>
       <Seo path="/contact" name="お問い合わせ" />
-      <title>お問い合わせ | 株式会社LIEN</title>
+      <title>無料見積もり・お問い合わせ | 市川市の株式会社LIEN</title>
       <meta
         name="description"
         content="株式会社LIENへのご相談・お見積りは無料です。お電話または問い合わせフォームよりお気軽にどうぞ。千葉県全域・茨城県・東京都・埼玉県対応。"
