@@ -20,6 +20,7 @@ function Footer() {
               {item.label}
             </Link>
           ))}
+          <Link to="/privacy">プライバシーポリシー</Link>
         </nav>
       </div>
       <p className="copyright">

@@ -631,6 +631,37 @@
   color: var(--text-muted);
 }
 
+/* ===== 法的ページ（プライバシーポリシー等） ===== */
+.legal-body p {
+  color: var(--text);
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+.legal-body h2 {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--navy);
+  margin: 32px 0 10px;
+}
+.legal-body ul {
+  margin: 8px 0 18px;
+  padding-left: 1.3em;
+}
+.legal-body li {
+  margin-bottom: 6px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.legal-body a {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+.legal-updated {
+  margin-top: 28px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
 /* ===== 安心バッジ（CRO） ===== */
 .assurance {
   list-style: none;
