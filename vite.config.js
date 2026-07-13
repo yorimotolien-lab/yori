@@ -1,16 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// コンテンツセキュリティポリシー（同一オリジンのみ許可）。
-// 外部スクリプト/CDN/Webフォント等は未使用のため 'self' 中心で厳格化できる。
+// コンテンツセキュリティポリシー。
+// 外部は Google Analytics(gtag) と Web3Forms のみ許可し、それ以外は 'self' 中心で厳格化。
 // style-src の 'unsafe-inline' はヒーロー透かしのインラインスタイル用。
 const CSP = [
   "default-src 'self'",
-  "script-src 'self'",
+  "script-src 'self' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com",
   "font-src 'self'",
-  "connect-src 'self' https://api.web3forms.com",
+  "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
