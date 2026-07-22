@@ -44,7 +44,7 @@
 - DNS は別途設定済み（A／AAAA／CNAME）
 
 ## 問い合わせ転送先
-`COMPANY.email`（カンマ区切りで複数可）。現在: `s.akimoto@lien-2020.com, r.yorimoto@lien-2020.com`
+`COMPANY.email`（カンマ区切りで複数可）。現在: `info@lien-2020.com`
 
 ## 注意・未対応
 - 施工事例は「準備中」の仮枠。実写真が用意でき次第、`public/` に画像を追加し `WORKS_PLACEHOLDER` 関連を画像対応に
