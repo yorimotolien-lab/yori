@@ -124,6 +124,19 @@ function Contact() {
             <a href={COMPANY.telHref} className="contact-tel">
               {COMPANY.tel}
             </a>
+            <div>
+              <a
+                href={COMPANY.mapUrl}
+                className="map-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
+                </svg>
+                Googleマップで見る
+              </a>
+            </div>
           </div>
 
           {status === 'success' ? (
