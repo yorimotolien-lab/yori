@@ -662,6 +662,34 @@
   font-size: 14px;
 }
 
+/* ===== Googleマップリンク ===== */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--bg);
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.map-link:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.map-link svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
 /* ===== 安心バッジ（CRO） ===== */
 .assurance {
   list-style: none;

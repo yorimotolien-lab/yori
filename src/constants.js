@@ -12,6 +12,7 @@ export const COMPANY = {
   tel: '047-307-9287',
   telHref: 'tel:04733079287',
   email: 's.akimoto@lien-2020.com,r.yorimoto@lien-2020.com',
+  mapUrl: 'https://share.google/XaAuOJQN4JLnsm4eI',
   qualifications: [
     '1級シーリング技能士',
     'シーリング管理士',
