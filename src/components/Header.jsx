@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { COMPANY, NAV_ITEMS } from '../constants.js'
+import FontSizeToggle from './FontSizeToggle.jsx'
 
 function Header() {
   const [open, setOpen] = useState(false)
@@ -60,6 +61,7 @@ function Header() {
           <a className="nav-tel" href={COMPANY.telHref}>
             {COMPANY.tel}
           </a>
+          <FontSizeToggle />
         </nav>
       </div>
     </header>
