@@ -690,6 +690,54 @@
   fill: currentColor;
 }
 
+/* ===== 文字サイズ切替（アクセシビリティ） ===== */
+.font-size-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+.font-size-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.font-size-btn {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--navy);
+  font: inherit;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.font-size-btn:hover {
+  border-color: var(--accent);
+}
+.font-size-btn.is-active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+html.font-lg {
+  zoom: 1.15;
+}
+/* PCでは固定表示（ナビを圧迫しない）。モバイルではメニュー内に表示 */
+@media (min-width: 769px) {
+  .font-size-toggle {
+    position: fixed;
+    top: 84px;
+    right: 14px;
+    z-index: 40;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 10px;
+    box-shadow: var(--shadow);
+  }
+}
+
 /* ===== 安心バッジ（CRO） ===== */
 .assurance {
   list-style: none;
