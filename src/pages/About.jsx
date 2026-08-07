@@ -6,6 +6,7 @@ import {
   AUDIENCES,
 } from '../constants.js'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
 
 function About() {
   const [openAudience, setOpenAudience] = useState(null)
@@ -40,6 +41,8 @@ function About() {
           <h1 className="page-title">会社概要</h1>
         </div>
       </section>
+
+      <Breadcrumb />
 
       <section className="section">
         <div className="section-inner narrow">

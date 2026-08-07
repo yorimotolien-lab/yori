@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { COMPANY } from '../constants.js'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
 
 function Privacy() {
   return (
@@ -18,6 +19,8 @@ function Privacy() {
           <h1 className="page-title">プライバシーポリシー</h1>
         </div>
       </section>
+
+      <Breadcrumb />
 
       <section className="section">
         <div className="section-inner narrow legal-body">

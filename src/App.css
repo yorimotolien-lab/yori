@@ -738,6 +738,72 @@ html.font-lg {
   }
 }
 
+/* ===== パンくずリスト ===== */
+.breadcrumb {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.breadcrumb .section-inner {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--accent-dark);
+}
+.breadcrumb-sep {
+  margin: 0 8px;
+  color: var(--border);
+}
+
+/* ===== ページ内目次（アンカーナビ） ===== */
+.page-toc {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 24px 0;
+}
+.page-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.page-toc a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.page-toc a::before {
+  content: '▾';
+  color: var(--accent);
+  font-size: 12px;
+}
+.page-toc a:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.section[id] {
+  scroll-margin-top: 90px;
+}
+
 /* ===== 安心バッジ（CRO） ===== */
 .assurance {
   list-style: none;

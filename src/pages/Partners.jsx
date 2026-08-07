@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { COMPANY, SERVICES, PARTNER } from '../constants.js'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
 
 function Partners() {
   return (
@@ -17,6 +18,8 @@ function Partners() {
           <h1 className="page-title">協力会社募集</h1>
         </div>
       </section>
+
+      <Breadcrumb />
 
       <section className="section">
         <div className="section-inner narrow">

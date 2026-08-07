@@ -2,6 +2,16 @@ import { Link } from 'react-router-dom'
 import { MAINTENANCE } from '../constants.js'
 import { ICONS } from '../icons.jsx'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
+import PageToc from '../components/PageToc.jsx'
+
+const tocItems = [
+  { id: 'importance', label: '早めの対応の重要性' },
+  { id: 'layers', label: '3つの防御層と劣化サイン' },
+  { id: 'risk', label: '放置するとどうなる？' },
+  { id: 'benefit', label: '早めに対応するメリット' },
+  { id: 'cycle', label: 'メンテナンスの目安' },
+]
 
 function Maintenance() {
   return (
@@ -20,7 +30,10 @@ function Maintenance() {
         </div>
       </section>
 
-      <section className="section">
+      <Breadcrumb />
+      <PageToc items={tocItems} />
+
+      <section className="section" id="importance">
         <div className="section-inner narrow">
           <p className="section-eyebrow">IMPORTANCE</p>
           <h2 className="section-title">劣化への早めの対応が、建物を守る</h2>
@@ -32,7 +45,7 @@ function Maintenance() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="layers">
         <div className="section-inner">
           <p className="section-eyebrow">3 LAYERS</p>
           <h2 className="section-title">建物を守る3つの防御層と劣化サイン</h2>
@@ -58,7 +71,7 @@ function Maintenance() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="risk">
         <div className="section-inner">
           <p className="section-eyebrow">RISK</p>
           <h2 className="section-title">劣化を放置するとどうなる？</h2>
@@ -73,7 +86,7 @@ function Maintenance() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="benefit">
         <div className="section-inner">
           <p className="section-eyebrow">BENEFIT</p>
           <h2 className="section-title">早めに対応するメリット</h2>
@@ -90,7 +103,7 @@ function Maintenance() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="cycle">
         <div className="section-inner narrow">
           <p className="section-eyebrow">CYCLE</p>
           <h2 className="section-title">メンテナンスの目安</h2>

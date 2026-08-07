@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { COMPANY, WEB3FORMS_ACCESS_KEY } from '../constants.js'
 import { ConsultIllustration } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
 
 const EMPTY = { name: '', email: '', tel: '', message: '' }
 
@@ -104,6 +105,8 @@ function Contact() {
           <h1 className="page-title">お問い合わせ</h1>
         </div>
       </section>
+
+      <Breadcrumb />
 
       <section className="section">
         <div className="section-inner narrow">

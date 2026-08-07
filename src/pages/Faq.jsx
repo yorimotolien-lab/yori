@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FAQS } from '../constants.js'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
 
 const faqLd = {
   '@context': 'https://schema.org',
@@ -33,6 +34,8 @@ function Faq() {
           <h1 className="page-title">よくあるご質問</h1>
         </div>
       </section>
+
+      <Breadcrumb />
 
       <section className="section">
         <div className="section-inner narrow">
