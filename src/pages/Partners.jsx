@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom'
 import { COMPANY, SERVICES, PARTNER } from '../constants.js'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
+import PageToc from '../components/PageToc.jsx'
+
+const tocItems = [
+  { id: 'jobs', label: '募集職種' },
+  { id: 'merits', label: '協力会社になるメリット' },
+  { id: 'requirements', label: '募集する会社' },
+  { id: 'recruit', label: '従業員募集' },
+]
 
 function Partners() {
   return (
@@ -18,13 +27,17 @@ function Partners() {
         </div>
       </section>
 
+      <Breadcrumb />
+
+      <PageToc items={tocItems} />
+
       <section className="section">
         <div className="section-inner narrow">
           <p className="concept-text">{PARTNER.lead}</p>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="jobs">
         <div className="section-inner">
           <p className="section-eyebrow">JOB</p>
           <h2 className="section-title">募集職種</h2>
@@ -39,7 +52,7 @@ function Partners() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="merits">
         <div className="section-inner">
           <p className="section-eyebrow">MERIT</p>
           <h2 className="section-title">協力会社になるメリット</h2>
@@ -54,7 +67,7 @@ function Partners() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="requirements">
         <div className="section-inner narrow">
           <p className="section-eyebrow">REQUIREMENTS</p>
           <h2 className="section-title">こんな会社さまを募集しています</h2>
@@ -66,7 +79,7 @@ function Partners() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="recruit">
         <div className="section-inner narrow">
           <p className="section-eyebrow">RECRUIT</p>
           <h2 className="section-title">従業員（自社スタッフ）募集</h2>

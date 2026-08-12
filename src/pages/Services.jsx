@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { SERVICES } from '../constants.js'
 import { ICONS } from '../icons.jsx'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
 
 const servicesLd = {
   '@context': 'https://schema.org',
@@ -34,6 +35,8 @@ function Services() {
           <h1 className="page-title">事業内容</h1>
         </div>
       </section>
+
+      <Breadcrumb />
 
       <section className="section">
         <div className="section-inner">

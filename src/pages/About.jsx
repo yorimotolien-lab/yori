@@ -6,6 +6,14 @@ import {
   AUDIENCES,
 } from '../constants.js'
 import Seo from '../components/Seo.jsx'
+import Breadcrumb from '../components/Breadcrumb.jsx'
+import PageToc from '../components/PageToc.jsx'
+
+const tocItems = [
+  { id: 'company-info', label: '会社情報' },
+  { id: 'qualifications', label: '有資格者の在籍' },
+  { id: 'for-clients', label: 'お客様別の安心ポイント' },
+]
 
 function About() {
   const [openAudience, setOpenAudience] = useState(null)
@@ -41,6 +49,10 @@ function About() {
         </div>
       </section>
 
+      <Breadcrumb />
+
+      <PageToc items={tocItems} />
+
       <section className="section">
         <div className="section-inner narrow">
           <p className="concept-text">{COMPANY.concept}</p>
@@ -51,7 +63,7 @@ function About() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="company-info">
         <div className="section-inner narrow">
           <h2 className="section-title">会社情報</h2>
           <table className="info-table">
@@ -90,7 +102,7 @@ function About() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="qualifications">
         <div className="section-inner">
           <p className="section-eyebrow">QUALIFICATIONS</p>
           <h2 className="section-title">有資格者の在籍</h2>
@@ -125,7 +137,7 @@ function About() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="for-clients">
         <div className="section-inner">
           <p className="section-eyebrow">FOR OUR CLIENTS</p>
           <h2 className="section-title">お客様別の安心ポイント</h2>
