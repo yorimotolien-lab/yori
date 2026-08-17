@@ -4,6 +4,7 @@ import {
   SERVICES,
   FLOW_STEPS,
   REASONS,
+  CORPORATE_REASONS,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { WorksComingSoon } from '../illustrations.jsx'
@@ -32,6 +33,14 @@ const websiteLd = {
 }
 
 function Home() {
+  // 導線分岐ボタンから同一ページ内のセクションへスムーズスクロール。
+  const scrollToId = (event, id) => {
+    const el = document.getElementById(id)
+    if (!el) return
+    event.preventDefault()
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <>
       <Seo path="/" jsonLd={websiteLd} />
@@ -80,6 +89,56 @@ function Home() {
         </div>
       </section>
 
+      <section className="section audience-split">
+        <div className="section-inner">
+          <p className="audience-split-heading">
+            ご相談内容に合わせてお選びください
+          </p>
+          <div className="audience-split-grid">
+            <a
+              href="#corporate"
+              onClick={(e) => scrollToId(e, 'corporate')}
+              className="audience-split-card is-primary"
+            >
+              <span className="audience-split-icon" aria-hidden="true">
+                🏢
+              </span>
+              <span className="audience-split-body">
+                <span className="audience-split-title">
+                  管理会社・ビル / マンションオーナー様はこちら
+                </span>
+                <span className="audience-split-sub">
+                  大規模修繕・防水・外壁・雨漏りのご相談
+                </span>
+              </span>
+              <span className="audience-split-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+            <a
+              href="#services"
+              onClick={(e) => scrollToId(e, 'services')}
+              className="audience-split-card"
+            >
+              <span className="audience-split-icon" aria-hidden="true">
+                🏠
+              </span>
+              <span className="audience-split-body">
+                <span className="audience-split-title">
+                  戸建てにお住まいのお客様はこちら
+                </span>
+                <span className="audience-split-sub">
+                  外壁塗装・屋根・雨漏り・リフォーム
+                </span>
+              </span>
+              <span className="audience-split-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="section reasons">
         <div className="section-inner">
           <p className="section-eyebrow">REASONS</p>
@@ -98,7 +157,61 @@ function Home() {
         </div>
       </section>
 
-      <section className="section services-preview">
+      <section className="section corporate" id="corporate">
+        <div className="section-inner">
+          <p className="section-eyebrow">FOR CORPORATE CLIENTS</p>
+          <h2 className="section-title">
+            法人・管理会社様にLIENが選ばれる3つの理由
+          </h2>
+          <p className="concept-text corp-lead">
+            マンション・ビルの大規模修繕や維持管理では、確かな品質はもちろん、入居者様への配慮や透明性のあるご報告が欠かせません。LIENは、管理会社様・オーナー様の「お手間」と「ご不安」を減らすことを大切にしています。
+          </p>
+          <ul className="corp-grid">
+            {CORPORATE_REASONS.map((reason, index) => (
+              <li key={reason.title} className="corp-card">
+                <div className="corp-photo">
+                  {reason.image ? (
+                    <img
+                      src={`${import.meta.env.BASE_URL}${reason.image}`}
+                      alt={reason.title}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="corp-photo-ph" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3z" />
+                      </svg>
+                      <span>写真準備中</span>
+                    </div>
+                  )}
+                </div>
+                <div className="corp-body">
+                  <span className="corp-no">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3>{reason.title}</h3>
+                  <p>{reason.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="corp-cta">
+            <p className="corp-cta-text">
+              大規模修繕・防水・外壁のご相談、他社お見積りとの比較・セカンドオピニオンも歓迎です。
+            </p>
+            <div className="corp-cta-actions">
+              <a href={COMPANY.telHref} className="btn btn-outline">
+                お電話で相談 {COMPANY.tel}
+              </a>
+              <Link to="/contact" className="btn btn-primary">
+                法人・管理会社様の無料相談
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section services-preview" id="services">
         <div className="section-inner">
           <p className="section-eyebrow">SERVICES</p>
           <h2 className="section-title">事業内容</h2>
