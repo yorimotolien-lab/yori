@@ -528,5 +528,6 @@ export const NAV_ITEMS = [
   { to: '/maintenance', label: '劣化と対策' },
   { to: '/faq', label: 'よくあるご質問' },
   { to: '/partners', label: '協力会社募集' },
+  { to: '/blog', label: 'ブログ' },
   { to: '/contact', label: 'お問い合わせ' },
 ]
