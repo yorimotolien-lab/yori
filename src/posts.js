@@ -32,6 +32,7 @@ function parsePost(path, raw) {
     date: meta.date || '',
     category: meta.category || 'お知らせ',
     excerpt: meta.excerpt || '',
+    image: meta.image || '',
     body: body.trim(),
   }
 }

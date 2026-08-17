@@ -30,15 +30,26 @@ function Blog() {
               {POSTS.map((post) => (
                 <li key={post.slug} className="blog-card">
                   <Link to={`/blog/${post.slug}`} className="blog-card-link">
-                    <div className="blog-meta">
-                      <span className="blog-cat">{post.category}</span>
-                      {post.date ? (
-                        <time className="blog-date">{post.date}</time>
-                      ) : null}
+                    {post.image ? (
+                      <div className="blog-card-thumb">
+                        <img
+                          src={`${import.meta.env.BASE_URL}${post.image}`}
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="blog-card-body">
+                      <div className="blog-meta">
+                        <span className="blog-cat">{post.category}</span>
+                        {post.date ? (
+                          <time className="blog-date">{post.date}</time>
+                        ) : null}
+                      </div>
+                      <h2 className="blog-card-title">{post.title}</h2>
+                      <p className="blog-card-excerpt">{post.excerpt}</p>
+                      <span className="blog-more">続きを読む →</span>
                     </div>
-                    <h2 className="blog-card-title">{post.title}</h2>
-                    <p className="blog-card-excerpt">{post.excerpt}</p>
-                    <span className="blog-more">続きを読む →</span>
                   </Link>
                 </li>
               ))}

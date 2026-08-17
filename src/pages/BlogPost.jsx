@@ -12,6 +12,7 @@ function BlogPost() {
   if (!post) return <Navigate to="/blog" replace />
 
   const url = `${SITE}/blog/${post.slug}`
+  const imageUrl = post.image ? `${SITE}/${post.image}` : ''
   const blogPostingLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -37,6 +38,16 @@ function BlogPost() {
       <Seo path={`/blog/${post.slug}`} jsonLd={[blogPostingLd, breadcrumbLd]} />
       <title>{`${post.title} | 株式会社LIEN`}</title>
       <meta name="description" content={post.excerpt} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={`${post.title} | 株式会社LIEN`} />
+      <meta property="og:description" content={post.excerpt} />
+      <meta property="og:url" content={url} />
+      <meta property="og:site_name" content="株式会社LIEN" />
+      {imageUrl ? <meta property="og:image" content={imageUrl} /> : null}
+      <meta
+        name="twitter:card"
+        content={imageUrl ? 'summary_large_image' : 'summary'}
+      />
 
       <section className="page-head">
         <div className="section-inner">
