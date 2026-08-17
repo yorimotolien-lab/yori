@@ -988,6 +988,36 @@ html.font-lg {
   font-size: 15px;
 }
 
+/* ===== 資格者証（有資格者カード内） ===== */
+.cert-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 16px;
+  text-decoration: none;
+}
+.cert-link img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.cert-link:hover img {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.cert-link-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+
 .merit-box {
   margin-top: 36px;
   background: var(--navy);

@@ -15,6 +15,29 @@ const tocItems = [
   { id: 'for-clients', label: 'お客様別の安心ポイント' },
 ]
 
+// 資格者証のサムネイル。タップで実物大の画像を別タブ表示。
+// 画像ファイルが未配置（読み込み失敗）の場合は何も表示しない。
+function CertLink({ src, name }) {
+  const [available, setAvailable] = useState(true)
+  if (!available) return null
+  return (
+    <a
+      className="cert-link"
+      href={src}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src={src}
+        alt={`${name}の資格者証`}
+        loading="lazy"
+        onError={() => setAvailable(false)}
+      />
+      <span className="cert-link-label">資格者証（タップで拡大）</span>
+    </a>
+  )
+}
+
 function About() {
   const [openAudience, setOpenAudience] = useState(null)
 
@@ -115,6 +138,12 @@ function About() {
               <li key={q.name} className="qual-detail-card">
                 <h3>{q.name}</h3>
                 <p>{q.description}</p>
+                {q.image && (
+                  <CertLink
+                    src={`${import.meta.env.BASE_URL}${q.image}`}
+                    name={q.name}
+                  />
+                )}
               </li>
             ))}
           </ul>

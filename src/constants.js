@@ -131,6 +131,10 @@ export const SERVICES = [
   },
 ]
 
+// 有資格者の詳細カード（会社概要ページ）。
+// image を指定すると、そのカードに資格者証の画像を表示します
+// （例: image: 'cert-kenchiku.jpg' → public/cert-kenchiku.jpg を配置）。
+// 未指定のカードは従来どおりテキストのみの表示です。
 export const QUALIFICATION_DETAILS = [
   {
     name: '1級シーリング技能士',
@@ -146,11 +150,13 @@ export const QUALIFICATION_DETAILS = [
     name: '1級建築施工管理技士',
     description:
       '建築工事の施工計画・工程・品質・安全を管理できる国家資格です。大規模修繕など規模の大きな工事も、計画から完了まで責任をもって管理します。',
+    image: 'cert-kenchiku.jpg',
   },
   {
     name: '雨漏り診断士',
     description:
       '雨漏りの原因を科学的に調査・診断する専門資格です。表面的な対処ではなく根本原因を特定し、最適な補修方法をご提案します。',
+    image: 'cert-amamori.jpg',
   },
   {
     name: '登録防水基幹技能者',
