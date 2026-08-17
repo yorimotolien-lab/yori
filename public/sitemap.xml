@@ -51,11 +51,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://lien-2020.com/blog/gaiheki-timing</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://lien-2020.com/blog/self-check-signs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
