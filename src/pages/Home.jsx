@@ -5,10 +5,13 @@ import {
   FLOW_STEPS,
   REASONS,
   CORPORATE_REASONS,
+  PRICING_POLICY,
+  WARRANTY,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
+import CtaAssurance from '../components/CtaAssurance.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -288,6 +291,55 @@ function Home() {
         </div>
       </section>
 
+      <section className="section pricing-policy">
+        <div className="section-inner narrow">
+          <p className="section-eyebrow">PRICING</p>
+          <h2 className="section-title">{PRICING_POLICY.title}</h2>
+          {PRICING_POLICY.body.map((text) => (
+            <p key={text} className="concept-text">
+              {text}
+            </p>
+          ))}
+          <div className="policy-callout">
+            <h3 className="policy-callout-title">
+              {PRICING_POLICY.breakdownTitle}
+            </h3>
+            <ul className="policy-tags">
+              {PRICING_POLICY.breakdownExamples.map((ex) => (
+                <li key={ex}>{ex}</li>
+              ))}
+            </ul>
+            <p>{PRICING_POLICY.breakdownBody}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section warranty">
+        <div className="section-inner narrow">
+          <p className="section-eyebrow">WARRANTY</p>
+          <h2 className="section-title">{WARRANTY.title}</h2>
+          {WARRANTY.lead.map((text) => (
+            <p key={text} className="concept-text">
+              {text}
+            </p>
+          ))}
+          <ul className="warranty-years">
+            {WARRANTY.years.map((y) => (
+              <li key={y}>
+                <span className="warranty-year-num">{y}</span>
+                <span className="warranty-year-label">保証</span>
+              </li>
+            ))}
+          </ul>
+          <div className="warranty-guarantee">
+            <h3 className="warranty-guarantee-title">
+              {WARRANTY.guaranteeTitle}
+            </h3>
+            <p>{WARRANTY.guaranteeBody}</p>
+          </div>
+        </div>
+      </section>
+
       <section className="section cta">
         <div className="section-inner cta-inner">
           <p className="section-eyebrow">CONTACT</p>
@@ -295,14 +347,16 @@ function Home() {
           <p>
             現地調査・お見積りは無料です。相談だけでも歓迎ですので、お気軽にお問い合わせください。
           </p>
-          <div className="cta-contacts">
-            <a href={COMPANY.telHref} className="cta-tel">
-              {COMPANY.tel}
-            </a>
-            <Link to="/contact" className="btn btn-primary">
-              無料で相談・見積もりする
-            </Link>
-          </div>
+          <CtaAssurance onDark>
+            <div className="cta-contacts">
+              <a href={COMPANY.telHref} className="cta-tel">
+                {COMPANY.tel}
+              </a>
+              <Link to="/contact" className="btn btn-primary">
+                無料で相談・見積もりする
+              </Link>
+            </div>
+          </CtaAssurance>
         </div>
       </section>
     </>

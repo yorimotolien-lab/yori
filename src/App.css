@@ -1697,3 +1697,134 @@ html.font-lg {
     margin-inline: auto;
   }
 }
+
+/* ===== CTAマイクロコピー（安心の一言） ===== */
+.cta-assurance {
+  text-align: center;
+}
+.cta-assurance-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.cta-assurance-flap {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+}
+.cta-assurance-pill {
+  background: #fff;
+  color: var(--accent-dark);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 18px;
+  box-shadow: var(--shadow);
+}
+.cta-assurance-sub {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.cta-assurance--dark .cta-assurance-sub {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ===== 料金の考え方（料金表を掲載しない理由） ===== */
+.policy-callout {
+  margin-top: 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px 26px;
+}
+.policy-callout-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--navy);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.policy-tags {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.policy-tags li {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--accent-bg, rgba(238, 114, 3, 0.12));
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+.policy-callout p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* ===== 工事保証（アフターフォロー） ===== */
+.warranty-years {
+  list-style: none;
+  margin: 30px 0;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.warranty-years li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--navy);
+  box-shadow: var(--shadow);
+}
+.warranty-years li:last-child {
+  background: var(--accent);
+}
+.warranty-year-num {
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.warranty-year-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 4px;
+}
+.warranty-guarantee {
+  margin-top: 30px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 10px;
+  padding: 28px 26px;
+}
+.warranty-guarantee-title {
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.warranty-guarantee p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.9;
+}

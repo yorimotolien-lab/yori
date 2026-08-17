@@ -3,6 +3,7 @@ import { COMPANY, WEB3FORMS_ACCESS_KEY } from '../constants.js'
 import { ConsultIllustration } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
+import CtaAssurance from '../components/CtaAssurance.jsx'
 
 const EMPTY = { name: '', email: '', tel: '', message: '' }
 
@@ -223,13 +224,15 @@ function Contact() {
                 </p>
               )}
 
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={status === 'sending'}
-              >
-                {status === 'sending' ? '送信中…' : 'この内容で送信する'}
-              </button>
+              <CtaAssurance>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? '送信中…' : 'この内容で送信する'}
+                </button>
+              </CtaAssurance>
               <p className="form-note">
                 {WEB3FORMS_ACCESS_KEY
                   ? '内容をご確認のうえ送信してください。1営業日以内にご返信します。'
