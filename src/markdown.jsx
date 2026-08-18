@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 // 依存ライブラリなしの簡易Markdownレンダラー。
 // React要素を返すため dangerouslySetInnerHTML を使わず、XSSの心配がない。
 // 対応記法: ## / ### 見出し、段落、- / * 箇条書き、1. 番号付き、
-//   **太字**、[テキスト](URL)リンク、![alt](画像URL)、> 引用、--- 区切り線。
+//   **太字**、[テキスト](URL)リンク、![alt](画像URL)、> ポイント囲み枠、--- 区切り線。
 
 function parseInline(text) {
   const nodes = []
@@ -83,7 +83,11 @@ export function renderMarkdown(md) {
         buf.push(lines[i].slice(2))
         i++
       }
-      blocks.push(<blockquote key={key}>{parseInline(buf.join(' '))}</blockquote>)
+      blocks.push(
+        <aside key={key} className="point-box">
+          {parseInline(buf.join(' '))}
+        </aside>,
+      )
       continue
     }
 
