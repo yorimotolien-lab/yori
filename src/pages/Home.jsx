@@ -12,6 +12,7 @@ import {
 import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import CtaAssurance from '../components/CtaAssurance.jsx'
+import SosCheck from '../components/SosCheck.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -73,7 +74,7 @@ function Home() {
             ご相談・現地調査・お見積りは無料です。
           </p>
           <div className="hero-actions">
-            <Link to="/contact" className="btn btn-primary">
+            <Link to="/contact" className="btn btn-primary pulse-button">
               無料で相談・見積もりする
             </Link>
             <a href={COMPANY.telHref} className="btn btn-ghost">
@@ -234,6 +235,8 @@ function Home() {
         </div>
       </section>
 
+      <SosCheck />
+
       <section className="section works">
         <div className="section-inner">
           <p className="section-eyebrow">WORKS</p>
@@ -352,7 +355,7 @@ function Home() {
               <a href={COMPANY.telHref} className="cta-tel">
                 {COMPANY.tel}
               </a>
-              <Link to="/contact" className="btn btn-primary">
+              <Link to="/contact" className="btn btn-primary pulse-button">
                 無料で相談・見積もりする
               </Link>
             </div>
