@@ -7,6 +7,8 @@ import {
   CORPORATE_REASONS,
   PRICING_POLICY,
   WARRANTY,
+  CONTRACTOR_TIPS,
+  SERVICE_AREAS,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { WorksComingSoon } from '../illustrations.jsx'
@@ -328,6 +330,59 @@ function Home() {
             </h3>
             <p>{WARRANTY.guaranteeBody}</p>
           </div>
+        </div>
+      </section>
+
+      <section className="section contractor-tips">
+        <div className="section-inner">
+          <p className="section-eyebrow">HOW TO CHOOSE</p>
+          <h2 className="section-title">{CONTRACTOR_TIPS.title}</h2>
+          <p className="tips-lead">{CONTRACTOR_TIPS.lead}</p>
+          <ul className="tips-grid">
+            {CONTRACTOR_TIPS.points.map((point, index) => (
+              <li key={point.text} className={`tips-card tips-${point.type}`}>
+                <span className="tips-no" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="tips-icon" aria-hidden="true">
+                  {point.type === 'pick' ? '✓' : '✕'}
+                </span>
+                <span className="tips-label">{point.label}</span>
+                <p className="tips-text">{point.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section service-areas">
+        <div className="section-inner">
+          <p className="section-eyebrow">SERVICE AREA</p>
+          <h2 className="section-title">{SERVICE_AREAS.title}</h2>
+          <p className="concept-text areas-lead">{SERVICE_AREAS.lead}</p>
+          <div className="areas-groups">
+            {SERVICE_AREAS.groups.map((group) => (
+              <div key={group.pref} className="areas-group">
+                <h3 className="areas-pref">
+                  <svg className="areas-pin" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
+                  </svg>
+                  {group.pref}
+                </h3>
+                <ul className="areas-tags">
+                  {group.areas.map((area) => (
+                    <li
+                      key={area}
+                      className={`area-tag${area === '市川市' ? ' area-tag--hq' : ''}`}
+                    >
+                      {area === '市川市' ? `★ ${area}` : area}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="areas-note">{SERVICE_AREAS.note}</p>
         </div>
       </section>
 
