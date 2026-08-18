@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { COMPANY, NAV_ITEMS } from '../constants.js'
 import FontSizeToggle from './FontSizeToggle.jsx'
 
 function Header() {
   const [open, setOpen] = useState(false)
-  // ロゴ表示の切り替え: 'metallic'(logo.jpg) → 'png'(logo.png) → 'text'
-  const [logo, setLogo] = useState('png')
-  const metallicSrc = `${import.meta.env.BASE_URL}logo.jpg`
+  // ロゴ表示: 'svg'(新ロゴ・ベクター透過) → 'png'(旧ロゴ) → 'text'
+  const [logo, setLogo] = useState('svg')
+  const svgSrc = `${import.meta.env.BASE_URL}logo.svg`
   const pngSrc = `${import.meta.env.BASE_URL}logo.png`
   const alt = `${COMPANY.name} ${COMPANY.nameEn}`
-
-  // 新しい白背景ロゴ(public/logo.jpg)が存在すれば自動でそちらを使う。
-  // 無ければ従来のロゴ(logo.png)のまま表示し、ちらつき・不具合を防ぐ。
-  useEffect(() => {
-    const img = new Image()
-    img.onload = () => setLogo('metallic')
-    img.src = metallicSrc
-  }, [metallicSrc])
 
   return (
     <header className="site-header">
@@ -28,11 +20,11 @@ function Header() {
           aria-label={alt}
           onClick={() => setOpen(false)}
         >
-          {logo === 'metallic' ? (
+          {logo === 'svg' ? (
             <img
-              src={metallicSrc}
+              src={svgSrc}
               alt={alt}
-              className="logo-img logo-img--metallic"
+              className="logo-img"
               onError={() => setLogo('png')}
             />
           ) : logo === 'png' ? (
