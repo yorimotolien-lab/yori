@@ -63,10 +63,13 @@ function Home() {
         />
         <div className="hero-inner">
           <p className="hero-lead">千葉県市川市の建設・修繕パートナー</p>
-          <h1 className="hero-title">
-            建物の「困った」を、
-            <br />
-            まるごと解決します。
+          <h1 className="hero-title hero-reveal">
+            <span className="reveal-line">
+              <span className="reveal-inner">建物の「困った」を、</span>
+            </span>
+            <span className="reveal-line">
+              <span className="reveal-inner">まるごと解決します。</span>
+            </span>
           </h1>
           <p className="hero-desc">
             シーリング・塗装・防水・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。
@@ -93,54 +96,39 @@ function Home() {
         </div>
       </section>
 
-      <section className="section audience-split">
-        <div className="section-inner">
-          <p className="audience-split-heading">
-            ご相談内容に合わせてお選びください
-          </p>
-          <div className="audience-split-grid">
-            <a
-              href="#corporate"
-              onClick={(e) => scrollToId(e, 'corporate')}
-              className="audience-split-card is-primary"
-            >
-              <span className="audience-split-icon" aria-hidden="true">
-                🏢
-              </span>
-              <span className="audience-split-body">
-                <span className="audience-split-title">
-                  管理会社・ビル / マンションオーナー様はこちら
-                </span>
-                <span className="audience-split-sub">
-                  大規模修繕・防水・外壁・雨漏りのご相談
-                </span>
-              </span>
-              <span className="audience-split-arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-            <a
-              href="#services"
-              onClick={(e) => scrollToId(e, 'services')}
-              className="audience-split-card"
-            >
-              <span className="audience-split-icon" aria-hidden="true">
-                🏠
-              </span>
-              <span className="audience-split-body">
-                <span className="audience-split-title">
-                  戸建てにお住まいのお客様はこちら
-                </span>
-                <span className="audience-split-sub">
-                  外壁塗装・屋根・雨漏り・リフォーム
-                </span>
-              </span>
-              <span className="audience-split-arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-          </div>
-        </div>
+      <section className="split-hero" aria-label="ご相談内容でお選びください">
+        <a
+          href="#corporate"
+          onClick={(e) => scrollToId(e, 'corporate')}
+          className="split-pane split-corp"
+        >
+          <span className="split-eyebrow">FOR CORPORATE</span>
+          <span className="split-icon" aria-hidden="true">
+            🏢
+          </span>
+          <span className="split-title">法人・管理会社様はこちら</span>
+          <span className="split-sub">
+            大規模修繕・防水・外壁・雨漏りのご相談
+          </span>
+          <span className="split-cta">
+            詳しく見る <span aria-hidden="true">→</span>
+          </span>
+        </a>
+        <a
+          href="#services"
+          onClick={(e) => scrollToId(e, 'services')}
+          className="split-pane split-home"
+        >
+          <span className="split-eyebrow">FOR YOUR HOME</span>
+          <span className="split-icon" aria-hidden="true">
+            🏠
+          </span>
+          <span className="split-title">戸建てのお客様はこちら</span>
+          <span className="split-sub">外壁塗装・屋根・雨漏り・リフォーム</span>
+          <span className="split-cta">
+            詳しく見る <span aria-hidden="true">→</span>
+          </span>
+        </a>
       </section>
 
       <section className="section reasons">
