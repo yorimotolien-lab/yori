@@ -1930,47 +1930,102 @@ html.font-lg {
 .blog-body {
   margin-top: 20px;
 }
+/* H2（大見出し）：太めのダークボーダー＋ごく薄いグレー背景で区切りを明確に */
 .blog-body h2 {
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 21px;
   color: var(--navy);
-  margin: 36px 0 14px;
-  padding-left: 14px;
-  border-left: 5px solid var(--accent);
   line-height: 1.5;
+  margin: 40px 0 18px;
+  padding: 12px 16px;
+  background: #f4f5f7;
+  border-left: 6px solid var(--navy);
+  border-radius: 0 6px 6px 0;
 }
+/* H3（中見出し）：下線のみでスッキリ */
 .blog-body h3 {
   font-size: 18px;
   color: var(--navy);
-  margin: 28px 0 10px;
+  line-height: 1.6;
+  margin: 32px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
 }
 .blog-body p {
   font-size: 16px;
-  line-height: 2;
+  line-height: 1.85;
   color: var(--text);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 .blog-body .blog-ul,
 .blog-body .blog-ol {
-  margin: 0 0 20px;
+  margin: 0 0 22px;
+  padding: 0;
+}
+.blog-body .blog-ol {
   padding-left: 1.4em;
 }
 .blog-body li {
   font-size: 16px;
-  line-height: 1.9;
-  margin-bottom: 8px;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+/* チェックマーク風の箇条書き（アクセントカラーのチップ） */
+.blog-body ul.blog-ul {
+  list-style: none;
+}
+.blog-body ul.blog-ul li {
+  position: relative;
+  padding-left: 32px;
+}
+.blog-body ul.blog-ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-bg, rgba(238, 114, 3, 0.12));
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
 }
 .blog-body a {
   color: var(--accent-dark);
   font-weight: 600;
 }
-.blog-body blockquote {
-  margin: 20px 0;
-  padding: 14px 18px;
-  border-left: 4px solid var(--border);
-  background: var(--bg-alt);
-  color: var(--text-muted);
-  border-radius: 0 8px 8px 0;
+/* ポイント囲み枠（プロからのワンポイント／重要情報）。Markdownの「> 」で作成 */
+.point-box {
+  margin: 26px 0;
+  padding: 18px 20px;
+  background: var(--accent-bg, rgba(238, 114, 3, 0.08));
+  border: 1px solid rgba(238, 114, 3, 0.3);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.85;
+}
+.point-box::before {
+  content: 'POINT';
+  display: block;
+  width: fit-content;
+  margin-bottom: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+.point-box a {
+  color: var(--accent-dark);
+  font-weight: 600;
 }
 .blog-body hr {
   border: none;
