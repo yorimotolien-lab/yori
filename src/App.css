@@ -2197,3 +2197,206 @@ html.font-lg {
   background: var(--accent-bg, rgba(238, 114, 3, 0.12));
   border-color: var(--accent);
 }
+
+/* ===== ヒーロー：シネマティックなテキストリビール＆登場 ===== */
+.hero-reveal .reveal-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.hero-reveal .reveal-inner {
+  display: block;
+  transform: translateY(118%);
+  animation: hero-reveal-up 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-reveal .reveal-line:nth-child(1) .reveal-inner {
+  animation-delay: 0.25s;
+}
+.hero-reveal .reveal-line:nth-child(2) .reveal-inner {
+  animation-delay: 0.46s;
+}
+@keyframes hero-reveal-up {
+  to {
+    transform: translateY(0);
+  }
+}
+/* リード・説明・ボタン等はふわっと登場（シネマティックな連鎖） */
+.hero-lead,
+.hero-desc,
+.hero-actions,
+.hero-note,
+.hero-trust {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-lead {
+  animation-delay: 0.1s;
+}
+.hero-desc {
+  animation-delay: 0.78s;
+}
+.hero-actions {
+  animation-delay: 0.92s;
+}
+.hero-note {
+  animation-delay: 1.04s;
+}
+.hero-trust {
+  animation-delay: 1.14s;
+}
+@keyframes hero-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal .reveal-inner,
+  .hero-lead,
+  .hero-desc,
+  .hero-actions,
+  .hero-note,
+  .hero-trust {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== スプリットスクリーン・ナビゲーション ===== */
+.split-hero {
+  display: flex;
+  width: 100%;
+  height: 56vh;
+  min-height: 400px;
+  max-height: 620px;
+  overflow: hidden;
+}
+.split-pane {
+  position: relative;
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 28px;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: flex-grow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.split-corp {
+  background: linear-gradient(140deg, #0f1c30 0%, #24384f 100%);
+  color: #fff;
+}
+.split-home {
+  background: linear-gradient(140deg, #f8edda 0%, #eed4b2 100%);
+  color: var(--navy);
+}
+.split-pane + .split-pane {
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.18);
+}
+.split-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.split-icon {
+  font-size: 46px;
+  line-height: 1;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.split-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.split-corp .split-title {
+  color: #fff;
+}
+.split-home .split-title {
+  color: var(--navy);
+}
+.split-sub {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 20em;
+}
+.split-corp .split-sub {
+  color: rgba(255, 255, 255, 0.82);
+}
+.split-home .split-sub {
+  color: var(--text-muted);
+}
+.split-cta {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+}
+/* PC：ホバーした側が拡大（約70%）、他方は縮小 */
+@media (hover: hover) and (min-width: 769px) {
+  .split-hero:hover .split-pane {
+    flex-grow: 0.65;
+  }
+  .split-hero .split-pane:hover {
+    flex-grow: 1.5;
+  }
+  .split-pane:hover .split-icon {
+    transform: scale(1.12) translateY(-4px);
+  }
+  .split-corp:hover .split-cta {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .split-home:hover .split-cta {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+  }
+}
+/* スマホ：上下の縦積みに切り替え */
+@media (max-width: 768px) {
+  .split-hero {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+  .split-pane {
+    flex: none;
+    min-height: 230px;
+    padding: 44px 24px;
+  }
+  .split-pane + .split-pane {
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.18);
+  }
+  .split-title {
+    font-size: 21px;
+  }
+  .split-icon {
+    font-size: 42px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .split-pane,
+  .split-icon {
+    transition: none;
+  }
+}
