@@ -71,7 +71,6 @@ export function renderMarkdown(md) {
       blocks.push(
         <figure key={key} className="blog-figure">
           <img src={image[2]} alt={image[1]} loading="lazy" />
-          {image[1] ? <figcaption>{image[1]}</figcaption> : null}
         </figure>,
       )
       i++
