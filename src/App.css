@@ -214,52 +214,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 背景画像 未設置時のフォールバック（ダークネイビー） */
+  /* ダークネイビー背景＋ロゴ背後のスポットライト（中央やや上） */
   background:
     radial-gradient(
-      circle at 70% 30%,
-      rgba(58, 92, 150, 0.55),
+      circle at 50% 43%,
+      rgba(74, 116, 182, 0.5),
       transparent 60%
     ),
     linear-gradient(135deg, #14223d 0%, #1d3052 55%, #25406c 100%);
   color: #fff;
 }
-/* ▼▼▼ ヒーロー背景画像：ここを差し替えてください ▼▼▼
-   ・本番は public/ に画像を置き、'/ファイル名.jpg' で参照します
-   ・CSP により外部URL（source.unsplash.com 等）は本番で読み込めないため、必ずローカル画像を使用
-   ・未設置の間は上のネイビー背景に自動フォールバックします
-   ・ケン・バーンズ効果：15秒かけて scale 1.0 → 1.1 へゆっくり拡大（往復ループ） */
+/* ▼▼▼ メインビジュアル：既存ロゴマーク（キューブ）をシルバー調の大型ウォーターマークに ▼▼▼
+   画像は public/hero-mark.png（logo.png のキューブ部分を切り出したもの）。
+   金属質ロゴをダーク背景で映えさせるため brighten でシルバー化し、ゆっくり浮遊させています。 */
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('/hero-bg.jpg'); /* ← ここを差し替え */
-  background-size: cover;
-  background-position: center;
-  animation: ken-burns 15s ease-in-out infinite alternate;
+  background-image: url('/hero-mark.png');
+  background-repeat: no-repeat;
+  background-position: center 43%;
+  background-size: clamp(300px, 50vw, 660px);
+  filter: grayscale(1) brightness(2.6) contrast(1.02);
+  opacity: 0.2;
+  animation: hero-mark-float 16s ease-in-out infinite alternate;
   will-change: transform;
 }
-/* ▲▲▲ ヒーロー背景画像ここまで ▲▲▲ */
-@keyframes ken-burns {
+/* ▲▲▲ メインビジュアルここまで ▲▲▲ */
+@keyframes hero-mark-float {
   from {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
   to {
-    transform: scale(1.1);
+    transform: scale(1.06) translateY(-12px);
   }
-}
-/* テキスト・ロゴを白抜きで際立たせるダークオーバーレイ */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(8, 15, 30, 0.66) 0%,
-    rgba(8, 15, 30, 0.58) 45%,
-    rgba(8, 15, 30, 0.82) 100%
-  );
-  pointer-events: none;
 }
 .hero-inner {
   position: relative;

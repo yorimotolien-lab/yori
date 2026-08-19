@@ -71,10 +71,9 @@ function Home() {
         content="千葉県市川市の建設会社・株式会社LIEN。外壁塗装・防水・シーリング・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。千葉県全域・東京・埼玉・茨城対応、現地調査・お見積り無料。"
       />
       <section className="hero">
-        {/* ▼▼▼ ヒーロー背景画像はここで差し替え → src/App.css の「.hero-bg」の background-image ▼▼▼ */}
-        {/* 画像は public/hero-bg.jpg を配置（未設置の間はネイビー背景に自動フォールバック） */}
+        {/* 既存のロゴマーク（キューブ）をメインビジュアルの背景に使用 → 画像は public/hero-mark.png、
+            見え方の調整は src/App.css の「.hero-bg」 */}
         <div className="hero-bg" aria-hidden="true" />
-        <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-inner">
           <p className="hero-lead">千葉県市川市の建設・修繕パートナー</p>
           <h1 className="hero-title hero-reveal">
