@@ -208,6 +208,13 @@
 .hero {
   position: relative;
   overflow: hidden;
+  /* ファーストビューを画面いっぱいに（ヘッダー分を差し引く）。svh でモバイルのアドレスバー変動にも対応 */
+  min-height: calc(100vh - 88px);
+  min-height: calc(100svh - 88px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 背景画像 未設置時のフォールバック（ダークネイビー） */
   background:
     radial-gradient(
       circle at 70% 30%,
@@ -217,22 +224,50 @@
     linear-gradient(135deg, #14223d 0%, #1d3052 55%, #25406c 100%);
   color: #fff;
 }
-.hero-watermark {
+/* ▼▼▼ ヒーロー背景画像：ここを差し替えてください ▼▼▼
+   ・本番は public/ に画像を置き、'/ファイル名.jpg' で参照します
+   ・CSP により外部URL（source.unsplash.com 等）は本番で読み込めないため、必ずローカル画像を使用
+   ・未設置の間は上のネイビー背景に自動フォールバックします
+   ・ケン・バーンズ効果：15秒かけて scale 1.0 → 1.1 へゆっくり拡大（往復ループ） */
+.hero-bg {
   position: absolute;
   inset: 0;
-  background-repeat: no-repeat;
-  background-position: right -30px center;
-  background-size: auto 150%;
-  opacity: 0.32;
-  filter: grayscale(1) brightness(2.4) contrast(1.1);
+  z-index: 0;
+  background-image: url('/hero-bg.jpg'); /* ← ここを差し替え */
+  background-size: cover;
+  background-position: center;
+  animation: ken-burns 15s ease-in-out infinite alternate;
+  will-change: transform;
+}
+/* ▲▲▲ ヒーロー背景画像ここまで ▲▲▲ */
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+/* テキスト・ロゴを白抜きで際立たせるダークオーバーレイ */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 15, 30, 0.66) 0%,
+    rgba(8, 15, 30, 0.58) 45%,
+    rgba(8, 15, 30, 0.82) 100%
+  );
   pointer-events: none;
 }
 .hero-inner {
   position: relative;
   z-index: 1;
+  width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 120px 24px;
+  padding: 88px 24px 128px;
   text-align: center;
 }
 .hero-lead {
@@ -244,9 +279,12 @@
 .hero-title {
   font-family: var(--serif);
   color: #fff;
-  font-size: 44px;
-  line-height: 1.45;
-  margin-bottom: 24px;
+  /* 画面幅を大胆に使う巨大タイポグラフィ（33px〜74px で流動的にスケール） */
+  font-size: clamp(2.1rem, 6vw, 4.6rem);
+  line-height: 1.32;
+  letter-spacing: 0.015em;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
 }
 .hero-desc {
   max-width: 600px;
@@ -1428,16 +1466,12 @@ html.font-lg {
   .logo-img {
     height: 40px;
   }
-  .hero-watermark {
-    background-position: center;
-    background-size: auto 90%;
-    opacity: 0.16;
-  }
-  .hero-title {
-    font-size: 30px;
+  .hero {
+    min-height: calc(100vh - 69px);
+    min-height: calc(100svh - 69px);
   }
   .hero-inner {
-    padding: 80px 24px;
+    padding: 72px 20px 96px;
   }
   .section {
     padding: 56px 0;
@@ -2809,4 +2843,101 @@ html.font-lg {
   display: block;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+/* ===== ヒーロー：スクロールインジケーター（Scroll Down + 下に伸びる縦線） ===== */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: hero-scroll-in 0.9s ease 1.5s forwards;
+}
+.hero-scroll-text {
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+}
+.hero-scroll-line {
+  position: relative;
+  width: 1px;
+  height: 54px;
+  background: rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+/* 明るいセグメントが縦線を繰り返し下降する */
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 45%;
+  background: linear-gradient(to bottom, transparent, #fff);
+  animation: hero-scroll-run 1.9s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+@keyframes hero-scroll-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-scroll-run {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(230%);
+  }
+}
+
+/* ===== スクロール連動フェードイン（全ページ共通の仕組み） =====
+   任意の要素に class="fade-in-up" を付けると、画面内に入った瞬間に
+   下から数十pxスライドしながらフェードインします（JS: src/components/ScrollReveal.jsx）。 */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* アクセシビリティ：視差効果を減らす設定では即時表示（動きを無効化） */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg {
+    animation: none;
+  }
+  .hero-scroll {
+    animation: none;
+    opacity: 1;
+  }
+  .hero-scroll-line::after {
+    animation: none;
+  }
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* モバイルはスクロールインジケーターを非表示（下部固定CTAバーと重なるため）。
+   ベース定義より後に置くことで確実に上書きする（メディアクエリは詳細度を上げないため）。 */
+@media (max-width: 768px) {
+  .hero-scroll {
+    display: none;
+  }
 }
