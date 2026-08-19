@@ -2795,3 +2795,18 @@ html.font-lg {
     transform: none;
   }
 }
+
+/* ===== 協力会社募集ページのヒーロー画像（握手・パートナーシップ） ===== */
+.partner-hero {
+  margin: 32px 0 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.partner-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
