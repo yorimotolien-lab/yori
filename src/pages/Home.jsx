@@ -71,11 +71,9 @@ function Home() {
         content="千葉県市川市の建設会社・株式会社LIEN。外壁塗装・防水・シーリング・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。千葉県全域・東京・埼玉・茨城対応、現地調査・お見積り無料。"
       />
       <section className="hero">
-        <div
-          className="hero-watermark"
-          aria-hidden="true"
-          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}logo.png)` }}
-        />
+        {/* 既存のロゴマーク（キューブ）をメインビジュアルの背景に使用 → 画像は public/hero-mark.png、
+            見え方の調整は src/App.css の「.hero-bg」 */}
+        <div className="hero-bg" aria-hidden="true" />
         <div className="hero-inner">
           <p className="hero-lead">千葉県市川市の建設・修繕パートナー</p>
           <h1 className="hero-title hero-reveal">
@@ -108,6 +106,10 @@ function Home() {
             <li>1都3県 対応</li>
             <li>見積り 無料</li>
           </ul>
+        </div>
+        <div className="hero-scroll" aria-hidden="true">
+          <span className="hero-scroll-text">Scroll Down</span>
+          <span className="hero-scroll-line" />
         </div>
       </section>
 
@@ -147,7 +149,7 @@ function Home() {
       </section>
 
       <section className="section reasons">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">REASONS</p>
           <h2 className="section-title">LIENが選ばれる理由</h2>
           <ul className="reason-grid">
@@ -165,7 +167,7 @@ function Home() {
       </section>
 
       <section className="section corporate" id="corporate">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">FOR CORPORATE CLIENTS</p>
           <h2 className="section-title">
             法人・管理会社様にLIENが選ばれる3つの理由
@@ -219,7 +221,7 @@ function Home() {
       </section>
 
       <section className="section services-preview" id="services">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">SERVICES</p>
           <h2 className="section-title">事業内容</h2>
           <ul className="service-grid">
@@ -241,7 +243,7 @@ function Home() {
       <SosCheck />
 
       <section className="section works">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">WORKS</p>
           <h2 className="section-title">施工事例</h2>
           <p className="concept-text">
@@ -262,7 +264,7 @@ function Home() {
       </section>
 
       <section className="section flow">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">FLOW</p>
           <h2 className="section-title">ご依頼〜お引き渡しの流れ</h2>
           <p className="concept-text">
@@ -283,7 +285,7 @@ function Home() {
       </section>
 
       <section className="section partners-band">
-        <div className="section-inner partners-band-inner">
+        <div className="section-inner partners-band-inner fade-in-up">
           <div>
             <p className="section-eyebrow">PARTNERS</p>
             <h2 className="section-title">協力会社募集</h2>
@@ -298,7 +300,7 @@ function Home() {
       </section>
 
       <section className="section pricing-policy">
-        <div className="section-inner narrow">
+        <div className="section-inner narrow fade-in-up">
           <p className="section-eyebrow">PRICING</p>
           <h2 className="section-title">{PRICING_POLICY.title}</h2>
           {PRICING_POLICY.body.map((text) => (
@@ -321,7 +323,7 @@ function Home() {
       </section>
 
       <section className="section warranty">
-        <div className="section-inner narrow">
+        <div className="section-inner narrow fade-in-up">
           <p className="section-eyebrow">WARRANTY</p>
           <h2 className="section-title">{WARRANTY.title}</h2>
           {WARRANTY.lead.map((text) => (
@@ -347,7 +349,7 @@ function Home() {
       </section>
 
       <section className="section contractor-tips">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">HOW TO CHOOSE</p>
           <h2 className="section-title">{CONTRACTOR_TIPS.title}</h2>
           <p className="tips-lead">{CONTRACTOR_TIPS.lead}</p>
@@ -369,7 +371,7 @@ function Home() {
       </section>
 
       <section className="section service-areas">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">SERVICE AREA</p>
           <h2 className="section-title">{SERVICE_AREAS.title}</h2>
           <p className="concept-text areas-lead">{SERVICE_AREAS.lead}</p>
@@ -401,7 +403,7 @@ function Home() {
       </section>
 
       <section className="section for-home" id="for-home">
-        <div className="section-inner">
+        <div className="section-inner fade-in-up">
           <p className="section-eyebrow">FOR YOUR HOME</p>
 
           <div className="fh-hero">
@@ -457,7 +459,7 @@ function Home() {
       </section>
 
       <section className="section cta">
-        <div className="section-inner cta-inner">
+        <div className="section-inner cta-inner fade-in-up">
           <p className="section-eyebrow">CONTACT</p>
           <h2 className="section-title">まずは無料でご相談ください</h2>
           <p>

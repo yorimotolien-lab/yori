@@ -108,6 +108,16 @@
       }
     </script>
 
+    <!-- JS 無効時の安全策：スクロール連動アニメーション要素を常に表示する -->
+    <noscript>
+      <style>
+        .fade-in-up {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </head>
   <body>
