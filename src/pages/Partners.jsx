@@ -34,6 +34,13 @@ function Partners() {
       <section className="section">
         <div className="section-inner narrow">
           <p className="concept-text">{PARTNER.lead}</p>
+          <figure className="partner-hero">
+            <img
+              src={`${import.meta.env.BASE_URL}partner-recruit.jpg`}
+              alt="協力会社さまと信頼のパートナーシップを結ぶ握手"
+              loading="lazy"
+            />
+          </figure>
         </div>
       </section>
 
