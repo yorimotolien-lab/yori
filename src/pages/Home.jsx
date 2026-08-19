@@ -9,6 +9,7 @@ import {
   WARRANTY,
   CONTRACTOR_TIPS,
   SERVICE_AREAS,
+  FOR_HOME,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { WorksComingSoon } from '../illustrations.jsx'
@@ -28,6 +29,18 @@ const REASON_ICONS = {
   ),
   wrench: (
     <path d="M21 6.5a4.5 4.5 0 01-6 4.2L7.7 18l-2.7-2.7 7.3-7.3A4.5 4.5 0 0118 2.5l-2.6 2.6 1.5 1.5L19.5 4A4.5 4.5 0 0121 6.5z" />
+  ),
+}
+
+const PROMISE_ICONS = {
+  greeting: (
+    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+  ),
+  schedule: (
+    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+  ),
+  report: (
+    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
   ),
 }
 
@@ -117,8 +130,8 @@ function Home() {
           </span>
         </a>
         <a
-          href="#services"
-          onClick={(e) => scrollToId(e, 'services')}
+          href="#for-home"
+          onClick={(e) => scrollToId(e, 'for-home')}
           className="split-pane split-home"
         >
           <span className="split-eyebrow">FOR YOUR HOME</span>
@@ -384,6 +397,62 @@ function Home() {
           </div>
           <p className="areas-more">{SERVICE_AREAS.moreNote}</p>
           <p className="areas-note">{SERVICE_AREAS.note}</p>
+        </div>
+      </section>
+
+      <section className="section for-home" id="for-home">
+        <div className="section-inner">
+          <p className="section-eyebrow">FOR YOUR HOME</p>
+
+          <div className="fh-hero">
+            <span className="fh-hero-icon" aria-hidden="true">
+              🏠
+            </span>
+            <h2 className="section-title fh-hero-title">
+              {FOR_HOME.hero.title}
+            </h2>
+            <p className="fh-hero-text">{FOR_HOME.hero.text}</p>
+          </div>
+
+          <div className="fh-block">
+            <h3 className="fh-subtitle">{FOR_HOME.checklistTitle}</h3>
+            <ul className="fh-checks">
+              {FOR_HOME.checks.map((check) => (
+                <li key={check} className="fh-check">
+                  <span className="fh-check-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </span>
+                  <span className="fh-check-text">{check}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="fh-block">
+            <h3 className="fh-subtitle">{FOR_HOME.promisesTitle}</h3>
+            <ul className="fh-promises">
+              {FOR_HOME.promises.map((promise, index) => (
+                <li key={promise.title} className="fh-promise">
+                  <span className="fh-promise-no" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="fh-promise-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">{PROMISE_ICONS[promise.icon]}</svg>
+                  </span>
+                  <h4 className="fh-promise-title">{promise.title}</h4>
+                  <p className="fh-promise-text">{promise.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="fh-cta">
+            <Link to="/contact" className="fh-btn">
+              無料で我が家の診断を申し込む
+            </Link>
+          </div>
         </div>
       </section>
 
