@@ -382,6 +382,7 @@ function Home() {
               </div>
             ))}
           </div>
+          <p className="areas-more">{SERVICE_AREAS.moreNote}</p>
           <p className="areas-note">{SERVICE_AREAS.note}</p>
         </div>
       </section>
