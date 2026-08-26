@@ -420,13 +420,23 @@ function Home() {
             <h3 className="fh-subtitle">{FOR_HOME.checklistTitle}</h3>
             <ul className="fh-checks">
               {FOR_HOME.checks.map((check) => (
-                <li key={check} className="fh-check">
+                <li key={check.text} className="fh-check">
+                  <span className="fh-check-photo">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${check.image}`}
+                      alt={check.text}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.parentElement.style.display = 'none'
+                      }}
+                    />
+                  </span>
                   <span className="fh-check-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24">
                       <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                     </svg>
                   </span>
-                  <span className="fh-check-text">{check}</span>
+                  <span className="fh-check-text">{check.text}</span>
                 </li>
               ))}
             </ul>
