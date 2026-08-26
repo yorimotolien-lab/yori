@@ -12,15 +12,25 @@ function SosCheck() {
 
         <ul className="sos-list">
           {SOS_CHECK.items.map((item) => (
-            <li key={item}>
+            <li key={item.text}>
               <label className="sos-item">
                 <input type="checkbox" />
+                <span className="sos-photo" aria-hidden="true">
+                  <img
+                    src={`${import.meta.env.BASE_URL}${item.image}`}
+                    alt={item.text}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.parentElement.style.display = 'none'
+                    }}
+                  />
+                </span>
                 <span className="sos-box" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
                     <path d="M5 12.5l4.5 4.5L19 7.5" />
                   </svg>
                 </span>
-                <span className="sos-text">{item}</span>
+                <span className="sos-text">{item.text}</span>
               </label>
             </li>
           ))}
