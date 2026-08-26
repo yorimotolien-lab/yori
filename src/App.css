@@ -2140,6 +2140,20 @@ html.font-lg {
   width: 0;
   height: 0;
 }
+.sos-photo {
+  flex: none;
+  width: 104px;
+  height: 74px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+.sos-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .sos-box {
   flex: none;
   width: 28px;
@@ -2945,5 +2959,17 @@ html.font-lg {
 @media (max-width: 768px) {
   .hero-scroll {
     display: none;
+  }
+}
+
+/* SOSサイン診断のサムネイルはモバイルで少し小さく */
+@media (max-width: 640px) {
+  .sos-photo {
+    width: 76px;
+    height: 56px;
+  }
+  .sos-item {
+    gap: 11px;
+    padding: 12px 14px;
   }
 }
