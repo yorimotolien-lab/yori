@@ -10,6 +10,7 @@ import {
   CONTRACTOR_TIPS,
   SERVICE_AREAS,
   FOR_HOME,
+  PARALLAX_BAND,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { WorksComingSoon } from '../illustrations.jsx'
@@ -262,6 +263,19 @@ function Home() {
           </ul>
         </div>
       </section>
+
+      {/* パララックス（視差効果）バンド。div のため section の背景交互（nth-of-type）に影響しない。
+          背景画像は public/parallax-bg.jpg を差し替え（未設置時はネイビー背景にフォールバック） */}
+      <div className="parallax-band">
+        <div className="parallax-band-inner fade-in-up">
+          <p className="parallax-eyebrow">{PARALLAX_BAND.eyebrow}</p>
+          <p className="parallax-title">{PARALLAX_BAND.title}</p>
+          <p className="parallax-text">{PARALLAX_BAND.text}</p>
+          <Link to="/contact" className="btn btn-primary parallax-cta">
+            {PARALLAX_BAND.ctaLabel}
+          </Link>
+        </div>
+      </div>
 
       <section className="section flow">
         <div className="section-inner fade-in-up">
