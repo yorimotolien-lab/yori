@@ -519,6 +519,14 @@ export const FOR_HOME = {
   ],
 }
 
+// パララックス（視差効果）バンドの文言。背景画像は public/parallax-bg.jpg（未設置時はネイビー背景）。
+export const PARALLAX_BAND = {
+  eyebrow: 'LIEN CONSTRUCTION',
+  title: '10年先も、この家で笑っていられるように。',
+  text: '市川市を拠点に、1都3県で。1級建築施工管理技士・雨漏り診断士が、見えない下地から仕上げまで一つひとつ丁寧に。お住まいの資産価値を守ります。',
+  ctaLabel: '無料で相談する',
+}
+
 export const MAINTENANCE = {
   lead: [
     '建物の外壁や屋上は、紫外線・雨水・寒暖差・風雨にさらされ続け、年月とともに必ず劣化します。なかでも外壁塗膜・防水塗膜・シーリングは、建物内部への水の浸入を防ぐ「最前線の防御層」です。',

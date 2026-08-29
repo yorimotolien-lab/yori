@@ -10,6 +10,7 @@
   --bg-alt: #e6edf7;
   --border: #d6dde9;
   --shadow: rgba(26, 42, 74, 0.1) 0 8px 24px;
+  --header-h: 91px; /* 固定ヘッダーの高さ（レイアウトのオフセットに使用） */
 
   --sans:
     'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, system-ui,
@@ -29,6 +30,11 @@
   box-sizing: border-box;
 }
 
+/* 固定ヘッダーぶん、ページ内アンカースクロールの着地位置をずらす */
+html {
+  scroll-padding-top: var(--header-h);
+}
+
 body {
   margin: 0;
 }
@@ -39,8 +45,16 @@ body {
   min-height: 100svh;
 }
 
+/* 固定ヘッダーのぶんだけコンテンツを下げる（ヒーローだけは負マージンで全面表示に戻す） */
 main {
   flex: 1 0 auto;
+  padding-top: var(--header-h);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-h: 73px;
+  }
 }
 
 h1,

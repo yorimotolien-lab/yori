@@ -5,6 +5,7 @@ import MobileCta from './components/MobileCta.jsx'
 import FloatingCta from './components/FloatingCta.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
 import ScrollReveal from './components/ScrollReveal.jsx'
+import CustomCursor from './components/CustomCursor.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Services from './pages/Services.jsx'
@@ -22,6 +23,7 @@ function App() {
     <>
       <ScrollToTop />
       <ScrollReveal />
+      <CustomCursor />
       <Header />
       <main>
         <Routes>

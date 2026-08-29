@@ -84,13 +84,24 @@
 }
 
 /* ===== Header ===== */
+/* 追従する「すりガラス」ヘッダー（Glassmorphism・常時固定） */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 6px 24px rgba(26, 42, 74, 0.07);
+}
+/* backdrop-filter 非対応ブラウザでは不透明度を上げて可読性を確保 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header {
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
 .site-header::before {
   content: '';
@@ -208,9 +219,11 @@
 .hero {
   position: relative;
   overflow: hidden;
-  /* ファーストビューを画面いっぱいに（ヘッダー分を差し引く）。svh でモバイルのアドレスバー変動にも対応 */
-  min-height: calc(100vh - 88px);
-  min-height: calc(100svh - 88px);
+  /* 固定ヘッダーのぶんの main の上パディングを打ち消し、ヒーローだけ画面最上部から全面表示 */
+  margin-top: calc(-1 * var(--header-h));
+  /* ファーストビューを画面いっぱいに。svh でモバイルのアドレスバー変動にも対応 */
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1453,10 +1466,6 @@ html.font-lg {
   }
   .logo-img {
     height: 40px;
-  }
-  .hero {
-    min-height: calc(100vh - 69px);
-    min-height: calc(100svh - 69px);
   }
   .hero-inner {
     padding: 72px 20px 96px;
@@ -2971,5 +2980,125 @@ html.font-lg {
   .sos-item {
     gap: 11px;
     padding: 12px 14px;
+  }
+}
+
+/* ===== パララックス（視差効果）バンド ===== */
+/* div 要素のため .section の nth-of-type 背景交互に影響しない。 */
+/* ▼▼▼ 背景画像はここで差し替え：public/parallax-bg.jpg（未設置時はネイビー背景にフォールバック） ▼▼▼ */
+.parallax-band {
+  position: relative;
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(rgba(10, 18, 35, 0.68), rgba(12, 22, 42, 0.74)),
+    url('/parallax-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* 視差効果：背景を固定してコンテンツをスクロール */
+  color: #fff;
+  text-align: center;
+}
+/* ▲▲▲ 背景画像ここまで ▲▲▲ */
+.parallax-band-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 132px 24px;
+}
+.parallax-eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.parallax-title {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.55;
+  margin: 0 0 22px;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+.parallax-text {
+  max-width: 620px;
+  margin: 0 auto 32px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 2;
+}
+/* iOS 等で background-attachment: fixed が不安定/非対応のため、モバイルは通常スクロール */
+@media (max-width: 768px) {
+  .parallax-band {
+    background-attachment: scroll;
+  }
+  .parallax-band-inner {
+    padding: 88px 22px;
+  }
+}
+
+/* ===== インタラクティブなカスタムカーソル（PC専用） ===== */
+.cursor-dot,
+.cursor-ring {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  /* カスタムカーソル有効時のみ、既定カーソルを非表示 */
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: none !important;
+  }
+  .cursor-dot,
+  .cursor-ring {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .cursor-dot {
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring-shape {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px; /* 原点に対して中央寄せ */
+    border: 1.6px solid #fff;
+    border-radius: 50%;
+    mix-blend-mode: difference;
+    transition:
+      transform 0.22s ease,
+      background 0.22s ease;
+  }
+  /* クリッカブル要素にホバーでリング拡大＋うっすら塗り */
+  body.cursor-hover .cursor-ring-shape {
+    transform: scale(1.7);
+    background: rgba(255, 255, 255, 0.35);
+  }
+  /* クリック押下で少し縮む */
+  body.cursor-down .cursor-ring-shape {
+    transform: scale(0.85);
+  }
+  body.cursor-hover.cursor-down .cursor-ring-shape {
+    transform: scale(1.45);
+  }
+  /* 画面外に出たら隠す */
+  body.cursor-hidden .cursor-dot,
+  body.cursor-hidden .cursor-ring {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring-shape {
+    transition: none;
   }
 }
