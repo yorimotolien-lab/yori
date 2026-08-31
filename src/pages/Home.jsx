@@ -17,6 +17,7 @@ import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import CtaAssurance from '../components/CtaAssurance.jsx'
 import SosCheck from '../components/SosCheck.jsx'
+import CountUp from '../components/CountUp.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -102,7 +103,10 @@ function Home() {
             相談だけでもOK／しつこい営業はいたしません
           </p>
           <ul className="hero-trust">
-            <li>創業 2020年</li>
+            <li>
+              創業{' '}
+              <CountUp end={2020} group={false} className="count-up--inline" />年
+            </li>
             <li>有資格者 在籍</li>
             <li>1都3県 対応</li>
             <li>見積り 無料</li>
@@ -348,7 +352,9 @@ function Home() {
           <ul className="warranty-years">
             {WARRANTY.years.map((y) => (
               <li key={y}>
-                <span className="warranty-year-num">{y}</span>
+                <span className="warranty-year-num">
+                  <CountUp end={parseInt(y, 10)} suffix="年" />
+                </span>
                 <span className="warranty-year-label">保証</span>
               </li>
             ))}
