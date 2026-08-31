@@ -1,15 +1,19 @@
 :root {
-  --navy: #1a2a4a;
-  --navy-dark: #131f38;
-  --navy-light: #2c4068;
-  --accent: #ee7203;
-  --accent-dark: #c25a00;
+  /* ===== ブランドパレット（色彩心理学の3色ルール） ===== */
+  /* Main 30%：ディープネイビー＝信頼感・重厚感・プロフェッショナリズム */
+  --navy: #0b192c;
+  --navy-dark: #06101d;
+  --navy-light: #1c3a5e;
+  /* Accent 10%：エネルギッシュオレンジ＝親しみ・情熱・CVへの視線誘導 */
+  --accent: #ff6b35;
+  --accent-dark: #e85320;
   --text: #232a36;
   --text-muted: #586072;
+  /* Base 60%：ホワイト＋プレステージホワイト（贅沢な余白・清潔感） */
   --bg: #ffffff;
-  --bg-alt: #e6edf7;
-  --border: #d6dde9;
-  --shadow: rgba(26, 42, 74, 0.1) 0 8px 24px;
+  --bg-alt: #f8f9fa;
+  --border: #e3e7ec;
+  --shadow: rgba(11, 25, 44, 0.1) 0 8px 24px;
   --header-h: 91px; /* 固定ヘッダーの高さ（レイアウトのオフセットに使用） */
 
   --sans:
