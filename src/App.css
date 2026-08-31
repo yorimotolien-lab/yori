@@ -254,6 +254,24 @@
   will-change: transform;
 }
 /* ▲▲▲ メインビジュアルここまで ▲▲▲ */
+/* ファーストビューの視認性強化：中央のテキスト帯を最も暗く落とすラジアル（放射状）
+   グラデーションのオーバーレイ。明るいシルバーのロゴ透かしの上でもコピーが際立つように、
+   中央を濃く・周辺は透明に近づけて“重さ”を出しつつ画面全体が潰れないよう調整。
+   .hero-bg（z-index:0）より上、.hero-inner（z-index:1）より下に重ねる。 */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 62% at 50% 48%,
+    rgba(8, 16, 33, 0.62) 0%,
+    rgba(8, 16, 33, 0.4) 42%,
+    rgba(8, 16, 33, 0.12) 72%,
+    transparent 100%
+  );
+}
 @keyframes hero-mark-float {
   from {
     transform: scale(1) translateY(0);
@@ -321,6 +339,19 @@
   padding: 6px 16px;
 }
 
+/* ===== 数字カウントアップ（共通） ===== */
+/* カウント中の桁変動で幅が揺れないよう等幅数字に固定。 */
+.count-up {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+/* ヒーローの「創業◯◯年」ピル内で数字だけをひとまわり大きく・太く強調。 */
+.count-up--inline {
+  font-size: 1.18em;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
 /* ===== Reasons ===== */
 .reason-grid {
   list-style: none;
@@ -338,6 +369,17 @@
   border-top: 4px solid var(--navy);
   border-radius: 10px;
   box-shadow: var(--shadow);
+  /* 3Dカードホバー：浮き上がり＋影の変化を上品な減速カーブで。 */
+  transition:
+    transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .reason-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 38px -16px rgba(20, 34, 61, 0.42);
+  }
 }
 .reason-icon {
   display: inline-flex;
@@ -447,6 +489,28 @@
   border-radius: 8px;
   padding: 28px 24px;
   box-shadow: var(--shadow);
+  /* 3Dカードホバー：REASONS カードと揃えた浮き上がり演出。 */
+  transition:
+    transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 38px -16px rgba(20, 34, 61, 0.42);
+  }
+}
+/* 「視差効果を減らす」設定時はホバーの移動を無効化（影の変化のみ許容）。 */
+@media (prefers-reduced-motion: reduce) {
+  .reason-card,
+  .service-card {
+    transition: box-shadow 0.32s ease;
+  }
+  .reason-card:hover,
+  .service-card:hover {
+    transform: none;
+  }
 }
 .service-card h2,
 .service-card h3 {
@@ -1848,10 +1912,12 @@ html.font-lg {
 }
 .warranty-year-num {
   font-family: var(--serif);
-  font-size: 23px;
-  font-weight: 700;
+  /* 周囲より際立つ大型フォント。数字だけをぐっと大きく・太く見せる。 */
+  font-size: 30px;
+  font-weight: 800;
   color: #fff;
   line-height: 1;
+  letter-spacing: 0.01em;
 }
 .warranty-year-label {
   font-size: 11px;
