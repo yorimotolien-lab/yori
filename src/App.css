@@ -1,6 +1,7 @@
 /* ===== Layout primitives ===== */
 .section {
-  padding: 72px 0;
+  /* マルチページ化に伴い余白を広めに取り、大手企業のような高級感と読みやすさを優先 */
+  padding: 92px 0;
 }
 .section:nth-of-type(even) {
   background: var(--bg-alt);
@@ -3166,5 +3167,57 @@ html.font-lg {
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring-shape {
     transition: none;
+  }
+}
+
+/* ===== マルチページ構造（ヘッダーCTA・スリム化HOMEの導線） ===== */
+/* ヘッダーの「お問い合わせ」ボタン（グローバルナビ内でアクセント色の丸ボタン） */
+.nav-cta {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  padding: 10px 22px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px -6px rgba(255, 107, 53, 0.6);
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.nav-cta:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px -8px rgba(255, 107, 53, 0.7);
+}
+
+/* セクション見出し下の要約リード（中央寄せ・ゆとりある余白） */
+.section-intro {
+  max-width: 660px;
+  margin: 0 auto 34px;
+  text-align: center;
+  color: var(--text-muted);
+}
+/* 「→ 詳しく見る」系の導線ボタン */
+.btn-more {
+  margin-top: 4px;
+}
+/* 対応エリア（簡略版）のチップを中央寄せ＋主要以外の“ほか”チップ */
+.areas-tags--center {
+  justify-content: center;
+}
+.area-tag--more {
+  background: transparent;
+  color: var(--text-muted);
+  border-style: dashed;
+}
+
+@media (max-width: 768px) {
+  /* モバイルのハンバーガーメニュー内ではCTAを全幅ボタンに */
+  .nav-cta {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
   }
 }

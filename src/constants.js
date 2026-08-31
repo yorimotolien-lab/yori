@@ -664,13 +664,26 @@ export const PARTNER = {
   },
 }
 
+// ヘッダーのグローバルナビ（スリム化）。cta:true の項目はボタンデザインで表示。
 export const NAV_ITEMS = [
   { to: '/', label: 'ホーム' },
-  { to: '/about', label: '会社概要' },
+  { to: '/strength', label: '選ばれる理由' },
+  { to: '/works', label: '施工実績' },
+  { to: '/blog', label: 'ブログ・お役立ち情報' },
+  { to: '/company', label: '会社概要・エリア' },
+  { to: '/contact', label: 'お問い合わせ', cta: true },
+]
+
+// フッターのサイトマップ（ヘッダーから外した下層ページも含めて全ページ集約）。
+export const FOOTER_LINKS = [
+  { to: '/', label: 'ホーム' },
+  { to: '/strength', label: '選ばれる理由' },
+  { to: '/works', label: '施工実績' },
   { to: '/services', label: '事業内容' },
   { to: '/maintenance', label: '劣化と対策' },
   { to: '/faq', label: 'よくあるご質問' },
+  { to: '/blog', label: 'ブログ・お役立ち情報' },
   { to: '/partners', label: '協力会社募集' },
-  { to: '/blog', label: 'ブログ' },
+  { to: '/company', label: '会社概要・エリア' },
   { to: '/contact', label: 'お問い合わせ' },
 ]

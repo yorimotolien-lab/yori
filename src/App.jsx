@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import MobileCta from './components/MobileCta.jsx'
@@ -7,7 +7,9 @@ import ScrollToTop from './components/ScrollToTop.jsx'
 import ScrollReveal from './components/ScrollReveal.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
 import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
+import Strength from './pages/Strength.jsx'
+import Works from './pages/Works.jsx'
+import Company from './pages/Company.jsx'
 import Services from './pages/Services.jsx'
 import Maintenance from './pages/Maintenance.jsx'
 import Faq from './pages/Faq.jsx'
@@ -28,7 +30,11 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/strength" element={<Strength />} />
+          <Route path="/works" element={<Works />} />
+          <Route path="/company" element={<Company />} />
+          {/* 旧URL /about は /company へ恒久リダイレクト（被リンク・SEO維持） */}
+          <Route path="/about" element={<Navigate to="/company" replace />} />
           <Route path="/services" element={<Services />} />
           <Route path="/maintenance" element={<Maintenance />} />
           <Route path="/faq" element={<Faq />} />

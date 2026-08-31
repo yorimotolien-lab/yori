@@ -1,22 +1,8 @@
 import { Link } from 'react-router-dom'
-import {
-  COMPANY,
-  SERVICES,
-  FLOW_STEPS,
-  REASONS,
-  CORPORATE_REASONS,
-  PRICING_POLICY,
-  WARRANTY,
-  CONTRACTOR_TIPS,
-  SERVICE_AREAS,
-  FOR_HOME,
-  PARALLAX_BAND,
-  WORKS_PLACEHOLDER,
-} from '../constants.js'
+import { COMPANY, REASONS, WORKS_PLACEHOLDER } from '../constants.js'
+import { POSTS } from '../posts.js'
 import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
-import CtaAssurance from '../components/CtaAssurance.jsx'
-import SosCheck from '../components/SosCheck.jsx'
 import CountUp from '../components/CountUp.jsx'
 
 const REASON_ICONS = {
@@ -40,17 +26,15 @@ const REASON_ICONS = {
   ),
 }
 
-const PROMISE_ICONS = {
-  greeting: (
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-  ),
-  schedule: (
-    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
-  ),
-  report: (
-    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-  ),
-}
+// トップページの対応エリア（簡略版）で見せる主要エリア。全域は /company に集約。
+const MAJOR_AREAS = [
+  '市川市',
+  '船橋市',
+  '浦安市',
+  '松戸市',
+  '習志野市',
+  '鎌ケ谷市',
+]
 
 const websiteLd = {
   '@context': 'https://schema.org',
@@ -60,27 +44,19 @@ const websiteLd = {
 }
 
 function Home() {
-  // 導線分岐ボタンから同一ページ内のセクションへスムーズスクロール。
-  const scrollToId = (event, id) => {
-    const el = document.getElementById(id)
-    if (!el) return
-    event.preventDefault()
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const latestPosts = POSTS.slice(0, 3)
 
   return (
     <>
       <Seo path="/" jsonLd={websiteLd} />
-      <title>
-        市川市・千葉の外壁塗装・防水・シーリング | 株式会社LIEN
-      </title>
+      <title>市川市・千葉の外壁塗装・防水・シーリング | 株式会社LIEN</title>
       <meta
         name="description"
         content="千葉県市川市の建設会社・株式会社LIEN。外壁塗装・防水・シーリング・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。千葉県全域・東京・埼玉・茨城対応、現地調査・お見積り無料。"
       />
+
+      {/* A. ファーストビュー */}
       <section className="hero">
-        {/* 既存のロゴマーク（キューブ）をメインビジュアルの背景に使用 → 画像は public/hero-mark.png、
-            見え方の調整は src/App.css の「.hero-bg」 */}
         <div className="hero-bg" aria-hidden="true" />
         <div className="hero-inner">
           <p className="hero-lead">千葉県市川市の建設・修繕パートナー</p>
@@ -105,9 +81,7 @@ function Home() {
               電話する {COMPANY.tel}
             </a>
           </div>
-          <p className="hero-note">
-            相談だけでもOK／しつこい営業はいたしません
-          </p>
+          <p className="hero-note">相談だけでもOK／しつこい営業はいたしません</p>
           <ul className="hero-trust">
             <li>
               創業{' '}
@@ -124,12 +98,9 @@ function Home() {
         </div>
       </section>
 
+      {/* 戸建て・法人の2つの入り口 */}
       <section className="split-hero" aria-label="ご相談内容でお選びください">
-        <a
-          href="#corporate"
-          onClick={(e) => scrollToId(e, 'corporate')}
-          className="split-pane split-corp"
-        >
+        <Link to="/strength#corporate" className="split-pane split-corp">
           <span className="split-eyebrow">FOR CORPORATE</span>
           <span className="split-icon" aria-hidden="true">
             🏢
@@ -141,12 +112,8 @@ function Home() {
           <span className="split-cta">
             詳しく見る <span aria-hidden="true">→</span>
           </span>
-        </a>
-        <a
-          href="#for-home"
-          onClick={(e) => scrollToId(e, 'for-home')}
-          className="split-pane split-home"
-        >
+        </Link>
+        <Link to="/strength#for-home" className="split-pane split-home">
           <span className="split-eyebrow">FOR YOUR HOME</span>
           <span className="split-icon" aria-hidden="true">
             🏠
@@ -156,13 +123,17 @@ function Home() {
           <span className="split-cta">
             詳しく見る <span aria-hidden="true">→</span>
           </span>
-        </a>
+        </Link>
       </section>
 
+      {/* B. 選ばれる理由（要約） → /strength */}
       <section className="section reasons">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">OUR PROMISE</p>
           <h2 className="section-title">お客様への、4つの安心のお約束</h2>
+          <p className="concept-text section-intro">
+            大手に負けない品質と、地域の会社ならではの誠実さで。LIENが選ばれる理由をご紹介します。
+          </p>
           <ul className="reason-grid">
             {REASONS.map((reason) => (
               <li key={reason.title} className="reason-card">
@@ -174,94 +145,24 @@ function Home() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="section corporate" id="corporate">
-        <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">FOR CORPORATE CLIENTS</p>
-          <h2 className="section-title">
-            法人・管理会社様にLIENが選ばれる3つの理由
-          </h2>
-          <p className="concept-text corp-lead">
-            マンション・ビルの大規模修繕や維持管理では、確かな品質はもちろん、入居者様への配慮や透明性のあるご報告が欠かせません。LIENは、管理会社様・オーナー様の「お手間」と「ご不安」を減らすことを大切にしています。
-          </p>
-          <ul className="corp-grid">
-            {CORPORATE_REASONS.map((reason, index) => (
-              <li key={reason.title} className="corp-card">
-                <div className="corp-photo">
-                  {reason.image ? (
-                    <img
-                      src={`${import.meta.env.BASE_URL}${reason.image}`}
-                      alt={reason.title}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="corp-photo-ph" aria-hidden="true">
-                      <svg viewBox="0 0 24 24">
-                        <path d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3z" />
-                      </svg>
-                      <span>写真準備中</span>
-                    </div>
-                  )}
-                </div>
-                <div className="corp-body">
-                  <span className="corp-no">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h3>{reason.title}</h3>
-                  <p>{reason.description}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="corp-cta">
-            <p className="corp-cta-text">
-              大規模修繕・防水・外壁のご相談、他社お見積りとの比較・セカンドオピニオンも歓迎です。
-            </p>
-            <div className="corp-cta-actions">
-              <a href={COMPANY.telHref} className="btn btn-outline">
-                お電話で相談 {COMPANY.tel}
-              </a>
-              <Link to="/contact" className="btn btn-primary">
-                法人・管理会社様の無料相談
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section services-preview" id="services">
-        <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">SERVICES</p>
-          <h2 className="section-title">事業内容</h2>
-          <ul className="service-grid">
-            {SERVICES.map((service) => (
-              <li key={service.title} className="service-card">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </li>
-            ))}
-          </ul>
           <div className="section-action">
-            <Link to="/services" className="text-link">
-              事業内容の詳細を見る →
+            <Link to="/strength" className="btn btn-outline btn-more">
+              選ばれる理由をもっと見る →
             </Link>
           </div>
         </div>
       </section>
 
-      <SosCheck />
-
+      {/* 施工事例（最新） → /works */}
       <section className="section works">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">WORKS</p>
           <h2 className="section-title">施工事例</h2>
-          <p className="concept-text">
-            施工事例は順次公開してまいります。気になる工事は、まずお気軽にお問い合わせください。
+          <p className="concept-text section-intro">
+            これまで手がけてきた工事の事例を順次公開してまいります。
           </p>
           <ul className="works-grid">
-            {WORKS_PLACEHOLDER.map((label) => (
+            {WORKS_PLACEHOLDER.slice(0, 3).map((label) => (
               <li key={label} className="works-card">
                 <div className="works-thumb">
                   <WorksComingSoon className="works-illu" />
@@ -271,229 +172,86 @@ function Home() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* パララックス（視差効果）バンド。div のため section の背景交互（nth-of-type）に影響しない。
-          背景画像は public/parallax-bg.jpg を差し替え（未設置時はネイビー背景にフォールバック） */}
-      <div className="parallax-band">
-        <div className="parallax-band-inner fade-in-up">
-          <p className="parallax-eyebrow">{PARALLAX_BAND.eyebrow}</p>
-          <p className="parallax-title">{PARALLAX_BAND.title}</p>
-          <p className="parallax-text">{PARALLAX_BAND.text}</p>
-          <Link to="/contact" className="btn btn-primary parallax-cta">
-            {PARALLAX_BAND.ctaLabel}
-          </Link>
-        </div>
-      </div>
-
-      <section className="section flow">
-        <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">FLOW</p>
-          <h2 className="section-title">ご依頼〜お引き渡しの流れ</h2>
-          <p className="concept-text">
-            初めてのお客様にも安心していただけるよう、お問い合わせから施工後のアフターフォローまで丁寧に進めてまいります。
-          </p>
-          <ol className="flow-diagram">
-            {FLOW_STEPS.map((step, index) => (
-              <li key={step.title} className="flow-node">
-                <span className="flow-num">{index + 1}</span>
-                <div className="flow-body">
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="section partners-band">
-        <div className="section-inner partners-band-inner fade-in-up">
-          <div>
-            <p className="section-eyebrow">PARTNERS</p>
-            <h2 className="section-title">協力会社募集</h2>
-            <p>
-              ともに成長できる協力会社さまを募集しています。各分野の専門業者さまからのご連絡をお待ちしています。
-            </p>
-          </div>
-          <Link to="/partners" className="btn btn-primary">
-            協力会社募集の詳細
-          </Link>
-        </div>
-      </section>
-
-      <section className="section pricing-policy">
-        <div className="section-inner narrow fade-in-up">
-          <p className="section-eyebrow">PRICING</p>
-          <h2 className="section-title">{PRICING_POLICY.title}</h2>
-          {PRICING_POLICY.body.map((text) => (
-            <p key={text} className="concept-text">
-              {text}
-            </p>
-          ))}
-          <div className="policy-callout">
-            <h3 className="policy-callout-title">
-              {PRICING_POLICY.breakdownTitle}
-            </h3>
-            <ul className="policy-tags">
-              {PRICING_POLICY.breakdownExamples.map((ex) => (
-                <li key={ex}>{ex}</li>
-              ))}
-            </ul>
-            <p>{PRICING_POLICY.breakdownBody}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section warranty">
-        <div className="section-inner narrow fade-in-up">
-          <p className="section-eyebrow">WARRANTY</p>
-          <h2 className="section-title">{WARRANTY.title}</h2>
-          {WARRANTY.lead.map((text) => (
-            <p key={text} className="concept-text">
-              {text}
-            </p>
-          ))}
-          <ul className="warranty-years">
-            {WARRANTY.years.map((y) => (
-              <li key={y}>
-                <span className="warranty-year-num">
-                  <CountUp end={parseInt(y, 10)} suffix="年" />
-                </span>
-                <span className="warranty-year-label">保証</span>
-              </li>
-            ))}
-          </ul>
-          <div className="warranty-guarantee">
-            <h3 className="warranty-guarantee-title">
-              {WARRANTY.guaranteeTitle}
-            </h3>
-            <p>{WARRANTY.guaranteeBody}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section contractor-tips">
-        <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">HOW TO CHOOSE</p>
-          <h2 className="section-title">{CONTRACTOR_TIPS.title}</h2>
-          <p className="tips-lead">{CONTRACTOR_TIPS.lead}</p>
-          <ul className="tips-grid">
-            {CONTRACTOR_TIPS.points.map((point, index) => (
-              <li key={point.text} className={`tips-card tips-${point.type}`}>
-                <span className="tips-no" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="tips-icon" aria-hidden="true">
-                  {point.type === 'pick' ? '✓' : '✕'}
-                </span>
-                <span className="tips-label">{point.label}</span>
-                <p className="tips-text">{point.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section service-areas">
-        <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">SERVICE AREA</p>
-          <h2 className="section-title">{SERVICE_AREAS.title}</h2>
-          <p className="concept-text areas-lead">{SERVICE_AREAS.lead}</p>
-          <div className="areas-groups">
-            {SERVICE_AREAS.groups.map((group) => (
-              <div key={group.pref} className="areas-group">
-                <h3 className="areas-pref">
-                  <svg className="areas-pin" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
-                  </svg>
-                  {group.pref}
-                </h3>
-                <ul className="areas-tags">
-                  {group.areas.map((area) => (
-                    <li
-                      key={area}
-                      className={`area-tag${area === '市川市' ? ' area-tag--hq' : ''}`}
-                    >
-                      {area === '市川市' ? `★ ${area}` : area}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="areas-more">{SERVICE_AREAS.moreNote}</p>
-          <p className="areas-note">{SERVICE_AREAS.note}</p>
-        </div>
-      </section>
-
-      <section className="section for-home" id="for-home">
-        <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">FOR YOUR HOME</p>
-
-          <div className="fh-hero">
-            <span className="fh-hero-icon" aria-hidden="true">
-              🏠
-            </span>
-            <h2 className="section-title fh-hero-title">
-              {FOR_HOME.hero.title}
-            </h2>
-            <p className="fh-hero-text">{FOR_HOME.hero.text}</p>
-          </div>
-
-          <div className="fh-block">
-            <h3 className="fh-subtitle">{FOR_HOME.checklistTitle}</h3>
-            <ul className="fh-checks">
-              {FOR_HOME.checks.map((check) => (
-                <li key={check.text} className="fh-check">
-                  <span className="fh-check-photo">
-                    <img
-                      src={`${import.meta.env.BASE_URL}${check.image}`}
-                      alt={check.text}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.parentElement.style.display = 'none'
-                      }}
-                    />
-                  </span>
-                  <span className="fh-check-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                    </svg>
-                  </span>
-                  <span className="fh-check-text">{check.text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="fh-block">
-            <h3 className="fh-subtitle">{FOR_HOME.promisesTitle}</h3>
-            <ul className="fh-promises">
-              {FOR_HOME.promises.map((promise, index) => (
-                <li key={promise.title} className="fh-promise">
-                  <span className="fh-promise-no" aria-hidden="true">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="fh-promise-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">{PROMISE_ICONS[promise.icon]}</svg>
-                  </span>
-                  <h4 className="fh-promise-title">{promise.title}</h4>
-                  <p className="fh-promise-text">{promise.text}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="fh-cta">
-            <Link to="/contact" className="fh-btn">
-              無料で我が家の診断を申し込む
+          <div className="section-action">
+            <Link to="/works" className="btn btn-outline btn-more">
+              施工実績をもっと見る →
             </Link>
           </div>
         </div>
       </section>
 
+      {/* ブログ・お役立ち情報（最新3件） → /blog */}
+      <section className="section blog-preview">
+        <div className="section-inner fade-in-up">
+          <p className="section-eyebrow">BLOG</p>
+          <h2 className="section-title">ブログ・お役立ち情報</h2>
+          <p className="concept-text section-intro">
+            外壁・防水・雨漏りなど、住まいを守るためのお役立ち情報を発信しています。
+          </p>
+          <ul className="blog-list">
+            {latestPosts.map((post) => (
+              <li key={post.slug} className="blog-card">
+                <Link to={`/blog/${post.slug}`} className="blog-card-link">
+                  {post.image ? (
+                    <div className="blog-card-thumb">
+                      <img
+                        src={`${import.meta.env.BASE_URL}${post.image}`}
+                        alt=""
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : null}
+                  <div className="blog-card-body">
+                    <div className="blog-meta">
+                      <span className="blog-cat">{post.category}</span>
+                      {post.date ? (
+                        <time className="blog-date">{post.date}</time>
+                      ) : null}
+                    </div>
+                    <h3 className="blog-card-title">{post.title}</h3>
+                    <p className="blog-card-excerpt">{post.excerpt}</p>
+                    <span className="blog-more">続きを読む →</span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="section-action">
+            <Link to="/blog" className="btn btn-outline btn-more">
+              お役立ち情報をもっと見る →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 対応エリア（簡略版） → /company */}
+      <section className="section areas-summary">
+        <div className="section-inner narrow fade-in-up">
+          <p className="section-eyebrow">SERVICE AREA</p>
+          <h2 className="section-title">対応エリア</h2>
+          <p className="concept-text section-intro">
+            千葉県市川市を拠点に、1都3県（千葉・東京・埼玉・茨城）まで幅広く対応します。
+          </p>
+          <ul className="areas-tags areas-tags--center">
+            {MAJOR_AREAS.map((area) => (
+              <li
+                key={area}
+                className={`area-tag${area === '市川市' ? ' area-tag--hq' : ''}`}
+              >
+                {area === '市川市' ? `★ ${area}` : area}
+              </li>
+            ))}
+            <li className="area-tag area-tag--more">ほか 千葉県全域</li>
+          </ul>
+          <div className="section-action">
+            <Link to="/company" className="btn btn-outline btn-more">
+              全対応エリアを見る →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* C. お問い合わせ */}
       <section className="section cta">
         <div className="section-inner cta-inner fade-in-up">
           <p className="section-eyebrow">CONTACT</p>
@@ -501,16 +259,14 @@ function Home() {
           <p>
             現地調査・お見積りは無料です。相談だけでも歓迎ですので、お気軽にお問い合わせください。
           </p>
-          <CtaAssurance onDark>
-            <div className="cta-contacts">
-              <a href={COMPANY.telHref} className="cta-tel">
-                {COMPANY.tel}
-              </a>
-              <Link to="/contact" className="btn btn-primary pulse-button">
-                無料で相談・見積もりする
-              </Link>
-            </div>
-          </CtaAssurance>
+          <div className="cta-contacts">
+            <a href={COMPANY.telHref} className="cta-tel">
+              {COMPANY.tel}
+            </a>
+            <Link to="/contact" className="btn btn-primary pulse-button">
+              無料で相談・見積もりする
+            </Link>
+          </div>
         </div>
       </section>
     </>

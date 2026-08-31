@@ -4,6 +4,7 @@ import {
   QUALIFICATION_DETAILS,
   QUALIFICATION_MERITS,
   AUDIENCES,
+  SERVICE_AREAS,
 } from '../constants.js'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
@@ -13,6 +14,7 @@ const tocItems = [
   { id: 'company-info', label: '会社情報' },
   { id: 'qualifications', label: '有資格者の在籍' },
   { id: 'for-clients', label: 'お客様別の安心ポイント' },
+  { id: 'service-area', label: '対応エリア' },
 ]
 
 // 資格者証のサムネイル。タップで実物大の画像を別タブ表示。
@@ -38,7 +40,7 @@ function CertLink({ src, name }) {
   )
 }
 
-function About() {
+function Company() {
   const [openAudience, setOpenAudience] = useState(null)
 
   const toggleAudience = (index) =>
@@ -59,8 +61,8 @@ function About() {
 
   return (
     <>
-      <Seo path="/about" name="会社概要" />
-      <title>会社概要 | 市川市の建設会社 株式会社LIEN</title>
+      <Seo path="/company" name="会社概要・エリア" />
+      <title>会社概要・対応エリア | 市川市の建設会社 株式会社LIEN</title>
       <meta
         name="description"
         content="株式会社LIEN（リアン）の会社概要・代表者・有資格者・建設業許可・対応エリア。千葉県市川市の建設会社で、1都3県で施工対応します。"
@@ -68,7 +70,7 @@ function About() {
       <section className="page-head">
         <div className="section-inner">
           <p className="section-eyebrow">ABOUT US</p>
-          <h1 className="page-title">会社概要</h1>
+          <h1 className="page-title">会社概要・エリア</h1>
         </div>
       </section>
 
@@ -205,8 +207,44 @@ function About() {
           </ul>
         </div>
       </section>
+
+      <section className="section service-areas" id="service-area">
+        <div className="section-inner">
+          <p className="section-eyebrow">SERVICE AREA</p>
+          <h2 className="section-title">{SERVICE_AREAS.title}</h2>
+          <p className="concept-text areas-lead">{SERVICE_AREAS.lead}</p>
+          <div className="areas-groups">
+            {SERVICE_AREAS.groups.map((group) => (
+              <div key={group.pref} className="areas-group">
+                <h3 className="areas-pref">
+                  <svg
+                    className="areas-pin"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
+                  </svg>
+                  {group.pref}
+                </h3>
+                <ul className="areas-tags">
+                  {group.areas.map((area) => (
+                    <li
+                      key={area}
+                      className={`area-tag${area === '市川市' ? ' area-tag--hq' : ''}`}
+                    >
+                      {area === '市川市' ? `★ ${area}` : area}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="areas-more">{SERVICE_AREAS.moreNote}</p>
+          <p className="areas-note">{SERVICE_AREAS.note}</p>
+        </div>
+      </section>
     </>
   )
 }
 
-export default About
+export default Company
