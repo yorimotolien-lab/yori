@@ -61,7 +61,11 @@ function Header() {
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                isActive ? 'nav-link is-active' : 'nav-link'
+                item.cta
+                  ? 'nav-cta'
+                  : isActive
+                    ? 'nav-link is-active'
+                    : 'nav-link'
               }
               onClick={() => setOpen(false)}
             >

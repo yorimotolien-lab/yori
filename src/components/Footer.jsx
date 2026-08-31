@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { COMPANY, NAV_ITEMS } from '../constants.js'
+import { COMPANY, FOOTER_LINKS } from '../constants.js'
 
 function Footer() {
   return (
@@ -15,7 +15,7 @@ function Footer() {
           </p>
         </div>
         <nav className="footer-nav">
-          {NAV_ITEMS.map((item) => (
+          {FOOTER_LINKS.map((item) => (
             <Link key={item.to} to={item.to}>
               {item.label}
             </Link>
