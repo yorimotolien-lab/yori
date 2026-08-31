@@ -32,6 +32,12 @@ const REASON_ICONS = {
   wrench: (
     <path d="M21 6.5a4.5 4.5 0 01-6 4.2L7.7 18l-2.7-2.7 7.3-7.3A4.5 4.5 0 0118 2.5l-2.6 2.6 1.5 1.5L19.5 4A4.5 4.5 0 0121 6.5z" />
   ),
+  shield: (
+    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.06 13.54L7.4 11l1.41-1.41 2.12 2.12 4.24-4.24L16.6 8.9l-5.66 5.64z" />
+  ),
+  greeting: (
+    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+  ),
 }
 
 const PROMISE_ICONS = {
@@ -155,8 +161,8 @@ function Home() {
 
       <section className="section reasons">
         <div className="section-inner fade-in-up">
-          <p className="section-eyebrow">REASONS</p>
-          <h2 className="section-title">LIENが選ばれる理由</h2>
+          <p className="section-eyebrow">OUR PROMISE</p>
+          <h2 className="section-title">お客様への、4つの安心のお約束</h2>
           <ul className="reason-grid">
             {REASONS.map((reason) => (
               <li key={reason.title} className="reason-card">
