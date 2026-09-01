@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {
   COMPANY,
+  CEO_MESSAGE,
   QUALIFICATION_DETAILS,
   QUALIFICATION_MERITS,
   AUDIENCES,
@@ -11,6 +12,7 @@ import Breadcrumb from '../components/Breadcrumb.jsx'
 import PageToc from '../components/PageToc.jsx'
 
 const tocItems = [
+  { id: 'message', label: '代表挨拶' },
   { id: 'company-info', label: '会社情報' },
   { id: 'qualifications', label: '有資格者の在籍' },
   { id: 'for-clients', label: 'お客様別の安心ポイント' },
@@ -77,6 +79,47 @@ function Company() {
       <Breadcrumb />
 
       <PageToc items={tocItems} />
+
+      <section className="section message" id="message">
+        <div className="section-inner fade-in-up">
+          <p className="section-eyebrow">{CEO_MESSAGE.eyebrow}</p>
+          <div className="message-grid">
+            <div className="message-photo">
+              <img
+                src={`${import.meta.env.BASE_URL}${CEO_MESSAGE.image}`}
+                alt={`${COMPANY.name} ${CEO_MESSAGE.signName}`}
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                  e.currentTarget.nextElementSibling.style.display = 'flex'
+                }}
+              />
+              <div
+                className="message-photo-ph"
+                aria-hidden="true"
+                style={{ display: 'none' }}
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+                <span>写真準備中</span>
+              </div>
+            </div>
+            <div className="message-body">
+              <p className="message-catch">{CEO_MESSAGE.catch}</p>
+              {CEO_MESSAGE.body.map((text) => (
+                <p key={text} className="message-text">
+                  {text}
+                </p>
+              ))}
+              <div className="message-sign">
+                <span className="sign-company">{CEO_MESSAGE.signCompany}</span>
+                <span className="sign-name">{CEO_MESSAGE.signName}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="section">
         <div className="section-inner narrow">
