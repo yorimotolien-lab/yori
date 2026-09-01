@@ -3324,3 +3324,176 @@ html.font-lg {
     animation: none;
   }
 }
+
+/* ===== 施工費用の目安（PRICE） ===== */
+.price-cards {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 32px;
+}
+/* カード1：全体工事セット（ネイビーの主役カードでメリハリ） */
+.price-set {
+  position: relative;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 16px;
+  padding: 34px 32px 32px;
+  box-shadow: 0 22px 50px -22px rgba(11, 25, 44, 0.6);
+}
+.price-set-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 5px 16px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.price-set-title {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.price-amount {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.price-amount-note {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: 6px;
+}
+.price-includes-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.85);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+.price-includes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 20px;
+}
+.price-include {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.price-check {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: 1px;
+}
+.price-check svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+}
+.price-include-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.price-include-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+.price-include-sub {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+/* カード2：部位別・専門施工（白カードの一覧） */
+.price-parts {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.price-parts-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  padding-bottom: 14px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid var(--navy);
+}
+.price-parts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.price-part {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.price-part-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.price-part-price {
+  flex-shrink: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 800;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.price-parts-hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.price-notes {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+.price-notes li {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .price-cards {
+    grid-template-columns: 1fr;
+  }
+  .price-includes {
+    grid-template-columns: 1fr;
+  }
+}
