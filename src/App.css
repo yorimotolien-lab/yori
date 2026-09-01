@@ -3751,121 +3751,89 @@ html.font-lg {
   }
 }
 
-/* ===== 法人のお客様へ（/clients）：ジグザグ巨大セクション ===== */
+/* ===== 法人の入り口ブロック（トップページ・ネイビー背景／写真なし） ===== */
+.clients-cta {
+  background: var(--navy);
+  color: #fff;
+}
+.clients-cta .section-inner {
+  text-align: center;
+}
+.clients-cta-eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.clients-cta-catch {
+  font-family: var(--serif);
+  color: #fff;
+  /* 巨大な白タイポグラフィで目を引く */
+  font-size: clamp(1.55rem, 3.4vw, 2.5rem);
+  line-height: 1.65;
+  max-width: 900px;
+  margin: 0 auto 38px;
+}
+.clients-cta .btn-primary {
+  font-size: 17px;
+  padding: 18px 42px;
+}
+
+/* ===== 法人のお客様へ（/clients）：テキスト特化セクション ===== */
 .clients-intro {
   text-align: center;
 }
-/* フルワイド2カラム。既定=画像左/テキスト右、--flip=テキスト左/画像右 */
-.client-section {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-}
-.client-section--flip {
-  flex-direction: row-reverse;
-}
-.client-media {
-  flex: 1 1 50%;
-  min-width: 0;
-}
-/* 後から実写画像を当てはめるプレースホルダー（薄いグレー） */
-.image-placeholder {
-  width: 100%;
-  height: 100%;
-  min-height: 460px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: #e9edf2;
-  color: #aab4c4;
-}
-.image-placeholder svg {
-  width: 64px;
-  height: 64px;
-  fill: currentColor;
-}
-.image-placeholder span {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-.client-body {
-  flex: 1 1 50%;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  /* 上下に大きな余白でゆったりとした高級感 */
-  padding: 100px clamp(24px, 6vw, 88px);
-  background: var(--bg);
-}
-.client-body-inner {
-  max-width: 540px;
+/* 見出し左・本文右の2カラム（白／薄グレー交互は stage-white/stage-alt で指定） */
+.client-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
 }
 .client-eyebrow {
   color: var(--accent);
   font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.14em;
+  font-size: 14px;
+  letter-spacing: 0.1em;
   margin-bottom: 14px;
 }
-.client-title {
+.client-heading {
   font-family: var(--serif);
-  /* 巨大な見出し（40px以上）をディープネイビーで力強く */
-  font-size: clamp(2.1rem, 4.6vw, 2.9rem);
-  line-height: 1.35;
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.5;
   color: var(--navy);
-  margin-bottom: 24px;
+  /* 見出し横のシンプルな縦線装飾（CSSのみ） */
+  padding-left: 20px;
+  border-left: 5px solid var(--accent);
 }
-.client-text {
-  font-size: 16px;
-  line-height: 2.1;
+.client-detail p {
+  font-size: 17px;
+  /* 説得力を持たせる広めの行間 */
+  line-height: 2.2;
   color: var(--text);
-  margin-bottom: 34px;
 }
-.client-btn {
+.client-detail .client-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-size: 16px;
+  gap: 8px;
+  margin-top: 24px;
   font-weight: 700;
-  color: #fff;
-  background: var(--accent);
-  padding: 16px 34px;
-  border-radius: 999px;
-  box-shadow: 0 10px 24px -12px rgba(255, 107, 53, 0.7);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.2s ease;
+  color: var(--accent-dark);
+  text-decoration: none;
 }
-.client-btn:hover {
-  background: var(--accent-dark);
-  transform: translateY(-4px);
-  box-shadow: 0 18px 32px -12px rgba(255, 107, 53, 0.8);
-}
-.client-btn span {
-  font-size: 20px;
-  line-height: 1;
+.client-detail .client-link:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
-  /* スマホ：画像が上・テキストが下の縦積み（--flip も同じ） */
-  .client-section,
-  .client-section--flip {
-    flex-direction: column;
+  /* スマホ：見出しが上・本文が下の縦積み */
+  .client-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
-  .client-media,
-  .client-body {
-    flex-basis: auto;
-    width: 100%;
-  }
-  .image-placeholder {
-    min-height: 240px;
-  }
-  .client-body {
-    padding: 56px 24px;
+  .client-heading {
+    padding-left: 16px;
+    border-left-width: 4px;
   }
 }
