@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom'
-import { COMPANY, REASONS, WORKS_PLACEHOLDER } from '../constants.js'
+import {
+  COMPANY,
+  REASONS,
+  SERVICES,
+  FLOW_STEPS,
+  CEO_MESSAGE,
+  WORKS_PLACEHOLDER,
+} from '../constants.js'
 import { POSTS } from '../posts.js'
 import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import CountUp from '../components/CountUp.jsx'
+import SosCheck from '../components/SosCheck.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -27,14 +35,16 @@ const REASON_ICONS = {
 }
 
 // トップページの対応エリア（簡略版）で見せる主要エリア。全域は /company に集約。
-const MAJOR_AREAS = [
-  '市川市',
-  '船橋市',
-  '浦安市',
-  '松戸市',
-  '習志野市',
-  '鎌ケ谷市',
-]
+const MAJOR_AREAS = ['市川市', '船橋市', '浦安市', '松戸市', '習志野市', '鎌ケ谷市']
+
+// スクロールを次のセクションへ誘導する下向きの矢印キュー。
+function ScrollCue() {
+  return (
+    <div className="scroll-cue" aria-hidden="true">
+      <span />
+    </div>
+  )
+}
 
 const websiteLd = {
   '@context': 'https://schema.org',
@@ -55,7 +65,7 @@ function Home() {
         content="千葉県市川市の建設会社・株式会社LIEN。外壁塗装・防水・シーリング・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。千葉県全域・東京・埼玉・茨城対応、現地調査・お見積り無料。"
       />
 
-      {/* A. ファーストビュー */}
+      {/* ① 認知：ファーストビュー */}
       <section className="hero">
         <div className="hero-bg" aria-hidden="true" />
         <div className="hero-inner">
@@ -98,7 +108,7 @@ function Home() {
         </div>
       </section>
 
-      {/* 戸建て・法人の2つの入り口 */}
+      {/* ② 共感：戸建て・法人スプリット＋お家のSOSサイン診断 */}
       <section className="split-hero" aria-label="ご相談内容でお選びください">
         <Link to="/strength#corporate" className="split-pane split-corp">
           <span className="split-eyebrow">FOR CORPORATE</span>
@@ -126,13 +136,34 @@ function Home() {
         </Link>
       </section>
 
-      {/* B. 選ばれる理由（要約） → /strength */}
-      <section className="section reasons">
+      <SosCheck />
+      <ScrollCue />
+
+      {/* ③ 信頼：代表挨拶（要約）＋4つの安心のお約束 */}
+      <section className="section message home-message stage-white">
+        <div className="section-inner narrow fade-in-up">
+          <p className="section-eyebrow">MESSAGE</p>
+          <p className="message-catch">{CEO_MESSAGE.catch}</p>
+          <p className="message-text">{CEO_MESSAGE.body[0]}</p>
+          <p className="message-text">{CEO_MESSAGE.body[CEO_MESSAGE.body.length - 1]}</p>
+          <div className="message-sign">
+            <span className="sign-company">{CEO_MESSAGE.signCompany}</span>
+            <span className="sign-name">{CEO_MESSAGE.signName}</span>
+          </div>
+          <div className="section-action">
+            <Link to="/company" className="btn btn-outline btn-more">
+              代表挨拶をすべて読む →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section reasons stage-alt">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">OUR PROMISE</p>
           <h2 className="section-title">お客様への、4つの安心のお約束</h2>
           <p className="concept-text section-intro">
-            大手に負けない品質と、地域の会社ならではの誠実さで。LIENが選ばれる理由をご紹介します。
+            無駄な中間マージンをカットした直営・専門施工体制。大手にも負けない品質と、地域の会社ならではの誠実さでお応えします。
           </p>
           <ul className="reason-grid">
             {REASONS.map((reason) => (
@@ -153,8 +184,82 @@ function Home() {
         </div>
       </section>
 
-      {/* 施工事例（最新） → /works */}
-      <section className="section works">
+      {/* ④ 要約：事業内容（詳細は下層ページへ） */}
+      <section className="section services-preview stage-white">
+        <div className="section-inner fade-in-up">
+          <p className="section-eyebrow">SERVICES</p>
+          <h2 className="section-title">事業内容</h2>
+          <p className="concept-text section-intro">
+            シーリング・塗装・防水・足場・大規模修繕・内装・雨漏り診断まで、自社で一貫対応します。
+          </p>
+          <ul className="service-grid">
+            {SERVICES.map((service) => (
+              <li key={service.title} className="service-card">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="section-action">
+            <Link to="/services" className="btn btn-outline btn-more">
+              事業内容の詳細を見る →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ⑤ 納得：施工の流れ＋対応エリア */}
+      <section className="section flow stage-alt">
+        <div className="section-inner fade-in-up">
+          <p className="section-eyebrow">FLOW</p>
+          <h2 className="section-title">ご依頼〜お引き渡しの流れ</h2>
+          <p className="concept-text section-intro">
+            お問い合わせから施工後のアフターフォローまで、明瞭なプロセスでご案内。初めての方も安心してお任せいただけます。
+          </p>
+          <ol className="flow-diagram">
+            {FLOW_STEPS.map((step, index) => (
+              <li key={step.title} className="flow-node">
+                <span className="flow-num">{index + 1}</span>
+                <div className="flow-body">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section areas-summary stage-white">
+        <div className="section-inner narrow fade-in-up">
+          <p className="section-eyebrow">SERVICE AREA</p>
+          <h2 className="section-title">対応エリア</h2>
+          <p className="concept-text section-intro">
+            千葉県市川市を拠点に、1都3県（千葉・東京・埼玉・茨城）まで幅広く対応。地元密着で、急なご相談や雨漏りにも<strong>最短即日</strong>で駆けつけます。
+          </p>
+          <ul className="areas-tags areas-tags--center">
+            {MAJOR_AREAS.map((area) => (
+              <li
+                key={area}
+                className={`area-tag${area === '市川市' ? ' area-tag--hq' : ''}`}
+              >
+                {area === '市川市' ? `★ ${area}` : area}
+              </li>
+            ))}
+            <li className="area-tag area-tag--more">ほか 千葉県全域</li>
+          </ul>
+          <div className="section-action">
+            <Link to="/company" className="btn btn-outline btn-more">
+              全対応エリアを見る →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <ScrollCue />
+
+      {/* ⑥ 実証：施工事例（最新）＋ブログ（最新3件） */}
+      <section className="section works stage-alt">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">WORKS</p>
           <h2 className="section-title">施工事例</h2>
@@ -180,8 +285,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ブログ・お役立ち情報（最新3件） → /blog */}
-      <section className="section blog-preview">
+      <section className="section blog-preview stage-white">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">BLOG</p>
           <h2 className="section-title">ブログ・お役立ち情報</h2>
@@ -224,40 +328,13 @@ function Home() {
         </div>
       </section>
 
-      {/* 対応エリア（簡略版） → /company */}
-      <section className="section areas-summary">
-        <div className="section-inner narrow fade-in-up">
-          <p className="section-eyebrow">SERVICE AREA</p>
-          <h2 className="section-title">対応エリア</h2>
-          <p className="concept-text section-intro">
-            千葉県市川市を拠点に、1都3県（千葉・東京・埼玉・茨城）まで幅広く対応します。
-          </p>
-          <ul className="areas-tags areas-tags--center">
-            {MAJOR_AREAS.map((area) => (
-              <li
-                key={area}
-                className={`area-tag${area === '市川市' ? ' area-tag--hq' : ''}`}
-              >
-                {area === '市川市' ? `★ ${area}` : area}
-              </li>
-            ))}
-            <li className="area-tag area-tag--more">ほか 千葉県全域</li>
-          </ul>
-          <div className="section-action">
-            <Link to="/company" className="btn btn-outline btn-more">
-              全対応エリアを見る →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* C. お問い合わせ */}
+      {/* ⑦ 行動：無料相談・お問い合わせ */}
       <section className="section cta">
         <div className="section-inner cta-inner fade-in-up">
           <p className="section-eyebrow">CONTACT</p>
           <h2 className="section-title">まずは無料でご相談ください</h2>
           <p>
-            現地調査・お見積りは無料です。相談だけでも歓迎ですので、お気軽にお問い合わせください。
+            現地調査・お見積りは<strong>完全無料</strong>。相談だけでも歓迎ですので、お気軽にお問い合わせください。しつこい営業は一切いたしません。
           </p>
           <div className="cta-contacts">
             <a href={COMPANY.telHref} className="cta-tel">

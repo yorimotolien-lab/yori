@@ -3274,3 +3274,53 @@ html.font-lg {
   color: var(--navy);
   letter-spacing: 0.04em;
 }
+
+/* ===== HOME 心理フロー：背景の明示制御と視線誘導 ===== */
+/* 並べ替えで nth-of-type のparityが崩れるため、HOMEの各段は背景を明示指定して制御。
+   （nth-of-type と同じ詳細度のため、後勝ちでこちらが適用される） */
+.section.stage-white {
+  background: var(--bg);
+}
+.section.stage-alt {
+  background: var(--bg-alt);
+}
+.section.sos-check {
+  background: var(--bg-alt);
+}
+
+/* 代表挨拶（HOME要約版）は中央寄せの導線ボタンを添える */
+.home-message .section-action {
+  text-align: left;
+}
+
+/* 次のセクションへ目線を誘導する下向き矢印（アクセントカラーでフワッと上下） */
+.scroll-cue {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0 2px;
+  background: var(--bg);
+}
+.scroll-cue span {
+  width: 15px;
+  height: 15px;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(45deg);
+  animation: scroll-cue-bounce 1.7s ease-in-out infinite;
+}
+@keyframes scroll-cue-bounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(45deg) translate(4px, 4px);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue span {
+    animation: none;
+  }
+}
