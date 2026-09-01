@@ -3376,6 +3376,37 @@ html.font-lg {
   color: rgba(255, 255, 255, 0.7);
   margin-left: 6px;
 }
+/* 足場代・諸経費コミの「総額」であることを強調する帯 */
+.price-total-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 107, 53, 0.16);
+  border: 1px solid rgba(255, 107, 53, 0.5);
+  border-radius: 10px;
+  padding: 11px 14px;
+  margin: -6px 0 24px;
+}
+.price-total-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.price-total-icon svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+}
 .price-includes-title {
   font-size: 14px;
   font-weight: 700;
