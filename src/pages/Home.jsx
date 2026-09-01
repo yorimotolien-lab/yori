@@ -6,13 +6,26 @@ import {
   FLOW_STEPS,
   CEO_MESSAGE,
   PRICE,
-  WORKS_PLACEHOLDER,
+  GUARANTEE_CARE,
+  WORKS_ITEMS,
 } from '../constants.js'
 import { POSTS } from '../posts.js'
 import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import CountUp from '../components/CountUp.jsx'
 import SosCheck from '../components/SosCheck.jsx'
+
+const GUARANTEE_ICONS = {
+  shield: (
+    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.06 13.54L7.4 11l1.41-1.41 2.12 2.12 4.24-4.24L16.6 8.9l-5.66 5.64z" />
+  ),
+  calendar: (
+    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+  ),
+  chat: (
+    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+  ),
+}
 
 const REASON_ICONS = {
   badge: (
@@ -307,7 +320,38 @@ function Home() {
         </div>
       </section>
 
-      <section className="section areas-summary stage-alt">
+      {/* ⑤ 納得：アフターフォロー・保証制度（GUARANTEE & AFTER CARE） */}
+      <section className="section guarantee stage-alt" id="guarantee">
+        <div className="section-inner fade-in-up">
+          <p className="section-eyebrow">GUARANTEE &amp; AFTER CARE</p>
+          <h2 className="section-title">{GUARANTEE_CARE.title}</h2>
+          <p className="guarantee-subtitle">{GUARANTEE_CARE.subtitle}</p>
+          <ul className="guarantee-grid">
+            {GUARANTEE_CARE.pillars.map((pillar) => (
+              <li key={pillar.title} className="guarantee-card">
+                <span className="guarantee-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">{GUARANTEE_ICONS[pillar.icon]}</svg>
+                </span>
+                <h3 className="guarantee-card-title">{pillar.title}</h3>
+                <p className="guarantee-card-text">{pillar.text}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="guarantee-timeline" aria-label="定期点検スケジュール">
+            <span className="guarantee-timeline-label">定期点検</span>
+            <ol className="guarantee-timeline-track">
+              {GUARANTEE_CARE.timeline.map((t) => (
+                <li key={t} className="guarantee-timeline-node">
+                  <span className="guarantee-timeline-dot" aria-hidden="true" />
+                  {t}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="section areas-summary stage-white">
         <div className="section-inner narrow fade-in-up">
           <p className="section-eyebrow">SERVICE AREA</p>
           <h2 className="section-title">対応エリア</h2>
@@ -336,7 +380,7 @@ function Home() {
       <ScrollCue />
 
       {/* ⑥ 実証：施工事例（最新）＋ブログ（最新3件） */}
-      <section className="section works stage-white">
+      <section className="section works stage-alt">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">WORKS</p>
           <h2 className="section-title">施工事例</h2>
@@ -344,13 +388,13 @@ function Home() {
             これまで手がけてきた工事の事例を順次公開してまいります。
           </p>
           <ul className="works-grid">
-            {WORKS_PLACEHOLDER.slice(0, 3).map((label) => (
-              <li key={label} className="works-card">
+            {WORKS_ITEMS.slice(0, 3).map((item) => (
+              <li key={item.label} className="works-card">
                 <div className="works-thumb">
                   <WorksComingSoon className="works-illu" />
                   <span>準備中</span>
                 </div>
-                <p className="works-label">{label}</p>
+                <p className="works-label">{item.label}</p>
               </li>
             ))}
           </ul>
@@ -362,7 +406,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="section blog-preview stage-alt">
+      <section className="section blog-preview stage-white">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">BLOG</p>
           <h2 className="section-title">ブログ・お役立ち情報</h2>

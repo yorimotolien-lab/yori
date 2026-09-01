@@ -258,7 +258,7 @@ export const REASONS = [
   },
   {
     icon: 'shield',
-    title: '最長7年保証',
+    title: '最長10年保証',
     description:
       '施工後も安心のアフターフォロー体制。万が一の不具合にも、責任を持って対応いたします。長いお付き合いを大切にします。',
   },
@@ -295,14 +295,52 @@ export const CORPORATE_REASONS = [
   },
 ]
 
-export const WORKS_PLACEHOLDER = [
-  '外壁塗装工事',
-  'シーリング打ち替え',
-  '屋上防水工事',
-  '大規模修繕工事',
-  '雨漏り補修',
-  '内装リフォーム',
+// 施工事例フィルターのカテゴリ（タブ）。key で WORKS_ITEMS.category と対応。
+export const WORK_CATEGORIES = [
+  { key: 'all', label: 'すべて' },
+  { key: 'exterior', label: '外壁塗装' },
+  { key: 'roof', label: '屋根塗装' },
+  { key: 'waterproof', label: '防水工事' },
+  { key: 'sealing', label: 'シーリング打替え' },
+  { key: 'leak', label: '雨漏り修繕' },
 ]
+
+// 施工事例（現在は写真準備中のプレースホルダー）。category でフィルター対象に。
+export const WORKS_ITEMS = [
+  { label: '外壁塗装工事', category: 'exterior' },
+  { label: '外壁・付帯部 塗装', category: 'exterior' },
+  { label: '屋根塗装工事', category: 'roof' },
+  { label: '屋根カバー工法', category: 'roof' },
+  { label: 'ベランダ・屋上 防水工事', category: 'waterproof' },
+  { label: 'バルコニー防水工事', category: 'waterproof' },
+  { label: 'シーリング打ち替え工事', category: 'sealing' },
+  { label: 'サッシまわりシーリング', category: 'sealing' },
+  { label: '雨漏り調査・修繕', category: 'leak' },
+]
+
+// アフターフォロー・保証制度（GUARANTEE & AFTER CARE）セクション。
+export const GUARANTEE_CARE = {
+  title: '施工が終わってからが、本当のお付き合いです',
+  subtitle: '最長10年保証 ＆ 万全のアフターフォロー体制',
+  pillars: [
+    {
+      icon: 'shield',
+      title: '最長10年 工事保証書の発行',
+      text: '施工内容や使用塗料に応じた独自の保証書を発行。万が一の不具合にも無償で迅速に対応いたします。',
+    },
+    {
+      icon: 'calendar',
+      title: '引き渡し後の定期点検スケジュール',
+      text: '1年目・3年目・5年目・7年目・10年目のタイミングで定期点検を実施。お引渡し後もお住まいの健康をしっかり見守ります。',
+    },
+    {
+      icon: 'chat',
+      title: 'LINE・お電話での即日アフター相談',
+      text: '施工後に気になる点や台風・大雨後の不安があれば、LINEや電話一本で専門スタッフが最短即日で駆けつけます。',
+    },
+  ],
+  timeline: ['1年目', '3年目', '5年目', '7年目', '10年目'],
+}
 
 export const FAQS = [
   {
@@ -398,12 +436,12 @@ export const PRICE = {
 
 // 「アフターフォロー・保証」セクション（ホーム）。
 export const WARRANTY = {
-  title: '施工後も安心！「最長7年」の工事保証をお約束します',
+  title: '施工後も安心！「最長10年」の工事保証をお約束します',
   lead: [
-    '「工事が終わったら、それっきり」ということは絶対にありません。株式会社LIENでは、万が一の不具合に備え、施工内容や使用する材料のグレードに合わせて【2年・5年・7年】の明確な工事保証を設けております。',
+    '「工事が終わったら、それっきり」ということは絶対にありません。株式会社LIENでは、万が一の不具合に備え、施工内容や使用する材料のグレードに合わせて【3年・5年・7年・10年】の明確な工事保証を設けております。',
     'どんなに丁寧に施工を行っても、建物を取り巻く環境によって予期せぬトラブルが起こる可能性はゼロではありません。だからこそ、私たちは「施工後の責任」をしっかりと形にしてお約束します。',
   ],
-  years: ['2年', '5年', '7年'],
+  years: ['3年', '5年', '7年', '10年'],
   guaranteeTitle: '万が一の剥がれや不具合には無償で対応！',
   guaranteeBody:
     '保証期間内に、当社の施工が原因となる塗膜の剥がれやシーリングの破断などが発生した場合は、責任を持って無償で手直し・補修をさせていただきます。（※自然災害等によるものは除きます。詳細な保証内容は、お見積りの段階で包み隠さずご説明いたします）',

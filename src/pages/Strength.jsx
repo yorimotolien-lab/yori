@@ -53,7 +53,7 @@ function Strength() {
       <title>選ばれる理由 | 市川市の建設会社 株式会社LIEN</title>
       <meta
         name="description"
-        content="株式会社LIENが選ばれる理由。直営・専門施工、有資格者による診断、最長7年保証、近隣配慮の徹底。法人・管理会社様、戸建てのお客様それぞれへの安心のお約束をご紹介します。"
+        content="株式会社LIENが選ばれる理由。直営・専門施工、有資格者による診断、最長10年保証、近隣配慮の徹底。法人・管理会社様、戸建てのお客様それぞれへの安心のお約束をご紹介します。"
       />
       <section className="page-head">
         <div className="section-inner">

@@ -3528,3 +3528,225 @@ html.font-lg {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== アフターフォロー・保証（GUARANTEE & AFTER CARE） ===== */
+.guarantee-subtitle {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin: 4px 0 6px;
+}
+.guarantee-grid {
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.guarantee-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--navy);
+  border-radius: 12px;
+  padding: 30px 26px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .guarantee-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 38px -16px rgba(20, 34, 61, 0.42);
+  }
+}
+.guarantee-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--navy);
+  margin-bottom: 18px;
+}
+.guarantee-icon svg {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+}
+.guarantee-card-title {
+  font-size: 17px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.guarantee-card-text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-muted);
+}
+/* 定期点検スケジュールのタイムライン（1→3→5→7→10年） */
+.guarantee-timeline {
+  margin-top: 34px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.guarantee-timeline-label {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+.guarantee-timeline-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
+  min-width: 260px;
+}
+.guarantee-timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--navy), var(--accent));
+  z-index: 0;
+}
+.guarantee-timeline-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.guarantee-timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* ===== 目的別コンテンツフィルター（ピルタブ） ===== */
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 30px;
+}
+.filter-tab {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 20px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+}
+.filter-tab:hover {
+  border-color: var(--navy);
+}
+.filter-tab.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+/* スマホではタブを横スクロール（折り返さず1行） */
+@media (max-width: 600px) {
+  .filter-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding: 2px 4px 8px;
+  }
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+}
+/* 施工事例カードのカテゴリバッジ */
+.works-cat-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+/* 絞り込み時のフワッとフェードイン（カードを軽くずらして順次表示） */
+.filter-in {
+  animation: filter-fade 0.42s ease both;
+}
+.works-grid .filter-in:nth-child(2) {
+  animation-delay: 0.05s;
+}
+.works-grid .filter-in:nth-child(3) {
+  animation-delay: 0.1s;
+}
+.works-grid .filter-in:nth-child(4) {
+  animation-delay: 0.15s;
+}
+.works-grid .filter-in:nth-child(5) {
+  animation-delay: 0.2s;
+}
+.works-grid .filter-in:nth-child(n + 6) {
+  animation-delay: 0.24s;
+}
+@keyframes filter-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filter-in {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .guarantee-grid {
+    grid-template-columns: 1fr;
+  }
+}
