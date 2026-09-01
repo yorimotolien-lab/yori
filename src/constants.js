@@ -664,7 +664,7 @@ export const PARTNER = {
   },
 }
 
-// 代表挨拶（会社概要ページ上部に掲載）。写真は public/ceo-akimoto.jpg を配置。
+// 代表挨拶（会社概要ページ上部に掲載）。写真は掲載せず、文章のみの構成。
 export const CEO_MESSAGE = {
   eyebrow: 'REPRESENTATIVE MESSAGE',
   catch:
@@ -676,7 +676,6 @@ export const CEO_MESSAGE = {
     '社名である「LIEN」は、フランス語で「絆」や「繋ぐ」を意味します。私たちは単に工事を行うだけの業者ではなく、現場で培った技術と情熱を結集し、大切な建物を末永く守り続けるパートナーでありたいと考えています。',
     '「LIENに頼んで本当によかった」——そう笑顔で言っていただける高品質な施工を、誠心誠意お届けすることをお約束いたします。',
   ],
-  image: 'ceo-akimoto.jpg',
   signCompany: '株式会社LIEN',
   signName: '代表取締役　秋本 駿',
 }

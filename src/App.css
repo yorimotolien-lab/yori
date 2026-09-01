@@ -3227,47 +3227,8 @@ html.font-lg {
   /* パララックス背景ではなくプレステージホワイトで清潔感・高級感を演出 */
   background: var(--bg-alt);
 }
-.message-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 40%) 1fr;
-  gap: clamp(28px, 5vw, 60px);
-  align-items: start;
-  margin-top: 30px;
-}
-.message-photo {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--navy);
-  box-shadow: 0 18px 44px -20px rgba(11, 25, 44, 0.55);
-}
-.message-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* 写真アップロード前のプレースホルダー（ネイビーのグラデーション） */
-.message-photo-ph {
-  position: absolute;
-  inset: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.6);
-  background: linear-gradient(160deg, var(--navy), var(--navy-light));
-}
-.message-photo-ph svg {
-  width: 56px;
-  height: 56px;
-  fill: currentColor;
-}
-.message-photo-ph span {
-  font-size: 13px;
-  letter-spacing: 0.08em;
-}
+/* 写真なし・文章のみの1カラム構成（section-inner narrow で読みやすい行長に）。
+   キャッチコピー上に細いネイビーのアクセントを添えて重厚感を演出。 */
 .message-catch {
   font-family: var(--serif);
   font-size: clamp(1.25rem, 2.2vw, 1.75rem);
@@ -3275,7 +3236,17 @@ html.font-lg {
   line-height: 1.75;
   color: var(--navy);
   letter-spacing: 0.01em;
+  margin-top: 30px;
   margin-bottom: 26px;
+}
+.message-catch::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-bottom: 22px;
+  background: var(--navy);
+  border-radius: 2px;
 }
 .message-text {
   line-height: 2;
@@ -3302,16 +3273,4 @@ html.font-lg {
   font-weight: 700;
   color: var(--navy);
   letter-spacing: 0.04em;
-}
-
-@media (max-width: 768px) {
-  /* スマホ：写真が上、文章が下 */
-  .message-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .message-photo {
-    aspect-ratio: 4 / 3;
-    max-height: 360px;
-  }
 }
