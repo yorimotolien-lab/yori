@@ -29,28 +29,24 @@ function Clients() {
         </div>
       </section>
 
-      {CLIENTS.map((client) => (
+      {CLIENTS.map((client, index) => (
         <section
-          key={client.title}
-          className={`client-section fade-in-up${client.flip ? ' client-section--flip' : ''}`}
-          aria-label={client.title}
+          key={client.audience}
+          className={`section client-block ${index % 2 === 0 ? 'stage-alt' : 'stage-white'}`}
+          aria-label={client.audience}
         >
-          <div className="client-media">
-            <div className="image-placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3z" />
-              </svg>
-              <span>イメージ画像</span>
-            </div>
-          </div>
-          <div className="client-body">
-            <div className="client-body-inner">
-              <p className="client-eyebrow">{client.eyebrow}</p>
-              <h2 className="client-title">{client.title}</h2>
-              <p className="client-text">{client.text}</p>
-              <Link to="/contact" className="client-btn">
-                もっと詳しく <span aria-hidden="true">＋</span>
-              </Link>
+          <div className="section-inner fade-in-up">
+            <div className="client-grid">
+              <div className="client-head">
+                <p className="client-eyebrow">{client.audience}</p>
+                <h2 className="client-heading">{client.heading}</h2>
+              </div>
+              <div className="client-detail">
+                <p>{client.text}</p>
+                <Link to="/contact" className="client-link">
+                  無料で相談する <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </div>
           </div>
         </section>

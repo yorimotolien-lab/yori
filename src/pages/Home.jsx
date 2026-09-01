@@ -7,6 +7,7 @@ import {
   CEO_MESSAGE,
   PRICE,
   GUARANTEE_CARE,
+  CLIENTS_ENTRY,
   WORKS_ITEMS,
 } from '../constants.js'
 import { POSTS } from '../posts.js'
@@ -219,6 +220,17 @@ function Home() {
               事業内容の詳細を見る →
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* 法人・オーナー・管理会社様の入り口ブロック（ネイビー／写真なし） → /clients */}
+      <section className="section clients-cta">
+        <div className="section-inner fade-in-up">
+          <p className="clients-cta-eyebrow">{CLIENTS_ENTRY.eyebrow}</p>
+          <p className="clients-cta-catch">{CLIENTS_ENTRY.catch}</p>
+          <Link to="/clients" className="btn btn-primary pulse-button">
+            {CLIENTS_ENTRY.button}
+          </Link>
         </div>
       </section>
 
