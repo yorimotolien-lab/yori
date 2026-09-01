@@ -5,6 +5,7 @@ import {
   SERVICES,
   FLOW_STEPS,
   CEO_MESSAGE,
+  PRICE,
   WORKS_PLACEHOLDER,
 } from '../constants.js'
 import { POSTS } from '../posts.js'
@@ -230,7 +231,83 @@ function Home() {
         </div>
       </section>
 
-      <section className="section areas-summary stage-white">
+      {/* ⑤ 納得：施工費用の目安（PRICE） */}
+      <section className="section price stage-white" id="price">
+        <div className="section-inner fade-in-up">
+          <p className="section-eyebrow">PRICE</p>
+          <h2 className="section-title">{PRICE.title}</h2>
+          <p className="concept-text section-intro">{PRICE.lead}</p>
+
+          <div className="price-cards">
+            {/* カード1：全体工事セット（含まれる工事をチェックリストで明示） */}
+            <div className="price-set">
+              <span className="price-set-badge">{PRICE.set.badge}</span>
+              <h3 className="price-set-title">{PRICE.set.title}</h3>
+              <p className="price-amount">
+                {PRICE.set.price}
+                <span className="price-amount-note">
+                  （{PRICE.set.note}）
+                </span>
+              </p>
+              <p className="price-total-note">
+                <span className="price-total-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                </span>
+                {PRICE.set.priceNote}
+              </p>
+              <p className="price-includes-title">{PRICE.set.includesTitle}</p>
+              <ul className="price-includes">
+                {PRICE.set.includes.map((item) => (
+                  <li key={item.name} className="price-include">
+                    <span className="price-check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                      </svg>
+                    </span>
+                    <span className="price-include-body">
+                      <span className="price-include-name">{item.name}</span>
+                      {item.sub ? (
+                        <span className="price-include-sub">{item.sub}</span>
+                      ) : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* カード2：部位別・専門施工の目安 */}
+            <div className="price-parts">
+              <h3 className="price-parts-title">{PRICE.parts.title}</h3>
+              <ul className="price-parts-list">
+                {PRICE.parts.items.map((item) => (
+                  <li key={item.name} className="price-part">
+                    <span className="price-part-name">{item.name}</span>
+                    <span className="price-part-price">{item.price}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="price-parts-hint">
+                必要な工事だけを組み合わせてご提案します。
+              </p>
+            </div>
+          </div>
+
+          <ul className="price-notes">
+            {PRICE.notes.map((note) => (
+              <li key={note}>※{note}</li>
+            ))}
+          </ul>
+          <div className="section-action">
+            <Link to="/contact" className="btn btn-primary pulse-button">
+              無料診断・お見積もりを申し込む
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section areas-summary stage-alt">
         <div className="section-inner narrow fade-in-up">
           <p className="section-eyebrow">SERVICE AREA</p>
           <h2 className="section-title">対応エリア</h2>
@@ -259,7 +336,7 @@ function Home() {
       <ScrollCue />
 
       {/* ⑥ 実証：施工事例（最新）＋ブログ（最新3件） */}
-      <section className="section works stage-alt">
+      <section className="section works stage-white">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">WORKS</p>
           <h2 className="section-title">施工事例</h2>
@@ -285,7 +362,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="section blog-preview stage-white">
+      <section className="section blog-preview stage-alt">
         <div className="section-inner fade-in-up">
           <p className="section-eyebrow">BLOG</p>
           <h2 className="section-title">ブログ・お役立ち情報</h2>
