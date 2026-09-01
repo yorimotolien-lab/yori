@@ -318,6 +318,29 @@ export const WORKS_ITEMS = [
   { label: '雨漏り調査・修繕', category: 'leak' },
 ]
 
+// 法人のお客様へ（/clients）：ターゲット別のジグザグ巨大セクション。
+// flip:true = テキスト左／画像右、flip:false = 画像左／テキスト右。
+export const CLIENTS = [
+  {
+    eyebrow: 'FOR GENERAL CONTRACTORS',
+    title: '元請様へ',
+    text: '専門工事の協力会社として、確かな品質と工程管理でご対応します。有資格者による施工管理で、貴社の信頼にしっかりとお応えします。',
+    flip: true,
+  },
+  {
+    eyebrow: 'FOR BUILDING OWNERS',
+    title: 'オーナー様へ',
+    text: '建物の資産価値を長期的な視点でお守りします。劣化診断から最適な工事のご提案まで、分かりやすいご説明と明確なお見積りで安心です。',
+    flip: false,
+  },
+  {
+    eyebrow: 'FOR PROPERTY MANAGERS',
+    title: '管理会社様へ',
+    text: '居住者様への配慮（ご挨拶や安全管理）を徹底し、クレームのないスムーズな修繕を実現。迅速な「報・連・相」で管理業務の負担を軽減します。',
+    flip: true,
+  },
+]
+
 // アフターフォロー・保証制度（GUARANTEE & AFTER CARE）セクション。
 export const GUARANTEE_CARE = {
   title: '施工が終わってからが、本当のお付き合いです',
@@ -758,6 +781,7 @@ export const FOOTER_LINKS = [
   { to: '/', label: 'ホーム' },
   { to: '/strength', label: '選ばれる理由' },
   { to: '/works', label: '施工実績' },
+  { to: '/clients', label: '法人のお客様へ' },
   { to: '/services', label: '事業内容' },
   { to: '/maintenance', label: '劣化と対策' },
   { to: '/faq', label: 'よくあるご質問' },
