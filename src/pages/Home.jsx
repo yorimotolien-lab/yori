@@ -124,7 +124,7 @@ function Home() {
 
       {/* ② 共感：戸建て・法人スプリット＋お家のSOSサイン診断 */}
       <section className="split-hero" aria-label="ご相談内容でお選びください">
-        <Link to="/strength#corporate" className="split-pane split-corp">
+        <Link to="/clients" className="split-pane split-corp">
           <span className="split-eyebrow">FOR CORPORATE</span>
           <span className="split-icon" aria-hidden="true">
             🏢
