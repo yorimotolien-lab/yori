@@ -295,14 +295,52 @@ export const CORPORATE_REASONS = [
   },
 ]
 
-export const WORKS_PLACEHOLDER = [
-  '外壁塗装工事',
-  'シーリング打ち替え',
-  '屋上防水工事',
-  '大規模修繕工事',
-  '雨漏り補修',
-  '内装リフォーム',
+// 施工事例フィルターのカテゴリ（タブ）。key で WORKS_ITEMS.category と対応。
+export const WORK_CATEGORIES = [
+  { key: 'all', label: 'すべて' },
+  { key: 'exterior', label: '外壁塗装' },
+  { key: 'roof', label: '屋根塗装' },
+  { key: 'waterproof', label: '防水工事' },
+  { key: 'sealing', label: 'シーリング打替え' },
+  { key: 'leak', label: '雨漏り修繕' },
 ]
+
+// 施工事例（現在は写真準備中のプレースホルダー）。category でフィルター対象に。
+export const WORKS_ITEMS = [
+  { label: '外壁塗装工事', category: 'exterior' },
+  { label: '外壁・付帯部 塗装', category: 'exterior' },
+  { label: '屋根塗装工事', category: 'roof' },
+  { label: '屋根カバー工法', category: 'roof' },
+  { label: 'ベランダ・屋上 防水工事', category: 'waterproof' },
+  { label: 'バルコニー防水工事', category: 'waterproof' },
+  { label: 'シーリング打ち替え工事', category: 'sealing' },
+  { label: 'サッシまわりシーリング', category: 'sealing' },
+  { label: '雨漏り調査・修繕', category: 'leak' },
+]
+
+// アフターフォロー・保証制度（GUARANTEE & AFTER CARE）セクション。
+export const GUARANTEE_CARE = {
+  title: '施工が終わってからが、本当のお付き合いです',
+  subtitle: '最長10年保証 ＆ 万全のアフターフォロー体制',
+  pillars: [
+    {
+      icon: 'shield',
+      title: '最長10年 工事保証書の発行',
+      text: '施工内容や使用塗料に応じた独自の保証書を発行。万が一の不具合にも無償で迅速に対応いたします。',
+    },
+    {
+      icon: 'calendar',
+      title: '引き渡し後の定期点検スケジュール',
+      text: '1年目・3年目・5年目・7年目・10年目のタイミングで定期点検を実施。お引渡し後もお住まいの健康をしっかり見守ります。',
+    },
+    {
+      icon: 'chat',
+      title: 'LINE・お電話での即日アフター相談',
+      text: '施工後に気になる点や台風・大雨後の不安があれば、LINEや電話一本で専門スタッフが最短即日で駆けつけます。',
+    },
+  ],
+  timeline: ['1年目', '3年目', '5年目', '7年目', '10年目'],
+}
 
 export const FAQS = [
   {
