@@ -25,6 +25,8 @@ function Header() {
               src={svgSrc}
               alt={alt}
               className="logo-img"
+              decoding="async"
+              fetchPriority="high"
               onError={() => setLogo('png')}
             />
           ) : logo === 'png' ? (
@@ -32,6 +34,8 @@ function Header() {
               src={pngSrc}
               alt={alt}
               className="logo-img"
+              decoding="async"
+              fetchPriority="high"
               onError={() => setLogo('text')}
             />
           ) : (
