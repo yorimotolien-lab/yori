@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { COMPANY, WEB3FORMS_ACCESS_KEY } from '../constants.js'
 import { ConsultIllustration } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
@@ -8,7 +9,12 @@ import CtaAssurance from '../components/CtaAssurance.jsx'
 const EMPTY = { name: '', email: '', tel: '', message: '' }
 
 function Contact() {
-  const [form, setForm] = useState(EMPTY)
+  const [searchParams] = useSearchParams()
+  // 診断シミュレーション等から引き継いだ内容を初期値に反映（?message=）。
+  const [form, setForm] = useState(() => ({
+    ...EMPTY,
+    message: searchParams.get('message') || '',
+  }))
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | success | error
 

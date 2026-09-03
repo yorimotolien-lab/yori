@@ -3948,3 +3948,244 @@ html.font-lg {
     gap: 26px;
   }
 }
+
+/* ===== カンタン診断シミュレーション（/diagnosis） ===== */
+.diag-intro {
+  text-align: center;
+}
+/* HOMEの診断エントリー（SosCheckの直下・薄グレー背景で連続させる） */
+.diag-entry {
+  background: var(--bg-alt);
+  text-align: center;
+  padding: 0 24px 60px;
+}
+.diag-entry-text {
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.diag-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px -26px rgba(11, 25, 44, 0.4);
+  padding: clamp(24px, 4vw, 44px);
+  margin-top: 28px;
+}
+.diag-progress {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+.diag-progress-step {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  transition: background 0.3s;
+}
+.diag-progress-step.is-current {
+  background: var(--accent);
+}
+.diag-progress-step.is-done {
+  background: var(--navy);
+}
+.diag-q-num {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+.diag-q {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.diag-q-note {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+/* 選択肢（大きめのタップしやすいカードボタン） */
+.diag-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.diag-options--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.diag-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.15s;
+}
+.diag-option:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.diag-option.is-selected {
+  border-color: var(--accent);
+  background: rgba(255, 107, 53, 0.08);
+}
+.diag-option-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+/* 症状（複数選択のチップ） */
+.diag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.diag-chip {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+.diag-chip:hover {
+  border-color: var(--accent);
+}
+.diag-chip.is-selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.diag-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+.diag-back {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px 4px;
+}
+.diag-back:hover {
+  color: var(--navy);
+}
+/* 診断結果 */
+.diag-result-label {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.diag-result-cond {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+.diag-result-plan {
+  background: linear-gradient(160deg, var(--navy), var(--navy-light));
+  color: #fff;
+  border-radius: 14px;
+  padding: 28px 26px;
+}
+.diag-result-plan-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.diag-result-plan-name {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: #fff;
+  margin-bottom: 14px;
+}
+.diag-result-plan-desc {
+  font-size: 15px;
+  line-height: 1.95;
+  color: rgba(255, 255, 255, 0.88);
+}
+.diag-result-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin-top: 18px;
+  padding: 18px 22px;
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.4);
+  border-radius: 12px;
+}
+.diag-result-price-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+.diag-result-price-value {
+  font-weight: 700;
+  color: var(--navy);
+}
+.diag-result-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-top: 16px;
+}
+.diag-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+.diag-restart {
+  display: block;
+  margin: 20px auto 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.diag-disclaimer {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 18px;
+}
+
+@media (max-width: 560px) {
+  .diag-options--grid {
+    grid-template-columns: 1fr;
+  }
+}

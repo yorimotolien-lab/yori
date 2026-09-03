@@ -818,6 +818,7 @@ export const FOOTER_LINKS = [
   { to: '/', label: 'ホーム' },
   { to: '/strength', label: '選ばれる理由' },
   { to: '/works', label: '施工実績' },
+  { to: '/diagnosis', label: 'カンタン診断' },
   { to: '/clients', label: '法人のお客様へ' },
   { to: '/services', label: '事業内容' },
   { to: '/maintenance', label: '劣化と対策' },

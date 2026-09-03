@@ -9,6 +9,7 @@ import CustomCursor from './components/CustomCursor.jsx'
 import Home from './pages/Home.jsx'
 import Strength from './pages/Strength.jsx'
 import Works from './pages/Works.jsx'
+import Diagnosis from './pages/Diagnosis.jsx'
 import Clients from './pages/Clients.jsx'
 import Company from './pages/Company.jsx'
 import Services from './pages/Services.jsx'
@@ -33,6 +34,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/strength" element={<Strength />} />
           <Route path="/works" element={<Works />} />
+          <Route path="/diagnosis" element={<Diagnosis />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/company" element={<Company />} />
           {/* 旧URL /about は /company へ恒久リダイレクト（被リンク・SEO維持） */}

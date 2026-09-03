@@ -165,6 +165,14 @@ function Home() {
       </section>
 
       <SosCheck />
+      <div className="diag-entry">
+        <p className="diag-entry-text">
+          もっと詳しく知りたい方は、30秒のカンタン診断も！
+        </p>
+        <Link to="/diagnosis" className="btn btn-primary pulse-button">
+          カンタン外壁・雨漏り診断を試す →
+        </Link>
+      </div>
       <ScrollCue />
 
       {/* ③ 信頼：代表挨拶（要約）＋4つの安心のお約束 */}
