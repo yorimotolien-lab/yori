@@ -14,8 +14,10 @@ const files = import.meta.glob('./posts/*.md', {
   eager: true,
 })
 
-function parsePost(path, raw) {
+function parsePost(path, rawInput) {
   const slug = path.split('/').pop().replace(/\.md$/, '')
+  // 改行コードを LF に正規化（Windows で CRLF になってもフロントマターを正しく解析するため）
+  const raw = rawInput.replace(/\r\n/g, '\n')
   const meta = {}
   let body = raw
   const fm = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
