@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import {
   COMPANY,
   REASONS,
+  AUTHORITY,
   SERVICES,
   FLOW_STEPS,
   CEO_MESSAGE,
@@ -15,6 +16,18 @@ import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import CountUp from '../components/CountUp.jsx'
 import SosCheck from '../components/SosCheck.jsx'
+
+const AUTHORITY_ICONS = {
+  eye: (
+    <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z" />
+  ),
+  clipboard: (
+    <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0a1 1 0 110 2 1 1 0 010-2zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+  ),
+  shield: (
+    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.06 13.54L7.4 11l1.41-1.41 2.12 2.12 4.24-4.24L16.6 8.9l-5.66 5.64z" />
+  ),
+}
 
 const GUARANTEE_ICONS = {
   shield: (
@@ -191,6 +204,43 @@ function Home() {
               </li>
             ))}
           </ul>
+
+          {/* 有資格者の権威性バンド：専門家が直接診断・管理＝手抜きなし・高品質 */}
+          <div className="authority-band">
+            <div className="authority-lead-col">
+              <p className="authority-eyebrow">{AUTHORITY.eyebrow}</p>
+              <h3 className="authority-title">{AUTHORITY.title}</h3>
+              <p className="authority-text">{AUTHORITY.lead}</p>
+              <ul className="authority-badges">
+                {AUTHORITY.badges.map((badge) => (
+                  <li key={badge} className="authority-badge">
+                    <span className="authority-badge-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.77l-6.18 3.25L7 13.14 2 8.27l6.91-1.01L12 1z" />
+                      </svg>
+                    </span>
+                    {badge}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ul className="authority-points">
+              {AUTHORITY.points.map((point) => (
+                <li key={point.title} className="authority-point">
+                  <span className="authority-point-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      {AUTHORITY_ICONS[point.icon]}
+                    </svg>
+                  </span>
+                  <div>
+                    <h4 className="authority-point-title">{point.title}</h4>
+                    <p className="authority-point-text">{point.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="section-action">
             <Link to="/strength" className="btn btn-outline btn-more">
               選ばれる理由をもっと見る →
