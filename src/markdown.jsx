@@ -70,7 +70,12 @@ export function renderMarkdown(md) {
     if (image) {
       blocks.push(
         <figure key={key} className="blog-figure">
-          <img src={image[2]} alt={image[1]} loading="lazy" />
+          <img
+            src={image[2]}
+            alt={image[1]}
+            loading="lazy"
+            decoding="async"
+          />
         </figure>,
       )
       i++
