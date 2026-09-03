@@ -10,7 +10,7 @@ export const COMPANY = {
   business:
     'シーリング工事 / 塗装工事 / 防水工事 / 足場工事 / 大規模修繕工事 / 内装工事 / 雨漏り診断',
   tel: '047-307-9287',
-  telHref: 'tel:04733079287',
+  telHref: 'tel:0473079287',
   email: 'info@lien-2020.com',
   mapUrl: 'https://share.google/XaAuOJQN4JLnsm4eI',
   qualifications: [
