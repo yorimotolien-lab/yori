@@ -49,6 +49,14 @@ function Maintenance() {
         <div className="section-inner">
           <p className="section-eyebrow">3 LAYERS</p>
           <h2 className="section-title">建物を守る3つの防御層と劣化サイン</h2>
+          <figure className="maint-figure">
+            <img
+              src={`${import.meta.env.BASE_URL}maintenance-layers.jpg`}
+              alt="建物を守る3つの防御層（①外壁塗膜・②防水塗膜・③シーリング）の断面図"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <ul className="service-grid">
             {MAINTENANCE.layers.map((layer, index) => (
               <li key={layer.title} className="service-card">

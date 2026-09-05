@@ -4003,6 +4003,19 @@ html.font-lg {
 .diag-intro {
   text-align: center;
 }
+/* メンテナンス「3つの防御層」図解 */
+.maint-figure {
+  margin: 0 auto 36px;
+  max-width: 760px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -22px rgba(11, 25, 44, 0.4);
+}
+.maint-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 /* HOMEの診断エントリー（SosCheckの直下・薄グレー背景で連続させる） */
 .diag-entry {
   background: var(--bg-alt);
