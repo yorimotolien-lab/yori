@@ -139,6 +139,14 @@ function Diagnosis() {
 
       <section className="section">
         <div className="section-inner narrow fade-in-up">
+          <div className="diag-hero">
+            <img
+              src={`${import.meta.env.BASE_URL}diagnosis-hero.jpg`}
+              alt="外壁・雨漏りの無料診断を行う診断スタッフ"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <p className="concept-text diag-intro">
             3つの質問に答えるだけで、あなたのお家におすすめの調査プランと概算費用の目安がわかります。入力内容はそのまま無料相談に引き継げます。
           </p>
