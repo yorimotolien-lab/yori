@@ -83,6 +83,14 @@ function Maintenance() {
         <div className="section-inner">
           <p className="section-eyebrow">RISK</p>
           <h2 className="section-title">劣化を放置するとどうなる？</h2>
+          <figure className="maint-figure">
+            <img
+              src={`${import.meta.env.BASE_URL}maintenance-risk.jpg`}
+              alt="劣化を放置すると、ひび割れ→雨水の浸入→躯体の腐食・雨漏りへと進行し、被害と費用が拡大する図解"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <ul className="audience-grid">
             {MAINTENANCE.risks.map((risk) => (
               <li key={risk.title} className="audience-card">
