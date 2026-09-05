@@ -4016,6 +4016,19 @@ html.font-lg {
   width: 100%;
   height: auto;
 }
+/* HOME 事業内容セクションの一貫施工ビジュアル */
+.services-visual {
+  margin: 0 auto 40px;
+  max-width: 880px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 44px -24px rgba(11, 25, 44, 0.45);
+}
+.services-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 /* HOMEの診断エントリー（SosCheckの直下・薄グレー背景で連続させる） */
 .diag-entry {
   background: var(--bg-alt);

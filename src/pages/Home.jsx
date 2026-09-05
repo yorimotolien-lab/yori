@@ -278,6 +278,14 @@ function Home() {
           <p className="concept-text section-intro">
             シーリング・塗装・防水・足場・大規模修繕・内装・雨漏り診断まで、自社で一貫対応します。
           </p>
+          <figure className="services-visual">
+            <img
+              src={`${import.meta.env.BASE_URL}services-visual.jpg`}
+              alt="足場の上で外壁塗装・屋根塗装・防水・シーリング・高圧洗浄を自社で一貫対応する職人たち"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <ul className="service-grid">
             {SERVICES.map((service) => (
               <li key={service.title} className="service-card">
