@@ -91,7 +91,7 @@ function Home() {
       <title>市川市・千葉の外壁塗装・防水・シーリング | 株式会社LIEN</title>
       <meta
         name="description"
-        content="千葉県市川市の建設会社・株式会社LIEN。外壁塗装・防水・シーリング・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。千葉県全域・東京・埼玉・茨城対応、現地調査・お見積り無料。"
+        content="千葉県市川市の建設会社・株式会社LIEN。外壁塗装・防水・シーリング・足場・大規模修繕・内装・雨漏り診断まで自社で一貫対応。千葉県全域・東京・埼玉・神奈川・茨城対応、現地調査・お見積り無料。"
       />
 
       {/* ① 認知：ファーストビュー */}
@@ -127,7 +127,7 @@ function Home() {
               <CountUp end={2020} group={false} className="count-up--inline" />年
             </li>
             <li>有資格者 在籍</li>
-            <li>1都3県 対応</li>
+            <li>1都4県 対応</li>
             <li>見積り 無料</li>
           </ul>
         </div>
@@ -447,8 +447,16 @@ function Home() {
           <p className="section-eyebrow">SERVICE AREA</p>
           <h2 className="section-title">対応エリア</h2>
           <p className="concept-text section-intro">
-            千葉県市川市を拠点に、1都3県（千葉・東京・埼玉・茨城）まで幅広く対応。地元密着で、急なご相談や雨漏りにも<strong>最短即日</strong>で駆けつけます。
+            千葉県市川市を拠点に、1都4県（千葉・東京・埼玉・神奈川・茨城）まで幅広く対応。地元密着で、急なご相談や雨漏りにも<strong>最短即日</strong>で駆けつけます。
           </p>
+          <figure className="area-map">
+            <img
+              src={`${import.meta.env.BASE_URL}service-area-map.jpg`}
+              alt="千葉県市川市を拠点に、東京・千葉・埼玉・神奈川・茨城の1都4県に対応する範囲を示した地図"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <ul className="areas-tags areas-tags--center">
             {MAJOR_AREAS.map((area) => (
               <li
