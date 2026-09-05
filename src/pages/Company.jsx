@@ -67,7 +67,7 @@ function Company() {
       <title>会社概要・対応エリア | 市川市の建設会社 株式会社LIEN</title>
       <meta
         name="description"
-        content="株式会社LIEN（リアン）の会社概要・代表者・有資格者・建設業許可・対応エリア。千葉県市川市の建設会社で、1都3県で施工対応します。"
+        content="株式会社LIEN（リアン）の会社概要・代表者・有資格者・建設業許可・対応エリア。千葉県市川市の建設会社で、1都4県（千葉・東京・埼玉・神奈川・茨城）で施工対応します。"
       />
       <section className="page-head">
         <div className="section-inner">

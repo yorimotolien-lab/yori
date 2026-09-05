@@ -104,7 +104,7 @@ function Contact() {
       <title>無料見積もり・お問い合わせ | 市川市の株式会社LIEN</title>
       <meta
         name="description"
-        content="株式会社LIENへのご相談・お見積りは無料です。お電話または問い合わせフォームよりお気軽にどうぞ。千葉県全域・茨城県・東京都・埼玉県対応。"
+        content="株式会社LIENへのご相談・お見積りは無料です。お電話または問い合わせフォームよりお気軽にどうぞ。千葉県全域・東京都・埼玉県・神奈川県・茨城県対応。"
       />
       <section className="page-head">
         <div className="section-inner">
