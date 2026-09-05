@@ -10,6 +10,7 @@ import {
   GUARANTEE_CARE,
   CLIENTS_ENTRY,
   WORKS_ITEMS,
+  PARALLAX_BAND,
 } from '../constants.js'
 import { POSTS } from '../posts.js'
 import { WorksComingSoon } from '../illustrations.jsx'
@@ -193,6 +194,18 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* 共感：パララックス帯（10年先も、この家で笑っていられるように。） */}
+      <div className="parallax-band">
+        <div className="parallax-band-inner fade-in-up">
+          <p className="parallax-eyebrow">{PARALLAX_BAND.eyebrow}</p>
+          <p className="parallax-title">{PARALLAX_BAND.title}</p>
+          <p className="parallax-text">{PARALLAX_BAND.text}</p>
+          <Link to="/contact" className="btn btn-primary pulse-button">
+            {PARALLAX_BAND.ctaLabel}
+          </Link>
+        </div>
+      </div>
 
       <section className="section reasons stage-alt">
         <div className="section-inner fade-in-up">
