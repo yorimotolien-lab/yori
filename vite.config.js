@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'node:fs'
 import path from 'node:path'
+import { AREAS } from './src/areas.js'
 
 // コンテンツセキュリティポリシー。
 // 外部は Google Analytics(gtag) と Web3Forms のみ許可し、それ以外は 'self' 中心で厳格化。
@@ -50,9 +51,12 @@ function generateSitemap() {
     '/faq',
     '/partners',
     '/company',
+    '/area',
     '/blog',
     '/contact',
     '/privacy',
+    // 地域別ランディングページ（src/areas.js から自動生成）
+    ...AREAS.map((a) => `/area/${a.slug}`),
   ]
   return {
     name: 'generate-sitemap',
