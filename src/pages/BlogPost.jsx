@@ -1,8 +1,9 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { COMPANY } from '../constants.js'
-import { getPost } from '../posts.js'
+import { getPost, getRelatedPosts } from '../posts.js'
 import { renderMarkdown } from '../markdown.jsx'
 import Seo from '../components/Seo.jsx'
+import Picture from '../components/Picture.jsx'
 
 const SITE = 'https://lien-2020.com'
 
@@ -10,6 +11,7 @@ function BlogPost() {
   const { slug } = useParams()
   const post = getPost(slug)
   if (!post) return <Navigate to="/blog" replace />
+  const related = getRelatedPosts(slug, 3)
 
   const url = `${SITE}/blog/${post.slug}`
   const imageUrl = post.image ? `${SITE}/${post.image}` : ''
@@ -73,7 +75,12 @@ function BlogPost() {
       <article className="section">
         <div className="section-inner narrow">
           <div className="blog-meta">
-            <span className="blog-cat">{post.category}</span>
+            <Link
+              to={`/blog?category=${encodeURIComponent(post.category)}`}
+              className="blog-cat blog-cat--link"
+            >
+              {post.category}
+            </Link>
             {post.date ? <time className="blog-date">{post.date}</time> : null}
           </div>
 
@@ -92,6 +99,48 @@ function BlogPost() {
               </Link>
             </div>
           </div>
+
+          {related.length > 0 && (
+            <section className="blog-related" aria-label="関連記事">
+              <h2 className="blog-related-title">関連記事</h2>
+              <ul className="blog-list">
+                {related.map((rp) => (
+                  <li key={rp.slug} className="blog-card">
+                    <Link to={`/blog/${rp.slug}`} className="blog-card-link">
+                      {rp.image ? (
+                        <div className="blog-card-thumb">
+                          <Picture
+                            src={`${import.meta.env.BASE_URL}${rp.image}`}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          className="blog-card-thumb blog-card-thumb--ph"
+                          aria-hidden="true"
+                        >
+                          <svg viewBox="0 0 24 24">
+                            <path d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3z" />
+                          </svg>
+                        </div>
+                      )}
+                      <div className="blog-card-body">
+                        <div className="blog-meta">
+                          <span className="blog-cat">{rp.category}</span>
+                          {rp.date ? (
+                            <time className="blog-date">{rp.date}</time>
+                          ) : null}
+                        </div>
+                        <h3 className="blog-card-title">{rp.title}</h3>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <div className="section-action">
             <Link to="/blog" className="text-link">

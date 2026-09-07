@@ -2093,6 +2093,60 @@ html.font-lg {
   border-radius: 4px;
   padding: 3px 10px;
 }
+/* 記事ページのカテゴリバッジ（クリックで一覧を絞り込み） */
+.blog-cat--link {
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+.blog-cat--link:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+/* ブログ一覧のカテゴリ絞り込みチップ */
+.blog-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.blog-filter-chip {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+.blog-filter-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.blog-filter-chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+/* 記事末の関連記事セクション */
+.blog-related {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.blog-related-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 28px;
+}
 .blog-date {
   font-size: 13px;
   color: var(--text-muted);
