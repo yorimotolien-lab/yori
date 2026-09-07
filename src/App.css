@@ -1,3 +1,41 @@
+/* ===== 遅延読み込み時のフォールバック（ルート分割用） ===== */
+.route-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.route-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--bg-alt);
+  border-top-color: var(--accent);
+  animation: route-spin 0.7s linear infinite;
+}
+@keyframes route-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-spinner {
+    animation-duration: 1.6s;
+  }
+}
+/* スクリーンリーダー専用（視覚的に隠す） */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ===== Layout primitives ===== */
 .section {
   /* マルチページ化に伴い余白を広めに取り、大手企業のような高級感と読みやすさを優先 */
