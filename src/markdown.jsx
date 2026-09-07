@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Picture from './components/Picture.jsx'
 
 // 依存ライブラリなしの簡易Markdownレンダラー。
 // React要素を返すため dangerouslySetInnerHTML を使わず、XSSの心配がない。
@@ -70,7 +71,7 @@ export function renderMarkdown(md) {
     if (image) {
       blocks.push(
         <figure key={key} className="blog-figure">
-          <img
+          <Picture
             src={image[2]}
             alt={image[1]}
             loading="lazy"

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { COMPANY } from '../constants.js'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
+import Picture from '../components/Picture.jsx'
 
 // 選択肢の定義（外部ライブラリ不使用のシンプルなステップ式ウィザード）。
 const BUILDINGS = [
@@ -140,7 +141,7 @@ function Diagnosis() {
       <section className="section">
         <div className="section-inner narrow fade-in-up">
           <div className="diag-hero">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}diagnosis-hero.jpg`}
               alt="外壁・雨漏りの無料診断を行う診断スタッフ"
               loading="lazy"

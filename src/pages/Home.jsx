@@ -17,6 +17,7 @@ import { WorksComingSoon } from '../illustrations.jsx'
 import Seo from '../components/Seo.jsx'
 import CountUp from '../components/CountUp.jsx'
 import SosCheck from '../components/SosCheck.jsx'
+import Picture from '../components/Picture.jsx'
 
 const AUTHORITY_ICONS = {
   eye: (
@@ -279,7 +280,7 @@ function Home() {
             シーリング・塗装・防水・足場・大規模修繕・内装・雨漏り診断まで、自社で一貫対応します。
           </p>
           <figure className="services-visual">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}services-visual.jpg`}
               alt="足場の上で外壁塗装・屋根塗装・防水・シーリング・高圧洗浄を自社で一貫対応する職人たち"
               loading="lazy"
@@ -450,7 +451,7 @@ function Home() {
             千葉県市川市を拠点に、1都4県（千葉・東京・埼玉・神奈川・茨城）まで幅広く対応。地元密着で、急なご相談や雨漏りにも<strong>最短即日</strong>で駆けつけます。
           </p>
           <figure className="area-map">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}service-area-map.jpg`}
               alt="千葉県市川市を拠点に、東京・千葉・埼玉・神奈川・茨城の1都4県に対応する範囲を示した地図"
               loading="lazy"
@@ -518,7 +519,7 @@ function Home() {
                 <Link to={`/blog/${post.slug}`} className="blog-card-link">
                   {post.image ? (
                     <div className="blog-card-thumb">
-                      <img
+                      <Picture
                         src={`${import.meta.env.BASE_URL}${post.image}`}
                         alt=""
                         loading="lazy"

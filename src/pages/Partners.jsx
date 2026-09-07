@@ -3,6 +3,7 @@ import { COMPANY, SERVICES, PARTNER } from '../constants.js'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import PageToc from '../components/PageToc.jsx'
+import Picture from '../components/Picture.jsx'
 
 const tocItems = [
   { id: 'jobs', label: '募集職種' },
@@ -35,7 +36,7 @@ function Partners() {
         <div className="section-inner narrow">
           <p className="concept-text">{PARTNER.lead}</p>
           <figure className="partner-hero">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}partner-recruit.jpg`}
               alt="協力会社さまと信頼のパートナーシップを結ぶ握手"
               loading="lazy"

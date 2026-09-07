@@ -12,6 +12,7 @@ import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import SosCheck from '../components/SosCheck.jsx'
 import CountUp from '../components/CountUp.jsx'
+import Picture from '../components/Picture.jsx'
 
 const REASON_ICONS = {
   badge: (
@@ -96,7 +97,7 @@ function Strength() {
               <li key={reason.title} className="corp-card">
                 <div className="corp-photo">
                   {reason.image ? (
-                    <img
+                    <Picture
                       src={`${import.meta.env.BASE_URL}${reason.image}`}
                       alt={reason.title}
                       loading="lazy"
@@ -156,7 +157,7 @@ function Strength() {
               {FOR_HOME.checks.map((check) => (
                 <li key={check.text} className="fh-check">
                   <span className="fh-check-photo">
-                    <img
+                    <Picture
                       src={`${import.meta.env.BASE_URL}${check.image}`}
                       alt={check.text}
                       loading="lazy"

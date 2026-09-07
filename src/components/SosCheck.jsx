@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { SOS_CHECK } from '../constants.js'
+import Picture from './Picture.jsx'
 
 // 「お家のSOSサイン診断」。タップすると✓の色がフワッと変わる（CSSチェックボックスハック・JS不要）。
 function SosCheck() {
@@ -16,7 +17,7 @@ function SosCheck() {
               <label className="sos-item">
                 <input type="checkbox" />
                 <span className="sos-photo" aria-hidden="true">
-                  <img
+                  <Picture
                     src={`${import.meta.env.BASE_URL}${item.image}`}
                     alt={item.text}
                     loading="lazy"
