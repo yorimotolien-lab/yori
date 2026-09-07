@@ -24,6 +24,8 @@ const Contact = lazy(() => import('./pages/Contact.jsx'))
 const Privacy = lazy(() => import('./pages/Privacy.jsx'))
 const Blog = lazy(() => import('./pages/Blog.jsx'))
 const BlogPost = lazy(() => import('./pages/BlogPost.jsx'))
+const AreaIndex = lazy(() => import('./pages/AreaIndex.jsx'))
+const AreaLanding = lazy(() => import('./pages/AreaLanding.jsx'))
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
             <Route path="/diagnosis" element={<Diagnosis />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/company" element={<Company />} />
+            <Route path="/area" element={<AreaIndex />} />
+            <Route path="/area/:slug" element={<AreaLanding />} />
             {/* 旧URL /about は /company へ恒久リダイレクト（被リンク・SEO維持） */}
             <Route path="/about" element={<Navigate to="/company" replace />} />
             <Route path="/services" element={<Services />} />

@@ -470,8 +470,8 @@ function Home() {
             <li className="area-tag area-tag--more">ほか 千葉県全域</li>
           </ul>
           <div className="section-action">
-            <Link to="/company" className="btn btn-outline btn-more">
-              全対応エリアを見る →
+            <Link to="/area" className="btn btn-outline btn-more">
+              地域別の対応エリアを見る →
             </Link>
           </div>
         </div>
