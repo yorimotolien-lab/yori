@@ -4,6 +4,7 @@ import { ICONS } from '../icons.jsx'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import PageToc from '../components/PageToc.jsx'
+import Picture from '../components/Picture.jsx'
 
 const tocItems = [
   { id: 'importance', label: '早めの対応の重要性' },
@@ -50,7 +51,7 @@ function Maintenance() {
           <p className="section-eyebrow">3 LAYERS</p>
           <h2 className="section-title">建物を守る3つの防御層と劣化サイン</h2>
           <figure className="maint-figure">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}maintenance-layers.jpg`}
               alt="建物を守る3つの防御層（①外壁塗膜・②防水塗膜・③シーリング）の断面図"
               loading="lazy"
@@ -84,7 +85,7 @@ function Maintenance() {
           <p className="section-eyebrow">RISK</p>
           <h2 className="section-title">劣化を放置するとどうなる？</h2>
           <figure className="maint-figure">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}maintenance-risk.jpg`}
               alt="劣化を放置すると、ひび割れ→雨水の浸入→躯体の腐食・雨漏りへと進行し、被害と費用が拡大する図解"
               loading="lazy"

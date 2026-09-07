@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { POSTS } from '../posts.js'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
+import Picture from '../components/Picture.jsx'
 
 const INITIAL = 6 // 初期表示件数
 const STEP = 6 // 「もっと見る」で追加表示する件数
@@ -41,7 +42,7 @@ function Blog() {
                     <Link to={`/blog/${post.slug}`} className="blog-card-link">
                       {post.image ? (
                         <div className="blog-card-thumb">
-                          <img
+                          <Picture
                             src={`${import.meta.env.BASE_URL}${post.image}`}
                             alt=""
                             loading="lazy"

@@ -10,6 +10,7 @@ import {
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import PageToc from '../components/PageToc.jsx'
+import Picture from '../components/Picture.jsx'
 
 const tocItems = [
   { id: 'message', label: '代表挨拶' },
@@ -31,7 +32,7 @@ function CertLink({ src, name }) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img
+      <Picture
         src={src}
         alt={`${name}の資格者証`}
         loading="lazy"

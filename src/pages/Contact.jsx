@@ -4,6 +4,7 @@ import { COMPANY, WEB3FORMS_ACCESS_KEY } from '../constants.js'
 import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import CtaAssurance from '../components/CtaAssurance.jsx'
+import Picture from '../components/Picture.jsx'
 
 const EMPTY = { name: '', email: '', tel: '', message: '' }
 
@@ -117,7 +118,7 @@ function Contact() {
       <section className="section">
         <div className="section-inner narrow">
           <figure className="contact-hero">
-            <img
+            <Picture
               src={`${import.meta.env.BASE_URL}contact-hero.jpg`}
               alt="家の前でお客様の相談に親身に対応するLIENのスタッフ"
               loading="lazy"

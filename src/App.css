@@ -1,3 +1,8 @@
+/* <picture> はレイアウトに影響させず、中の <img> を従来どおり扱う（WebP対応） */
+picture {
+  display: contents;
+}
+
 /* ===== 遅延読み込み時のフォールバック（ルート分割用） ===== */
 .route-loading {
   min-height: 60vh;
@@ -283,7 +288,11 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('/hero-mark.png');
+  background-image: url('/hero-mark.png'); /* 非対応ブラウザ用フォールバック */
+  background-image: image-set(
+    url('/hero-mark.webp') type('image/webp'),
+    url('/hero-mark.png') type('image/png')
+  );
   background-repeat: no-repeat;
   background-position: center 43%;
   background-size: clamp(300px, 50vw, 660px);
@@ -3205,7 +3214,13 @@ html.font-lg {
   background-color: var(--navy);
   background-image:
     linear-gradient(rgba(10, 18, 35, 0.68), rgba(12, 22, 42, 0.74)),
-    url('/parallax-bg.jpg');
+    url('/parallax-bg.jpg'); /* 非対応ブラウザ用フォールバック */
+  background-image:
+    linear-gradient(rgba(10, 18, 35, 0.68), rgba(12, 22, 42, 0.74)),
+    image-set(
+      url('/parallax-bg.webp') type('image/webp'),
+      url('/parallax-bg.jpg') type('image/jpeg')
+    );
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* 視差効果：背景を固定してコンテンツをスクロール */
