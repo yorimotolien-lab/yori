@@ -59,7 +59,7 @@ picture {
   max-width: 760px;
 }
 .section-eyebrow {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -613,7 +613,7 @@ picture {
 .service-no {
   display: block;
   font-family: var(--serif);
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -965,7 +965,7 @@ html.font-lg {
 }
 .page-toc a::before {
   content: '▾';
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 12px;
 }
 .page-toc a:hover {
@@ -1732,7 +1732,7 @@ html.font-lg {
   flex: none;
   font-size: 18px;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .audience-split-card.is-primary .audience-split-title {
   color: #fff;
@@ -1811,7 +1811,7 @@ html.font-lg {
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 10px;
 }
 .corp-body h3 {
@@ -1874,7 +1874,7 @@ html.font-lg {
   margin-bottom: 16px;
 }
 .cta-assurance-flap {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   font-size: 22px;
   line-height: 1;
@@ -3525,7 +3525,7 @@ html.font-lg {
   font-size: clamp(1.9rem, 3.6vw, 2.6rem);
   font-weight: 800;
   line-height: 1.2;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 24px;
 }
 .price-amount-note {
@@ -3952,7 +3952,7 @@ html.font-lg {
   align-items: start;
 }
 .client-eyebrow {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.1em;
@@ -4202,7 +4202,7 @@ html.font-lg {
   background: var(--navy);
 }
 .diag-q-num {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.1em;
@@ -4310,7 +4310,7 @@ html.font-lg {
 }
 /* 診断結果 */
 .diag-result-label {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.12em;
