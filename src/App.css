@@ -4400,3 +4400,186 @@ html.font-lg {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== 対応エリア案内（/area）：キャッチ・アコーディオン・ピル ===== */
+/* キャッチコピー見出し（少し大きめ・左寄せで力強く） */
+.area-catch {
+  max-width: 20em;
+}
+/* 全対応エリアのディレクトリ帯（parityに依存せず明示的に淡色背景） */
+.section.area-directory {
+  background: var(--bg-alt);
+}
+/* 「›付きは詳細ページ」凡例 */
+.area-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.area-legend-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* アコーディオン（<details>）— JS不要・タップで開閉 */
+.area-accordion {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+  margin-top: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(11, 25, 44, 0.04);
+}
+.area-accordion + .area-accordion {
+  margin-top: 14px;
+}
+.area-accordion-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background 0.2s;
+}
+.area-accordion-summary::-webkit-details-marker {
+  display: none;
+}
+.area-accordion-summary:hover {
+  background: var(--bg-alt);
+}
+.area-accordion[open] .area-accordion-summary {
+  border-bottom: 1px solid var(--border);
+}
+.area-accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.area-accordion-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+}
+.area-accordion-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-text);
+  background: rgba(255, 107, 53, 0.1);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+/* 開閉インジケーター（＋ / −） */
+.area-accordion-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.area-accordion-icon::before,
+.area-accordion-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+.area-accordion-icon::before {
+  top: 7px;
+  left: 0;
+  width: 16px;
+  height: 2px;
+}
+.area-accordion-icon::after {
+  top: 0;
+  left: 7px;
+  width: 2px;
+  height: 16px;
+}
+.area-accordion[open] .area-accordion-icon::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+.area-accordion-body {
+  padding: 18px 22px 22px;
+}
+.area-accordion-note {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+/* 詳細ページありのピル（矢印付き・アクセント寄り） */
+.area-tag--link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.area-tag--link {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+.area-tag-arrow {
+  font-weight: 700;
+  color: var(--accent);
+}
+.area-tag--link:hover .area-tag-arrow {
+  color: #fff;
+}
+.area-tag--hq .area-tag-arrow {
+  color: #fff;
+}
+.area-directory-note {
+  margin-top: 22px;
+}
+
+/* スマホ：余白と文字を詰めてスッキリ見せる */
+@media (max-width: 560px) {
+  .area-accordion-summary {
+    padding: 15px 16px;
+  }
+  .area-accordion-title {
+    font-size: 15px;
+  }
+  .area-accordion-body {
+    padding: 14px 16px 18px;
+  }
+  .areas-tags {
+    gap: 8px;
+  }
+  .area-tag {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+  .area-legend {
+    display: flex;
+    margin-left: 0;
+    margin-top: 6px;
+  }
+}
+
+/* モーション配慮：開閉アイコンのトランジションを無効化 */
+@media (prefers-reduced-motion: reduce) {
+  .area-accordion-icon::before,
+  .area-accordion-icon::after {
+    transition: none;
+  }
+}
