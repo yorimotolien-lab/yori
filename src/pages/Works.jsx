@@ -21,10 +21,10 @@ function Works() {
   return (
     <>
       <Seo path="/works" name="施工実績" />
-      <title>施工実績 | 市川市の外壁塗装・防水・大規模修繕 株式会社LIEN</title>
+      <title>施工事例｜市川・柏・松戸・流山の外壁塗装実績｜株式会社LIEN</title>
       <meta
         name="description"
-        content="株式会社LIENの施工実績。外壁塗装・屋根塗装・防水・シーリング・雨漏り修繕など、目的別に絞り込んでご覧いただけます。千葉県市川市を中心に施工事例を順次公開してまいります。"
+        content="株式会社LIENの施工事例・実績集。市川市・柏市・松戸市・流山市を中心に、外壁塗装・屋根塗装・防水・雨漏り修理の施工事例を目的別にご紹介。地域の施工実績から仕上がりの品質をご確認いただけます（事例は順次公開中）。"
       />
       <section className="page-head">
         <div className="section-inner">

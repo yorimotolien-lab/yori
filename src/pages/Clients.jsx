@@ -7,10 +7,10 @@ function Clients() {
   return (
     <>
       <Seo path="/clients" name="法人のお客様へ" />
-      <title>法人のお客様へ | 元請・オーナー・管理会社様 | 株式会社LIEN</title>
+      <title>大規模修繕｜千葉・柏・市川のマンション管理会社様へ｜LIEN</title>
       <meta
         name="description"
-        content="株式会社LIENの法人のお客様向けご案内。元請様・オーナー様・管理会社様それぞれに、確かな品質・工程管理・居住者様への配慮で、大規模修繕から専門工事までご対応します。"
+        content="千葉県で大規模修繕なら株式会社LIEN。柏市・市川市を中心に、マンションオーナー様・管理会社様・元請様へ外壁塗装・防水・シーリングの専門工事を直営でご提供。工程管理と居住者様への配慮を徹底し、協力会社様の募集も行っています。"
       />
       <section className="page-head">
         <div className="section-inner">
