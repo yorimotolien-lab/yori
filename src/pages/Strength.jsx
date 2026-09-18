@@ -51,10 +51,10 @@ function Strength() {
   return (
     <>
       <Seo path="/strength" name="選ばれる理由" />
-      <title>選ばれる理由 | 市川市の建設会社 株式会社LIEN</title>
+      <title>選ばれる理由｜1級建築施工管理技士が直営施工｜株式会社LIEN</title>
       <meta
         name="description"
-        content="株式会社LIENが選ばれる理由。直営・専門施工、有資格者による診断、最長10年保証、近隣配慮の徹底。法人・管理会社様、戸建てのお客様それぞれへの安心のお約束をご紹介します。"
+        content="千葉県・東葛地区で外壁塗装なら株式会社LIEN。1級建築施工管理技士による自社直営施工で、下請け任せにしない高品質と適正価格を実現します。柏市・松戸市・市川市エリアで確かな技術力をお約束。現地調査・お見積り無料。"
       />
       <section className="page-head">
         <div className="section-inner">
