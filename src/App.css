@@ -2238,6 +2238,13 @@ html.font-lg {
 .blog-body {
   margin-top: 20px;
 }
+/* 本文の動的読み込み中の表示 */
+.blog-body-loading {
+  min-height: 40vh;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 40px 0;
+}
 /* H2（大見出し）：太めのダークボーダー＋ごく薄いグレー背景で区切りを明確に */
 .blog-body h2 {
   font-family: var(--serif);

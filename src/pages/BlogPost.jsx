@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { COMPANY } from '../constants.js'
-import { getPost, getRelatedPosts } from '../posts.js'
+import { getPost, getRelatedPosts, loadPostBody } from '../posts.js'
 import { renderMarkdown } from '../markdown.jsx'
 import Seo from '../components/Seo.jsx'
 import Picture from '../components/Picture.jsx'
@@ -10,6 +11,20 @@ const SITE = 'https://lien-2020.com'
 function BlogPost() {
   const { slug } = useParams()
   const post = getPost(slug)
+  // 本文は動的読み込み（メインバンドルに同梱しない）。null = 読み込み中。
+  const [body, setBody] = useState(null)
+
+  useEffect(() => {
+    let alive = true
+    setBody(null)
+    loadPostBody(slug).then((b) => {
+      if (alive) setBody(b)
+    })
+    return () => {
+      alive = false
+    }
+  }, [slug])
+
   if (!post) return <Navigate to="/blog" replace />
   const related = getRelatedPosts(slug, 3)
 
@@ -84,7 +99,15 @@ function BlogPost() {
             {post.date ? <time className="blog-date">{post.date}</time> : null}
           </div>
 
-          <div className="blog-body">{renderMarkdown(post.body)}</div>
+          <div className="blog-body">
+            {body === null ? (
+              <p className="blog-body-loading" aria-live="polite">
+                読み込み中…
+              </p>
+            ) : (
+              renderMarkdown(body)
+            )}
+          </div>
 
           <div className="blog-cta">
             <p className="blog-cta-text">
