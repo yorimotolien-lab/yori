@@ -234,8 +234,79 @@ function prerenderMeta() {
   }
 }
 
+// 記事の「メタ情報だけ」（本文なし）を仮想モジュール virtual:posts-meta で提供する。
+// 一覧・関連記事・カテゴリはこの軽量メタだけで動き、記事本文はメインバンドルに
+// 同梱しない（本文は posts.js が必要時に動的 import する）。
+function postsMetaPlugin() {
+  const VIRTUAL = 'virtual:posts-meta'
+  const RESOLVED = '\0' + VIRTUAL
+
+  const readMeta = () => {
+    let files
+    try {
+      files = fs
+        .readdirSync(path.resolve('src/posts'))
+        .filter((f) => f.endsWith('.md'))
+    } catch {
+      return []
+    }
+    return files
+      .map((f) => {
+        const raw = fs
+          .readFileSync(path.resolve('src/posts', f), 'utf8')
+          .replace(/\r\n/g, '\n')
+        const meta = {}
+        const fm = raw.match(/^---\n([\s\S]*?)\n---/)
+        if (fm) {
+          fm[1].split('\n').forEach((line) => {
+            const i = line.indexOf(':')
+            if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim()
+          })
+        }
+        const slug = f.replace(/\.md$/, '')
+        return {
+          slug,
+          title: meta.title || slug,
+          date: meta.date || '',
+          category: meta.category || 'お知らせ',
+          excerpt: meta.excerpt || '',
+          image: meta.image || '',
+        }
+      })
+      .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+  }
+
+  return {
+    name: 'posts-meta',
+    resolveId(id) {
+      if (id === VIRTUAL) return RESOLVED
+    },
+    load(id) {
+      if (id === RESOLVED) {
+        return `export const POSTS_META = ${JSON.stringify(readMeta())}`
+      }
+    },
+    // 記事(.md)の追加・編集時に仮想モジュールを更新する（開発時のHMR）。
+    handleHotUpdate(ctx) {
+      if (/[\\/]posts[\\/].*\.md$/.test(ctx.file)) {
+        const mod = ctx.server.moduleGraph.getModuleById(RESOLVED)
+        if (mod) {
+          ctx.server.moduleGraph.invalidateModule(mod)
+          return [mod, ...ctx.modules]
+        }
+      }
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react(), injectCspMeta(), generateSitemap(), prerenderMeta()],
+  plugins: [
+    react(),
+    injectCspMeta(),
+    generateSitemap(),
+    prerenderMeta(),
+    postsMetaPlugin(),
+  ],
 })

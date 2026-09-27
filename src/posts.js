@@ -1,6 +1,7 @@
-// src/posts/*.md を読み込み、記事データの配列にする。
+// 記事一覧・関連記事・カテゴリで使う「メタ情報だけ」（本文なし）。
+// ビルド時に vite.config.js の postsMetaPlugin が src/posts/*.md のフロントマターを
+// 収集して提供する（本文はメインバンドルに含めない）。
 // 記事を追加するには src/posts/ に .md ファイルを1つ足すだけでよい。
-// 先頭に「フロントマター」を書く:
 //   ---
 //   title: 記事タイトル
 //   date: 2026-08-17
@@ -8,42 +9,27 @@
 //   excerpt: 一覧に表示する短い説明
 //   ---
 //   本文（Markdown）...
-const files = import.meta.glob('./posts/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
+import { POSTS_META } from 'virtual:posts-meta'
 
-function parsePost(path, rawInput) {
-  const slug = path.split('/').pop().replace(/\.md$/, '')
-  // 改行コードを LF に正規化（Windows で CRLF になってもフロントマターを正しく解析するため）
-  const raw = rawInput.replace(/\r\n/g, '\n')
-  const meta = {}
-  let body = raw
-  const fm = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
-  if (fm) {
-    fm[1].split('\n').forEach((line) => {
-      const idx = line.indexOf(':')
-      if (idx > 0) meta[line.slice(0, idx).trim()] = line.slice(idx + 1).trim()
-    })
-    body = fm[2]
-  }
-  return {
-    slug,
-    title: meta.title || slug,
-    date: meta.date || '',
-    category: meta.category || 'お知らせ',
-    excerpt: meta.excerpt || '',
-    image: meta.image || '',
-    body: body.trim(),
-  }
-}
-
-export const POSTS = Object.entries(files)
-  .map(([path, raw]) => parsePost(path, raw))
-  .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+export const POSTS = POSTS_META
 
 export const getPost = (slug) => POSTS.find((p) => p.slug === slug)
+
+// 記事本文（Markdown）は記事ページを開いたときだけ動的に読み込む。
+// これによりメインバンドルに全記事の本文を同梱せず、初期表示を軽量化する。
+const bodyLoaders = import.meta.glob('./posts/*.md', {
+  query: '?raw',
+  import: 'default',
+})
+
+export async function loadPostBody(slug) {
+  const entry = Object.entries(bodyLoaders).find(([p]) => p.endsWith(`/${slug}.md`))
+  if (!entry) return ''
+  // 改行コードを LF に正規化（Windows で CRLF になってもフロントマターを正しく解析するため）
+  const raw = (await entry[1]()).replace(/\r\n/g, '\n')
+  const fm = raw.match(/^---\n[\s\S]*?\n---\n?([\s\S]*)$/)
+  return (fm ? fm[1] : raw).trim()
+}
 
 // 記事に含まれる主要トピックのキーワード（関連記事の類似度計算に使用）。
 const TOPIC_KEYWORDS = [
