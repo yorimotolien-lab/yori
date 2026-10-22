@@ -59,18 +59,45 @@ function Works() {
 
           {/* key を切り替えることで、絞り込みのたびにフワッとフェードイン */}
           <ul className="works-grid" key={active}>
-            {filtered.map((item) => (
-              <li key={item.label} className="works-card filter-in">
+            {filtered.map((item) => {
+              // slug + cover を持つ項目は実際の事例（写真あり・詳細へリンク）。
+              const isReal = item.slug && item.cover
+              const thumb = (
                 <div className="works-thumb">
-                  <WorksComingSoon className="works-illu" />
-                  <span>準備中</span>
+                  {isReal ? (
+                    <img
+                      className="works-photo"
+                      src={`${import.meta.env.BASE_URL}${item.cover}`}
+                      alt={item.label}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <>
+                      <WorksComingSoon className="works-illu" />
+                      <span>準備中</span>
+                    </>
+                  )}
                   <span className="works-cat-badge">
                     {CATEGORY_LABEL[item.category]}
                   </span>
                 </div>
-                <p className="works-label">{item.label}</p>
-              </li>
-            ))}
+              )
+              return (
+                <li key={item.label} className="works-card filter-in">
+                  {isReal ? (
+                    <Link to={`/works/${item.slug}`} className="works-card-link">
+                      {thumb}
+                      <p className="works-label">{item.label}</p>
+                    </Link>
+                  ) : (
+                    <>
+                      {thumb}
+                      <p className="works-label">{item.label}</p>
+                    </>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </section>

@@ -4590,3 +4590,102 @@ html.font-lg {
     transition: none;
   }
 }
+
+/* ===== 施工実績：実際の事例カード（写真あり・詳細へリンク） ===== */
+.works-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+.works-card-link:hover {
+  transform: translateY(-3px);
+}
+.works-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.works-card-link:hover .works-thumb {
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+/* ===== 施工実績 詳細ページ ===== */
+.work-detail-cat {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.work-detail-spec {
+  margin: 24px 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.work-detail-spec-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.work-detail-spec-row:last-child {
+  border-bottom: none;
+}
+.work-detail-spec dt {
+  flex: none;
+  width: 110px;
+  padding: 12px 16px;
+  background: var(--bg-alt);
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 14px;
+}
+.work-detail-spec dd {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 15px;
+}
+.work-detail-h2 {
+  font-family: var(--serif);
+  font-size: 21px;
+  color: var(--navy);
+  margin: 40px 0 18px;
+  padding: 12px 16px;
+  background: var(--bg-alt);
+  border-left: 6px solid var(--navy);
+  border-radius: 0 6px 6px 0;
+}
+.work-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.work-gallery-item {
+  margin: 0;
+}
+.work-gallery-item img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.work-gallery-item figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+@media (max-width: 560px) {
+  .work-detail-spec-row {
+    flex-direction: column;
+  }
+  .work-detail-spec dt {
+    width: auto;
+  }
+}

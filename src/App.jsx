@@ -13,6 +13,7 @@ import './App.css'
 // それ以外のページはルート単位で遅延読み込み（コード分割）し、初期バンドルを軽量化する。
 const Strength = lazy(() => import('./pages/Strength.jsx'))
 const Works = lazy(() => import('./pages/Works.jsx'))
+const WorksDetail = lazy(() => import('./pages/WorksDetail.jsx'))
 const Diagnosis = lazy(() => import('./pages/Diagnosis.jsx'))
 const Clients = lazy(() => import('./pages/Clients.jsx'))
 const Company = lazy(() => import('./pages/Company.jsx'))
@@ -46,6 +47,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/strength" element={<Strength />} />
             <Route path="/works" element={<Works />} />
+            <Route path="/works/:slug" element={<WorksDetail />} />
             <Route path="/diagnosis" element={<Diagnosis />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/company" element={<Company />} />

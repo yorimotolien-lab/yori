@@ -305,8 +305,15 @@ export const WORK_CATEGORIES = [
   { key: 'leak', label: '雨漏り修繕' },
 ]
 
-// 施工事例（現在は写真準備中のプレースホルダー）。category でフィルター対象に。
+// 施工事例。slug + cover を持つ項目は実際の事例ページ（/works/:slug）へリンク。
+// slug を持たない項目は写真準備中のプレースホルダー。category でフィルター対象に。
 export const WORKS_ITEMS = [
+  {
+    label: 'アスファルト防水 冷工法（屋上）',
+    category: 'waterproof',
+    slug: 'waterproof-asphalt-cold',
+    cover: 'works-asphalt-cover.jpg',
+  },
   { label: '外壁塗装工事', category: 'exterior' },
   { label: '外壁・付帯部 塗装', category: 'exterior' },
   { label: '屋根塗装工事', category: 'roof' },
@@ -317,6 +324,41 @@ export const WORKS_ITEMS = [
   { label: 'サッシまわりシーリング', category: 'sealing' },
   { label: '雨漏り調査・修繕', category: 'leak' },
 ]
+
+// 実際の施工事例の詳細（/works/:slug の WorksDetail から参照）。
+// 画像は public/ 直下に配置し、ファイル名を記載する。
+export const WORKS_CASES = {
+  'waterproof-asphalt-cold': {
+    slug: 'waterproof-asphalt-cold',
+    label: 'アスファルト防水 冷工法（屋上）',
+    category: 'waterproof',
+    categoryLabel: '防水工事',
+    method: 'アスファルト防水 冷工法（常温粘着工法）',
+    place: '屋上（陸屋根）',
+    cover: 'works-asphalt-cover.jpg',
+    summary:
+      '屋上の既存防水層の劣化に対し、火を使わない「アスファルト防水 冷工法（常温粘着工法）」で改修した事例です。高圧洗浄・既存防水層の撤去から、立上りの仮防水・プライマー・増し張り、改修ドレンの設置、平場のアスファルトシート張り・転圧・ジョイントシール、仕上げのトップコートまで、実際の工程を写真でご紹介します。',
+    points: [
+      '火を使わない「冷工法（常温粘着）」で、近隣への配慮と安全性に優れた施工',
+      '改修用ドレンを新設し、排水不良による雨漏りリスクを根本から改善',
+      '立上りの増し張り・ジョイントシールまで丁寧に処理し、確実な防水層を形成',
+    ],
+    gallery: [
+      {
+        src: 'works-asphalt-1.jpg',
+        caption:
+          '施工前 → 高圧水洗浄 → 立上り既存防水層撤去 → 立上り仮防水・プライマー → 増し張りシート → 改修ドレン取付 → 平場リベース塗布 → 平場アスファルトシート張り',
+      },
+      {
+        src: 'works-asphalt-2.jpg',
+        caption:
+          '立上り上張りシート → 平場アスファルトシート張り・転圧 → 平場／立上りジョイントシール → 平場トップコート塗布 → 施工後',
+      },
+    ],
+  },
+}
+
+export const getWorksCase = (slug) => WORKS_CASES[slug] || null
 
 // 有資格者の権威性を示すバンド（トップページ OUR PROMISE 内）。
 // 「専門家が直接診断・管理するから手抜きが起きず高品質」を視覚化する。
