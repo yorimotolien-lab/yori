@@ -303,6 +303,7 @@ export const WORK_CATEGORIES = [
   { key: 'waterproof', label: '防水工事' },
   { key: 'sealing', label: 'シーリング打替え' },
   { key: 'tile', label: 'タイル貼替え' },
+  { key: 'repair', label: '下地補修' },
   { key: 'leak', label: '雨漏り修繕' },
 ]
 
@@ -339,6 +340,12 @@ export const WORKS_ITEMS = [
     category: 'tile',
     slug: 'tile-replacement',
     cover: 'works-tile-cover.jpg',
+  },
+  {
+    label: '外壁爆裂補修（下地補修）',
+    category: 'repair',
+    slug: 'repair-spalling',
+    cover: 'works-repair-cover.jpg',
   },
   { label: '雨漏り調査・修繕', category: 'leak' },
 ]
@@ -440,6 +447,29 @@ export const WORKS_CASES = {
         src: 'works-tile-1.jpg',
         caption:
           '施工前 → カッター入れ → タイルハツリ → 清掃 → タイル貼り → 目地詰め → 施工後',
+      },
+    ],
+  },
+  'repair-spalling': {
+    slug: 'repair-spalling',
+    label: '外壁爆裂補修（下地補修）',
+    category: 'repair',
+    categoryLabel: '下地補修',
+    method: '外壁爆裂（鉄筋爆裂）補修・樹脂モルタル充填',
+    place: '外壁（RC・モルタル下地）',
+    cover: 'works-repair-cover.jpg',
+    summary:
+      '内部の鉄筋がサビて膨張し、コンクリートが押し出されて剥がれる「爆裂（ばくれつ）」を補修した事例です。傷んだ部分を撤去・清掃し、ユニエポプライマーを塗布して密着性を高めたうえで、樹脂モルタルを充填して成形・仕上げました。爆裂を放置すると鉄筋の腐食が進み、建物の強度低下や雨漏りにつながるため、塗装前の下地補修として重要な工程です。',
+    points: [
+      'サビて膨張した部分を撤去・清掃し、鉄筋の防錆処理まで行って再発を防止',
+      'ユニエポプライマーで密着性を高め、樹脂モルタルで欠損部をしっかり充填・成形',
+      '外壁塗装の前に下地を確実に整えることで、仕上がりの美しさと塗膜の耐久性を両立',
+    ],
+    gallery: [
+      {
+        src: 'works-repair-1.jpg',
+        caption:
+          '施工前 → 撤去 → 清掃 → ユニエポプライマー塗布 → 樹脂モルタル充填 → 施工後',
       },
     ],
   },
