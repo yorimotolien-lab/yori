@@ -347,6 +347,12 @@ export const WORKS_ITEMS = [
     slug: 'repair-spalling',
     cover: 'works-repair-cover.jpg',
   },
+  {
+    label: '外壁ひび割れ補修（下地補修）',
+    category: 'repair',
+    slug: 'repair-crack',
+    cover: 'works-crack-cover.jpg',
+  },
   { label: '雨漏り調査・修繕', category: 'leak' },
 ]
 
@@ -470,6 +476,28 @@ export const WORKS_CASES = {
         src: 'works-repair-1.jpg',
         caption:
           '施工前 → 撤去 → 清掃 → ユニエポプライマー塗布 → 樹脂モルタル充填 → 施工後',
+      },
+    ],
+  },
+  'repair-crack': {
+    slug: 'repair-crack',
+    label: '外壁ひび割れ補修（下地補修）',
+    category: 'repair',
+    categoryLabel: '下地補修',
+    method: '外壁クラック（ひび割れ）補修・セメントフィラーすり込み',
+    place: '外壁（モルタル下地）',
+    cover: 'works-crack-cover.jpg',
+    summary:
+      '外壁に発生したひび割れ（クラック）を補修した事例です。ひび割れ部分の汚れやホコリを清掃してから、セメントフィラーをすり込んで隙間を埋め、下地を平滑に整えました。ひび割れを放置すると雨水が内部に浸入し、鉄筋のサビや雨漏りの原因になります。塗装前にクラックを確実に補修しておくことで、建物を長持ちさせます。',
+    points: [
+      'ひび割れ部を清掃してからセメントフィラーをすり込み、隙間を確実に充填',
+      '雨水の浸入経路を断ち、鉄筋のサビ・雨漏り・外壁のさらなる劣化を予防',
+      '塗装前の下地補修として丁寧に処理することで、仕上がりと塗膜の耐久性を向上',
+    ],
+    gallery: [
+      {
+        src: 'works-crack-1.jpg',
+        caption: '施工前 → 清掃 → セメントフィラーすり込み → 施工後',
       },
     ],
   },
