@@ -314,6 +314,12 @@ export const WORKS_ITEMS = [
     slug: 'waterproof-asphalt-cold',
     cover: 'works-asphalt-cover.jpg',
   },
+  {
+    label: 'ウレタン塗膜防水（屋上）',
+    category: 'waterproof',
+    slug: 'waterproof-urethane',
+    cover: 'works-urethane-cover.jpg',
+  },
   { label: '外壁塗装工事', category: 'exterior' },
   { label: '外壁・付帯部 塗装', category: 'exterior' },
   { label: '屋根塗装工事', category: 'roof' },
@@ -353,6 +359,29 @@ export const WORKS_CASES = {
         src: 'works-asphalt-2.jpg',
         caption:
           '立上り上張りシート → 平場アスファルトシート張り・転圧 → 平場／立上りジョイントシール → 平場トップコート塗布 → 施工後',
+      },
+    ],
+  },
+  'waterproof-urethane': {
+    slug: 'waterproof-urethane',
+    label: 'ウレタン塗膜防水（屋上）',
+    category: 'waterproof',
+    categoryLabel: '防水工事',
+    method: 'ウレタン塗膜防水（密着工法・2層塗り＋トップコート）',
+    place: '屋上（陸屋根）',
+    cover: 'works-urethane-cover.jpg',
+    summary:
+      '屋上防水の劣化に対し、液状のウレタン樹脂を塗り重ねて継ぎ目のない防水層をつくる「ウレタン塗膜防水」で改修した事例です。高圧洗浄・ケレン清掃で下地を整えてからプライマーを塗布し、ウレタン塗膜防水を2層塗り重ね、最後にトップコートで保護・仕上げを行いました。複雑な形状の屋上でも継ぎ目なく防水層を形成できるのが特長です。',
+    points: [
+      '液状のウレタンを塗り重ねるため、継ぎ目のない一体の防水層を形成',
+      '下地のケレン清掃・プライマー塗布を丁寧に行い、密着性と耐久性を確保',
+      '2層塗り＋トップコート仕上げで、紫外線や摩耗から防水層を長期保護',
+    ],
+    gallery: [
+      {
+        src: 'works-urethane-1.jpg',
+        caption:
+          '施工前 → 高圧洗浄 → ケレン・清掃 → プライマー塗布 → ウレタン塗膜防水 1層目 → 2層目 → トップコート塗布 → 施工後',
       },
     ],
   },
