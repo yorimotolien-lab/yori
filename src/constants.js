@@ -320,13 +320,18 @@ export const WORKS_ITEMS = [
     slug: 'waterproof-urethane',
     cover: 'works-urethane-cover.jpg',
   },
+  {
+    label: 'シーリング打ち替え工事（外壁目地）',
+    category: 'sealing',
+    slug: 'sealing-joint',
+    cover: 'works-sealing-cover.jpg',
+  },
   { label: '外壁塗装工事', category: 'exterior' },
   { label: '外壁・付帯部 塗装', category: 'exterior' },
   { label: '屋根塗装工事', category: 'roof' },
   { label: '屋根カバー工法', category: 'roof' },
   { label: 'ベランダ・屋上 防水工事', category: 'waterproof' },
   { label: 'バルコニー防水工事', category: 'waterproof' },
-  { label: 'シーリング打ち替え工事', category: 'sealing' },
   { label: 'サッシまわりシーリング', category: 'sealing' },
   { label: '雨漏り調査・修繕', category: 'leak' },
 ]
@@ -382,6 +387,29 @@ export const WORKS_CASES = {
         src: 'works-urethane-1.jpg',
         caption:
           '施工前 → 高圧洗浄 → ケレン・清掃 → プライマー塗布 → ウレタン塗膜防水 1層目 → 2層目 → トップコート塗布 → 施工後',
+      },
+    ],
+  },
+  'sealing-joint': {
+    slug: 'sealing-joint',
+    label: 'シーリング打ち替え工事（外壁目地）',
+    category: 'sealing',
+    categoryLabel: 'シーリング打替え',
+    method: 'シーリング（目地シール）打ち替え工事',
+    place: '外壁目地',
+    cover: 'works-sealing-cover.jpg',
+    summary:
+      '経年で硬化・ひび割れした外壁目地のシーリングを、古い材料を撤去したうえで新たに打ち直した事例です。既存シールの撤去から、周囲を汚さないマスキング養生、プライマー塗布、新しいシーリング材の充填、ヘラ押さえによる仕上げまで、実際の工程を写真でご紹介します。目地のシーリングは外壁から雨水が入らないようにする大切な防水ラインで、劣化を放置すると雨漏りや外壁内部の傷みにつながります。',
+    points: [
+      '古いシーリングを撤去してから打ち直す「打ち替え」で、確実に防水性能を回復',
+      'マスキング養生・プライマー塗布を丁寧に行い、密着性ときれいな仕上がりを両立',
+      '外壁塗装と同時に行うと足場を共用でき、コストを抑えて効率的に施工可能',
+    ],
+    gallery: [
+      {
+        src: 'works-sealing-1.jpg',
+        caption:
+          '施工前 → 既存目地シール撤去 → 養生（マスキング） → プライマー塗布 → シーリング充填 → ヘラ押さえ → 施工後',
       },
     ],
   },
