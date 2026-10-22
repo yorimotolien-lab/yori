@@ -302,6 +302,7 @@ export const WORK_CATEGORIES = [
   { key: 'roof', label: '屋根塗装' },
   { key: 'waterproof', label: '防水工事' },
   { key: 'sealing', label: 'シーリング打替え' },
+  { key: 'tile', label: 'タイル貼替え' },
   { key: 'leak', label: '雨漏り修繕' },
 ]
 
@@ -333,6 +334,12 @@ export const WORKS_ITEMS = [
   { label: 'ベランダ・屋上 防水工事', category: 'waterproof' },
   { label: 'バルコニー防水工事', category: 'waterproof' },
   { label: 'サッシまわりシーリング', category: 'sealing' },
+  {
+    label: 'タイル貼替え工事（外壁）',
+    category: 'tile',
+    slug: 'tile-replacement',
+    cover: 'works-tile-cover.jpg',
+  },
   { label: '雨漏り調査・修繕', category: 'leak' },
 ]
 
@@ -410,6 +417,29 @@ export const WORKS_CASES = {
         src: 'works-sealing-1.jpg',
         caption:
           '施工前 → 既存目地シール撤去 → 養生（マスキング） → プライマー塗布 → シーリング充填 → ヘラ押さえ → 施工後',
+      },
+    ],
+  },
+  'tile-replacement': {
+    slug: 'tile-replacement',
+    label: 'タイル貼替え工事（外壁）',
+    category: 'tile',
+    categoryLabel: 'タイル貼替え',
+    method: 'タイル部分貼替え（ハツリ撤去・張り直し・目地詰め）',
+    place: '外壁タイル',
+    cover: 'works-tile-cover.jpg',
+    summary:
+      '浮き・割れが生じた外壁タイルを部分的に貼り替えた事例です。周囲を傷めないようカッターで切れ込みを入れ、傷んだタイルをハツリ（はつり）で丁寧に撤去。下地を清掃したうえで新しいタイルを張り直し、目地を詰めて仕上げました。タイルの浮きや剥がれは落下事故や雨水の浸入につながるため、早めの補修が大切です。',
+    points: [
+      'カッターで切れ込みを入れてからハツリ撤去し、周囲の健全なタイルを傷めずに施工',
+      '下地清掃・張り直し・目地詰めまで一貫して行い、既存タイルと自然になじむ仕上がり',
+      '浮き・剥がれを放置すると落下や雨水浸入のリスク。部分補修で建物の安全と美観を維持',
+    ],
+    gallery: [
+      {
+        src: 'works-tile-1.jpg',
+        caption:
+          '施工前 → カッター入れ → タイルハツリ → 清掃 → タイル貼り → 目地詰め → 施工後',
       },
     ],
   },
