@@ -101,6 +101,15 @@ function Company() {
 
       <section className="section">
         <div className="section-inner narrow">
+          <div className="concept-logo">
+            <img
+              src={`${import.meta.env.BASE_URL}logo.png`}
+              alt="株式会社LIEN（リアン）ロゴ"
+              width="200"
+              height="226"
+              loading="lazy"
+            />
+          </div>
           <p className="concept-text">{COMPANY.concept}</p>
           <p className="concept-text">
             私たち{COMPANY.name}
