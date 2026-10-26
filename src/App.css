@@ -521,6 +521,19 @@ picture {
   margin-bottom: 16px;
 }
 
+/* 会社理念セクションのロゴ（背景透過PNG・中央寄せ） */
+.concept-logo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.concept-logo img {
+  display: block;
+  width: 200px;
+  max-width: 60%;
+  height: auto;
+  margin: 0 auto;
+}
+
 /* ===== Service grid ===== */
 .service-grid {
   list-style: none;
