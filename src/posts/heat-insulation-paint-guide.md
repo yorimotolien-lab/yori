@@ -3,9 +3,9 @@ title: 【市川市】夏は涼しく冬は暖かい？遮熱・断熱塗料の�
 date: 2026-11-18
 category: お役立ち情報
 excerpt: 年々厳しくなる暑さ・寒さ対策で注目の「遮熱・断熱塗料」。熱を跳ね返す遮熱と、熱の移動を遅らせる断熱の違い、屋根表面を10〜15℃下げる効果、明るい色・屋根優先など失敗しない塗料選びのポイント、足場代込みの費用目安を、1級建築施工管理技士が解説します。
-image: heat-insulation-paint-guide-hero.jpg
+image: heat-insulation-paint-guide-hero.webp
 ---
-![夏は涼しく冬は暖かい？遮熱・断熱塗料の本当の効果と費用](/heat-insulation-paint-guide-hero.jpg)
+![夏は涼しく冬は暖かい？遮熱・断熱塗料の本当の効果と費用](/heat-insulation-paint-guide-hero.webp)
 
 こんにちは！千葉県市川市・東京都江戸川区を中心にお家の健康を守る**株式会社LIEN（リアン）**です。
 
