@@ -13,10 +13,18 @@ const CATEGORY_LABEL = Object.fromEntries(
 function Works() {
   const [active, setActive] = useState('all')
 
-  const filtered =
+  const byCategory =
     active === 'all'
       ? WORKS_ITEMS
       : WORKS_ITEMS.filter((item) => item.category === active)
+
+  // 写真付きの実際の事例（slug + cover あり）を常に上に、
+  // 「準備中」の仮枠を下に並べる（各グループ内の元の順序は維持）。
+  const filtered = [...byCategory].sort((a, b) => {
+    const aReal = a.slug && a.cover ? 0 : 1
+    const bReal = b.slug && b.cover ? 0 : 1
+    return aReal - bReal
+  })
 
   return (
     <>
