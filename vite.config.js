@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import fs from 'node:fs'
 import path from 'node:path'
 import { AREAS } from './src/areas.js'
+import { WORKS_CASES } from './src/constants.js'
 import { STATIC_META, SITE_URL, DEFAULT_OG_IMAGE } from './src/site-meta.js'
 
 // コンテンツセキュリティポリシー。
@@ -38,7 +39,8 @@ function injectCspMeta() {
 }
 
 // sitemap.xml をビルド時に自動生成する。
-// 固定ページ＋ src/posts/*.md から全ブログ記事URLを収集するため、記事を追加しても自動反映される。
+// 固定ページ＋地域LP＋施工実績詳細＋ src/posts/*.md の全ブログ記事URLを収集するため、
+// 記事・事例を追加しても自動反映される。ブログ記事は投稿日を <lastmod> に出力する。
 function generateSitemap() {
   const SITE = 'https://lien-2020.com'
   const staticRoutes = [
@@ -58,7 +60,15 @@ function generateSitemap() {
     '/privacy',
     // 地域別ランディングページ（src/areas.js から自動生成）
     ...AREAS.map((a) => `/area/${a.slug}`),
+    // 施工実績の詳細ページ（src/constants.js の WORKS_CASES から自動生成）
+    ...Object.keys(WORKS_CASES).map((slug) => `/works/${slug}`),
   ]
+  // YYYY-MM-DD 形式の日付だけを lastmod として採用（不正値は出力しない）。
+  const toLastmod = (v) => (/^\d{4}-\d{2}-\d{2}$/.test(v) ? v : '')
+  const urlEntry = (loc, lastmod) =>
+    `  <url>\n    <loc>${SITE}${loc}</loc>${
+      lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''
+    }\n  </url>`
   return {
     name: 'generate-sitemap',
     apply: 'build',
@@ -68,14 +78,24 @@ function generateSitemap() {
         posts = fs
           .readdirSync(path.resolve('src/posts'))
           .filter((f) => f.endsWith('.md'))
-          .map((f) => `/blog/${f.replace(/\.md$/, '')}`)
+          .map((f) => {
+            const raw = fs
+              .readFileSync(path.resolve('src/posts', f), 'utf8')
+              .replace(/\r\n/g, '\n')
+            const fm = raw.match(/^---\n([\s\S]*?)\n---/)
+            const dm = fm && fm[1].match(/^date:\s*(.+)$/m)
+            return {
+              loc: `/blog/${f.replace(/\.md$/, '')}`,
+              lastmod: toLastmod(dm ? dm[1].trim() : ''),
+            }
+          })
       } catch {
         posts = []
       }
-      const urls = [...staticRoutes, ...posts]
-      const body = urls
-        .map((u) => `  <url>\n    <loc>${SITE}${u}</loc>\n  </url>`)
-        .join('\n')
+      const body = [
+        ...staticRoutes.map((u) => urlEntry(u, '')),
+        ...posts.map((p) => urlEntry(p.loc, p.lastmod)),
+      ].join('\n')
       const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`
       fs.writeFileSync(path.resolve('dist/sitemap.xml'), xml)
     },
