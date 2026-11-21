@@ -564,6 +564,18 @@ export const CLIENTS = [
   },
 ]
 
+// 法人・管理会社様からの実際のGoogleクチコミ（法人ページで掲載）。
+export const CLIENT_VOICE = {
+  microcopy: '管理会社様からも『星5』の高評価をいただいております！',
+  rating: 5,
+  name: 'ちはや不動産 様',
+  role: '管理会社',
+  initial: 'ち',
+  source: 'Googleクチコミ',
+  comment:
+    'ちはや不動産と申します。いつも弊社管理物件の外壁メンテナンスしていただきありがとうございます。現地確認から見積まで早く連絡も密に行っていただけ非常に助かっております。今後ともよろしくお願いいたします。',
+}
+
 // アフターフォロー・保証制度（GUARANTEE & AFTER CARE）セクション。
 export const GUARANTEE_CARE = {
   title: '施工が終わってからが、本当のお付き合いです',

@@ -711,6 +711,121 @@ picture {
   color: #fff;
   font-family: var(--serif);
 }
+/* ===== 法人・管理会社様の声（Googleクチコミ 星5） ===== */
+.client-voice {
+  text-align: center;
+}
+.voice-microcopy {
+  color: var(--navy);
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.voice-card {
+  max-width: 680px;
+  margin: 36px auto 0;
+  padding: 30px 34px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(11, 25, 44, 0.14);
+  text-align: left;
+}
+.voice-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.voice-avatar {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.voice-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.voice-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.voice-role {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+.voice-stars {
+  margin-top: 3px;
+  color: #ffd700;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+.voice-source {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.voice-google-g {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+.voice-source-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.voice-comment {
+  position: relative;
+  margin: 22px 0 0;
+  padding: 18px 4px 0 44px;
+  border-top: 1px solid var(--border);
+  font-size: 16px;
+  line-height: 1.95;
+  color: var(--text);
+}
+.voice-comment::before {
+  content: '“';
+  position: absolute;
+  left: 2px;
+  top: 6px;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.35;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+@media (max-width: 560px) {
+  .voice-card {
+    padding: 24px 20px;
+  }
+  .voice-source {
+    order: 3;
+    margin-top: 4px;
+  }
+  .voice-comment {
+    padding-left: 32px;
+  }
+}
+
 .cta-inner {
   text-align: center;
 }
